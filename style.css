@@ -1,0 +1,171 @@
+:root {
+  --bg: #fff8f3;
+  --card: #ffffff;
+  --text: #2b2320;
+  --muted: #8a7d76;
+  --line: #f0e4db;
+  --accent: #e8590c;
+  --accent-soft: #ffe8d9;
+  --on-accent: #ffffff;
+  --radius: 16px;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #171412;
+    --card: #221e1b;
+    --text: #f3ebe6;
+    --muted: #9c8f88;
+    --line: #322c28;
+    --accent: #ff7a2f;
+    --accent-soft: #3a2517;
+    --on-accent: #1a1209;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html { background: var(--bg); }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+button { font: inherit; color: inherit; border: 0; background: none; padding: 0; cursor: pointer; }
+input { font: inherit; color: inherit; }
+
+.page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: calc(env(safe-area-inset-top, 0px) + 16px) 16px calc(env(safe-area-inset-bottom, 0px) + 96px);
+}
+
+h1 { font-size: 28px; margin: 4px 0 16px; letter-spacing: -0.02em; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 24px 0 8px; }
+
+.muted { color: var(--muted); }
+.empty { text-align: center; color: var(--muted); padding: 48px 16px; }
+
+/* Recherche + filtres */
+.search {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+  margin-bottom: 12px;
+}
+.chips { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 12px; margin: 0 -16px; padding-inline: 16px; scrollbar-width: none; }
+.chips::-webkit-scrollbar { display: none; }
+.chip {
+  flex: none;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  font-size: 14px;
+}
+.chip.on { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-align: center;
+}
+.btn.soft { background: var(--accent-soft); color: var(--accent); }
+.btn + .btn, .btn + .list, .list + .btn { margin-top: 12px; }
+
+/* Listes de cartes */
+.list { display: grid; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+.card .main { flex: 1; min-width: 0; text-align: left; }
+.card .title { font-weight: 600; }
+.card .meta { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.icon-btn {
+  flex: none;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 22px; line-height: 1;
+}
+.icon-btn.on { background: var(--accent); color: var(--on-accent); }
+
+/* Stepper de personnes */
+.stepper { display: inline-flex; align-items: center; gap: 4px; }
+.stepper button { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-size: 20px; line-height: 1; }
+.stepper span { min-width: 74px; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* Détail d'une recette */
+.back { color: var(--accent); font-weight: 600; margin-bottom: 8px; padding: 6px 0; }
+.detail-meta { color: var(--muted); margin: -8px 0 16px; }
+.servings-row { display: flex; align-items: center; justify-content: space-between; margin: 16px 0 4px; }
+.ingredients, .steps { margin: 0; padding: 0; list-style: none; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.ingredients li { padding: 11px 14px; border-top: 1px solid var(--line); }
+.ingredients li:first-child { border-top: 0; }
+.steps { counter-reset: step; }
+.steps li { counter-increment: step; padding: 12px 14px 12px 48px; border-top: 1px solid var(--line); position: relative; }
+.steps li:first-child { border-top: 0; }
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 14px; top: 12px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 13px; font-weight: 700;
+  display: grid; place-items: center;
+}
+.notes { margin-top: 16px; color: var(--muted); font-size: 14px; }
+.source { display: inline-block; margin-top: 12px; color: var(--accent); }
+
+/* Liste de courses */
+.shop { margin: 0; padding: 0; list-style: none; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); }
+.shop li + li { border-top: 1px solid var(--line); }
+.row { display: flex; align-items: center; gap: 12px; width: 100%; padding: 12px 14px; text-align: left; }
+.box {
+  flex: none; width: 24px; height: 24px; border-radius: 50%;
+  border: 2px solid var(--muted);
+  display: grid; place-items: center;
+  color: transparent; font-size: 14px; font-weight: 700;
+}
+.row.done .box { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.row.done .label { text-decoration: line-through; color: var(--muted); }
+.row .from { display: block; font-size: 12px; color: var(--muted); }
+
+/* Barre d'onglets */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  display: flex; justify-content: center;
+  background: color-mix(in srgb, var(--card) 92%, transparent);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--line);
+  padding: 6px 8px calc(env(safe-area-inset-bottom, 0px) + 6px);
+}
+.tabbar-inner { display: flex; width: 100%; max-width: 640px; }
+.tab { flex: 1; display: grid; justify-items: center; gap: 2px; padding: 6px 0; font-size: 12px; color: var(--muted); position: relative; }
+.tab .ico { font-size: 22px; line-height: 1; }
+.tab.on { color: var(--accent); font-weight: 600; }
+.badge {
+  position: absolute; top: 0; left: calc(50% + 8px);
+  min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px;
+  background: var(--accent); color: var(--on-accent);
+  font-size: 11px; font-weight: 700; display: grid; place-items: center;
+}

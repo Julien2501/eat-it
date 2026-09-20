@@ -1,0 +1,52 @@
+[
+  {
+    "id": "carbonara",
+    "title": "Pâtes carbonara",
+    "servings": 4,
+    "time": 25,
+    "tags": ["pâtes", "rapide"],
+    "ingredients": [
+      { "name": "spaghetti", "qty": 400, "unit": "g", "aisle": "pantry" },
+      { "name": "lardons", "qty": 200, "unit": "g", "aisle": "meat" },
+      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 80, "unit": "g", "aisle": "dairy" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Cuire les spaghetti dans une grande casserole d'eau bouillante salée.",
+      "Faire dorer les lardons à sec dans une poêle, sans matière grasse.",
+      "Mélanger les œufs, le parmesan et beaucoup de poivre dans un saladier.",
+      "Égoutter les pâtes en gardant un verre d'eau de cuisson. Les verser dans la poêle hors du feu avec les lardons.",
+      "Ajouter le mélange aux œufs en remuant, en allongeant avec un peu d'eau de cuisson pour obtenir une sauce crémeuse. Servir aussitôt."
+    ],
+    "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
+  },
+  {
+    "id": "curry-pois-chiches",
+    "title": "Curry de pois chiches",
+    "servings": 4,
+    "time": 35,
+    "tags": ["végétarien", "curry"],
+    "ingredients": [
+      { "name": "pois chiches", "qty": 2, "unit": "boîte", "aisle": "pantry" },
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 3, "unit": "gousse", "aisle": "produce" },
+      { "name": "épinards frais", "qty": 200, "unit": "g", "aisle": "produce" },
+      { "name": "pâte de curry", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "riz basmati", "qty": 300, "unit": "g", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Émincer les oignons et l'ail. Les faire revenir dans l'huile d'olive 5 minutes.",
+      "Ajouter la pâte de curry et remuer 1 minute.",
+      "Verser les tomates, le lait de coco et les pois chiches égouttés. Laisser mijoter 15 minutes.",
+      "Pendant ce temps, cuire le riz.",
+      "Ajouter les épinards en fin de cuisson, laisser tomber 2 minutes, saler et servir sur le riz."
+    ],
+    "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
+  }
+]

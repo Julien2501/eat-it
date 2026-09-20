@@ -2,26 +2,28 @@
   {
     "id": "carbonara",
     "title": "Pâtes carbonara",
-    "servings": 4,
-    "time": 25,
+    "servings": 2,
+    "time": 20,
     "image": "images/carbonara.jpg",
-    "tags": ["pâtes", "rapide"],
+    "tags": ["pâtes", "rapide", "classique"],
     "ingredients": [
-      { "name": "spaghetti", "qty": 400, "unit": "g", "aisle": "pantry" },
-      { "name": "lardons", "qty": 200, "unit": "g", "aisle": "meat" },
-      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
-      { "name": "parmesan râpé", "qty": 80, "unit": "g", "aisle": "dairy" },
+      { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "lardons", "qty": 120, "unit": "g", "aisle": "meat" },
+      { "name": "œuf", "qty": 1, "unit": "", "aisle": "dairy" },
+      { "name": "jaune d'œuf", "plural": "jaunes d'œufs", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 40, "unit": "g", "aisle": "dairy" },
       { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" },
       { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
-      "Cuire les spaghetti dans une grande casserole d'eau bouillante salée.",
-      "Faire dorer les lardons à sec dans une poêle, sans matière grasse.",
-      "Mélanger les œufs, le parmesan et beaucoup de poivre dans un saladier.",
-      "Égoutter les pâtes en gardant un verre d'eau de cuisson. Les verser dans la poêle hors du feu avec les lardons.",
-      "Ajouter le mélange aux œufs en remuant, en allongeant avec un peu d'eau de cuisson pour obtenir une sauce crémeuse. Servir aussitôt."
+      "Porter à ébullition une grande casserole d'eau, la saler légèrement (les lardons et le parmesan sont déjà salés), puis y cuire les spaghetti al dente.",
+      "Pendant ce temps, faire dorer les lardons à sec dans une grande poêle, à feu moyen, 5 à 6 minutes. Éteindre le feu et laisser la poêle de côté avec le gras.",
+      "Dans un bol, fouetter l'œuf entier et les jaunes avec le parmesan et beaucoup de poivre fraîchement moulu, jusqu'à obtenir une crème épaisse.",
+      "Juste avant d'égoutter les pâtes, prélever un verre d'eau de cuisson. Égoutter, puis verser les spaghetti dans la poêle des lardons, toujours hors du feu, et mélanger.",
+      "Verser le mélange aux œufs sur les pâtes en remuant vivement, en ajoutant un peu d'eau de cuisson pour obtenir une sauce lisse et brillante. La chaleur des pâtes suffit à la lier : si la poêle est trop chaude, les œufs brouillent.",
+      "Servir immédiatement, avec du poivre et un peu de parmesan en plus."
     ],
-    "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
+    "notes": "Pas de crème : la sauce vient des œufs, du fromage et de l'eau de cuisson. Version italienne d'origine : guanciale à la place des lardons et pecorino à la place du parmesan."
   },
   {
     "id": "choux-bruxelles-patate-douce",
@@ -179,5 +181,168 @@
       "Cuire le riz selon les indications du paquet et servir le chili dessus."
     ],
     "notes": "Se réchauffe très bien et se garde 3 jours au frais. Piment à ajuster selon le goût."
+  },
+  {
+    "id": "sushi-bowl-truite-avocat",
+    "title": "Sushi bowl truite et avocat",
+    "servings": 2,
+    "time": 30,
+    "image": "images/sushi-bowl-truite-avocat.jpg",
+    "tags": ["japonais", "poisson", "healthy"],
+    "source": "https://www.tiktok.com/@eatwithflower/video/7488376597314112790",
+    "ingredients": [
+      { "name": "riz à sushi", "qty": 120, "unit": "g", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'agave", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "pavé de truite", "plural": "pavés de truite", "qty": 2, "unit": "", "aisle": "meat" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "fromage frais", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sauce soja sucrée", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Facultatif : faire tremper le riz 30 minutes, puis le rincer soigneusement.",
+      "Cuire le riz 8 à 10 minutes dans l'eau bouillante, l'égoutter et le remettre dans la casserole.",
+      "Ajouter le vinaigre de riz et le sirop d'agave sur le riz encore chaud, puis mélanger. À défaut de sirop d'agave, faire chauffer du sucre blanc avec le vinaigre dans une petite casserole à part et l'ajouter au riz.",
+      "Bien tasser le riz dans le bol et le laisser refroidir.",
+      "Couper la truite et l'avocat en morceaux. Les disposer sur le riz avec le fromage frais.",
+      "Terminer avec les graines de sésame, un filet de citron et de la sauce soja sucrée."
+    ],
+    "notes": "La légende ne donne pas les quantités de truite, d'avocat et de fromage frais, ni le détail du montage : ils sont estimés. Elle ne précise pas non plus si la truite est crue ou cuite ; ne la manger crue que si elle est très fraîche ou surgelée de qualité sushi. Recette de Fleur (@eatwithflower) sur TikTok."
+  },
+  {
+    "id": "taglyoza",
+    "title": "Taglyoza, tagliatelles façon dumpling",
+    "servings": 1,
+    "time": 25,
+    "image": "images/taglyoza.jpg",
+    "tags": ["asiatique", "nouilles", "protéiné"],
+    "source": "https://swissfitcook.com/blogs/recettes/taglyoza",
+    "ingredients": [
+      { "name": "pâte à gyoza", "qty": 120, "unit": "g", "aisle": "other" },
+      { "name": "porc haché 5 %", "qty": 100, "unit": "g", "aisle": "meat" },
+      { "name": "crevettes crues", "qty": 100, "unit": "g", "aisle": "meat" },
+      { "name": "chou chinois", "qty": 100, "unit": "g", "aisle": "produce" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 5, "unit": "g", "aisle": "produce" },
+      { "name": "sauce soja légère", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "bouillon de volaille ou de légumes", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Découper la pâte à gyoza en fines lamelles, façon tagliatelles. Les cuire 1 à 2 minutes dans une grande eau bouillante salée, puis les égoutter en gardant un peu d'eau de cuisson.",
+      "Mixer (ou hacher très finement) le porc, les crevettes, le chou, le blanc de l'oignon vert, l'ail et le gingembre. Assaisonner avec la sauce soja, le vinaigre de riz et un peu de poivre.",
+      "Faire chauffer l'huile de sésame dans une poêle et y cuire la farce à feu vif, jusqu'à ce qu'elle soit bien dorée et légèrement croustillante.",
+      "Déglacer avec un peu de bouillon en grattant bien le fond de la poêle pour récupérer les sucs.",
+      "Ajouter les tagliatelles dans la poêle et mélanger pour bien les enrober, en ajustant la texture avec un peu d'eau de cuisson si nécessaire.",
+      "Servir dans un bol avec les toppings de son choix."
+    ],
+    "notes": "Une très grosse portion (1 personne). Toppings au choix : sauce barbecue japonaise, huile pimentée croustillante (crispy chili oil), vert d'oignon. Le bouillon est à doser au goût : la recette n'en utilise qu'un peu pour déglacer. Environ 580 kcal et 50 g de protéines par portion, hors toppings, selon l'auteur (Swiss Fit Cook)."
+  },
+  {
+    "id": "salade-riz-croustillant",
+    "title": "Salade de riz croustillant, sauce cacahuète",
+    "servings": 1,
+    "time": 40,
+    "image": "images/salade-riz-croustillant.jpg",
+    "tags": ["salade", "végétarien", "asiatique"],
+    "source": "https://www.tiktok.com/@unzestepourdeux/video/7613475586463370518",
+    "ingredients": [
+      { "name": "riz cuit", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "tofu ferme", "qty": 150, "unit": "g", "aisle": "dairy" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "carotte", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "coriandre", "qty": 0.25, "unit": "bouquet", "aisle": "produce" },
+      { "name": "menthe", "qty": 0.25, "unit": "bouquet", "aisle": "produce" },
+      { "name": "cébette", "plural": "cébettes", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "edamame ou haricots plats", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "beurre de cacahuète", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "gingembre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "flocons de piment", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Riz croustillant : mélanger le riz cuit avec 1 c. à soupe de sauce soja et 1 c. à soupe d'huile de sésame. L'étaler en fine couche sur du papier cuisson et cuire 25 minutes à 190 °C, en remuant à mi-cuisson.",
+      "Tofu croustillant : presser le tofu ferme, l'émietter et le faire mariner avec 1 c. à soupe de sauce soja. Le griller dans une poêle à feu vif.",
+      "Sauce : mélanger 2 c. à soupe de beurre de cacahuète, 3 c. à soupe d'eau, 1 c. à soupe d'huile de sésame, 1 c. à soupe de sauce soja, 1 c. à soupe de miel, le vinaigre de riz (facultatif), des flocons de piment et un peu de gingembre.",
+      "Hacher la coriandre, la menthe et la cébette. Râper la carotte et couper l'avocat.",
+      "Assembler la salade avec les herbes, la carotte, l'avocat et les edamame, puis ajouter le riz croustillant et le tofu. Napper de sauce."
+    ],
+    "notes": "La légende ne donne pas le nombre de personnes (150 g de riz et 1 avocat font une grande salade individuelle), ni la quantité de tofu, d'edamame et de cébette : estimés. Le montage final est déduit de la liste d'ingrédients. Recette de Leah (@unzestepourdeux) sur TikTok."
+  },
+  {
+    "id": "porc-hoisin-saute",
+    "title": "Porc sauté sticky au hoisin",
+    "servings": 4,
+    "time": 20,
+    "image": "images/porc-hoisin-saute.jpg",
+    "imageFocus": "50% 72%",
+    "tags": ["asiatique", "porc", "rapide"],
+    "source": "https://www.tiktok.com/@mariongrasby_/video/7608759256522788104",
+    "ingredients": [
+      { "name": "poitrine de porc sans couenne", "qty": 600, "unit": "g", "aisle": "meat" },
+      { "name": "huile végétale", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": 300, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vin de riz Shaoxing", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "bicarbonate de soude", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "fécule de maïs", "qty": 3, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sauce hoisin", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 3, "unit": "gousse", "aisle": "produce" },
+      { "name": "cinq-épices chinois", "qty": 2, "unit": "c. à café", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Couper la poitrine de porc en bâtonnets d'environ 3 cm. Les mélanger dans un saladier avec la sauce soja, le vin Shaoxing, le bicarbonate et la fécule de maïs. Laisser mariner 10 minutes.",
+      "Mélanger les ingrédients de la sauce : hoisin, miel, sauce d'huître, sauce soja foncée, ail haché et cinq-épices.",
+      "Chauffer un wok à feu moyen-vif, ajouter l'huile puis le porc. Étaler les morceaux et les laisser saisir 3 à 4 minutes sans remuer. Poursuivre la cuisson 4 à 5 minutes au total, jusqu'à ce que le porc soit doré et légèrement croustillant sur les bords.",
+      "Ajouter les oignons verts coupés en bâtonnets de 6 cm et sauter encore 1 minute.",
+      "Verser la sauce, bien mélanger et laisser bouillonner 2 à 3 minutes, jusqu'à ce qu'elle épaississe et devienne brillante. Servir aussitôt avec du riz vapeur."
+    ],
+    "notes": "La légende ne donne pas le nombre de personnes (4 estimé pour 600 g de poitrine) ni la quantité de riz. Recette de Marion Grasby, en collaboration avec Australian Pork."
+  },
+  {
+    "id": "gnocchis-champignons-lardons",
+    "title": "Gnocchis crémeux champignons et lardons",
+    "servings": 4,
+    "time": 35,
+    "image": "images/gnocchis-champignons-lardons.jpg",
+    "tags": ["gnocchis", "crémeux", "viande"],
+    "source": "https://www.tiktok.com/@casalitaaa/video/7616023848445562134",
+    "ingredients": [
+      { "name": "gnocchis", "qty": 700, "unit": "g", "aisle": "pantry" },
+      { "name": "lardons", "qty": 350, "unit": "g", "aisle": "meat" },
+      { "name": "champignons bruns", "qty": 400, "unit": "g", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "oignon", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "bouillon de volaille", "qty": 300, "unit": "ml", "aisle": "pantry" },
+      { "name": "Boursin ail et fines herbes", "qty": 0.5, "unit": "", "aisle": "dairy" },
+      { "name": "crème fraîche", "qty": 380, "unit": "ml", "aisle": "dairy" },
+      { "name": "paprika fumé", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "origan séché", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Dans une grande poêle à feu moyen, faire cuire les lardons jusqu'à ce qu'ils soient dorés et croustillants. Les retirer et les réserver.",
+      "Dans la même poêle, faire revenir l'oignon et l'ail hachés 3 à 4 minutes, jusqu'à ce qu'ils soient tendres et parfumés.",
+      "Ajouter les champignons et les laisser cuire quelques minutes, jusqu'à ce qu'ils soient bien dorés.",
+      "Verser le bouillon et la crème, puis laisser mijoter doucement. Ajouter le Boursin et remuer jusqu'à ce qu'il soit complètement fondu et que la sauce soit lisse.",
+      "Ajouter le paprika fumé et l'origan, puis laisser mijoter 3 à 5 minutes, jusqu'à ce que la sauce épaississe légèrement.",
+      "Ajouter les gnocchis directement dans la sauce, couvrir et laisser mijoter 5 minutes en remuant de temps en temps, jusqu'à ce qu'ils soient tendres et bien enrobés.",
+      "Retirer du feu, ajouter les lardons croustillants et le parmesan. Poivrer selon le goût et parsemer de persil si souhaité."
+    ],
+    "notes": "La légende ne donne pas le nombre de personnes (4 estimé pour 700 g de gnocchis). L'origan est cité dans la préparation mais absent de la liste d'ingrédients, sans quantité. Recette de casalitaaa sur TikTok."
   }
 ]

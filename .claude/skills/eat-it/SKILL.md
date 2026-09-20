@@ -40,8 +40,10 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 {
   "id": "carbonara",            // slug unique, minuscules, sans accents
   "title": "Pâtes carbonara",
-  "servings": 4,                // nombre de personnes pour lequel les quantités sont écrites
+  "servings": 4,                // portion d'origine pour laquelle les quantités sont écrites (sert au calcul)
   "time": 25,                   // minutes, total
+  "image": "images/carbonara.jpg",
+  "imageFocus": "50% 70%",      // optionnel : cadrage de la photo dans les cartes 16/10 (object-position)
   "tags": ["pâtes", "rapide"],
   "source": "https://...",      // optionnel : lien d'origine
   "ingredients": [
@@ -53,6 +55,8 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 }
 ```
 
+- **Nombre de personnes : l'app affiche 2 par défaut pour toute recette** (`DEFAULT_SERVINGS` dans `app.js`, demandé par l'utilisateur), quelle que soit la valeur de `servings`. Donc `servings` = la portion telle que la source l'écrit, sans rééchelonner à la main. Si la source ne donne pas le nombre de personnes, l'estimer d'après les quantités (ex. 700 g de gnocchis ≈ 4) et le signaler dans `notes`.
+- **Ne jamais inventer en silence** : quantité, temps ou nombre de personnes absents de la source = estimés, et dit clairement (dans `notes` de façon courte, et à l'utilisateur dans le compte rendu). Ingrédient cité dans les étapes mais absent de la liste : l'ajouter avec `qty: null` et le signaler.
 - `aisle` : `produce`, `meat`, `dairy`, `pantry`, `bakery`, `frozen`, `other` (rayons de la liste de courses).
 - `qty: null` = « au goût », non additionné dans la liste de courses.
 - `unit` : `g`, `ml`, `c. à soupe`, `c. à café`, ou `""` pour des pièces. Unités-mots au singulier (`boîte`, `gousse`, `pincée`) : l'app met le pluriel toute seule et ajoute « de/d’ » (« 2 boîtes de pois chiches »). Le nom de l'ingrédient s'écrit donc sans unité entre parenthèses.
@@ -77,7 +81,13 @@ L'utilisateur a TikTok sur son téléphone : il envoie le lien (Partager > Copie
 2. Légende et vignette via l'API oEmbed, sans authentification : `curl -s -A "Mozilla/5.0" "https://www.tiktok.com/oembed?url=<URL complète>"`. Le champ `title` contient la légende (la recette y est souvent en entier), `thumbnail_url` la couverture de la vidéo (portrait, ~1048×1518), `author_name` le créateur.
 3. Télécharger la vignette tout de suite : son URL est signée et expire.
 4. Ensuite, même normalisation que pour un lien de site (étapes 4 à 7 ci-dessus). `source` = URL complète sans les paramètres de suivi (`?_r=…`).
-5. Si la légende ne contient pas la recette (texte seulement à l'écran ou à l'oral) : demander à l'utilisateur des captures d'écran de la vidéo et les lire (les images sont lisibles). N'installer `yt-dlp`/`ffmpeg`/Whisper que si l'utilisateur le décide.
+5. Si la légende renvoie vers un site (« recette sur mon site, lien en bio ») : le profil `https://www.tiktok.com/@auteur` contient `"bioLink":{"link":"…"}` (souvent un Linktree, dont les URL sont dans le HTML). Suivre jusqu'au site, chercher la page dans `sitemap.xml` (sitemaps de blog) puis lire l'article. Exemple : swissfitcook.com (Shopify, `/blogs/recettes/<slug>`), pas de JSON-LD Recipe, le texte de l'article suffit ; sa photo est dans `og:image` (Shopify accepte `&width=960`).
+6. Si la légende ne contient pas la recette (texte seulement à l'écran ou à l'oral) et qu'aucun site n'existe : demander à l'utilisateur des captures d'écran de la vidéo et les lire (les images sont lisibles). N'installer `yt-dlp`/`ffmpeg`/Whisper que si l'utilisateur le décide.
+7. Les légendes peuvent être en anglais (ex. Marion Grasby) : traduire, convertir les unités impériales en métrique si besoin (`tbsp` → `c. à soupe`, `tsp` → `c. à café`).
+
+## Ajouter une recette depuis Instagram
+
+**Pas possible sans l'utilisateur.** Les pages `instagram.com/reel/...` (y compris `/embed/captioned/`) renvoient un mur de connexion de ~627 Ko identique pour tous les reels, sans légende ni image. Ne pas passer par des proxys tiers. Demander à l'utilisateur des captures d'écran (légende dépliée avec « … plus », et texte affiché dans la vidéo) déposées dans `_inbox/` (dossier ignoré par git), puis les lire avec l'outil de lecture d'images. Pour la photo du plat, une capture nette de la vidéo suffit (recadrer avec Pillow si besoin).
 
 Conversions faites à la main quand la légende donne des poids pour des ingrédients déjà présents ailleurs en cuillères : convertir vers l'unité déjà utilisée (ex. sirop d'érable 5-10 g ≈ ½ c. à soupe) et garder la valeur d'origine dans l'étape, pour que la liste de courses additionne.
 
@@ -91,7 +101,9 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 
 - Champ `image` de la recette : chemin relatif `images/<id>.jpg`. Sans image (ou si elle ne charge pas), l'app affiche un dégradé coloré avec 🍽️ : une recette sans photo reste présentable.
 - **Les images sont stockées dans le dépôt**, jamais en lien externe (hotlinking cassé, pas de hors ligne). Format JPEG, ~960 px de large, idéalement < 250 Ko.
-- Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les deux recettes d'exemple utilisent des photos Wikipédia (`curl -A "Eat-it/1.0"` obligatoire, sinon refusé).
+- **Redimensionner avec `python tools/resize_image.py`** (Pillow, installé sur la machine avec `pip install --user pillow`) : sans argument, il réduit toutes les images de `images/` plus larges que 960 px. À lancer après chaque téléchargement (les vignettes TikTok font jusqu'à 2160×3840 et ~1 Mo).
+- Les vignettes TikTok sont en portrait : la carte en montre le centre 16/10. Vérifier le recadrage (aperçu avec Pillow) et, si un visage ou du texte gêne, régler `imageFocus`.
+- Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les recettes classiques utilisent des photos Wikimedia (`-A "Eat-it/1.0 (personal recipe app)"` obligatoire, sinon refusé), créditées dans `images/CREDITS.md`.
 
 ## Design de l'app
 
@@ -111,6 +123,7 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 - Tout texte venant des données passe par `esc()` avant d'entrer dans le HTML.
 - Code et identifiants en anglais, textes de l'interface en français.
 - Quand on change les fichiers du shell (JS/CSS), incrémenter `CACHE` dans `sw.js` (`eatit-vN`).
+- Scripts Node lancés depuis Bash sous Windows : utiliser `fetch` de Node plutôt que `execSync("curl … -o /dev/null")` (échoue), et des chemins Windows (`C:/other/Eat-it/…`) dans `fs`, pas `/c/other/…`.
 
 ## Vérifier son travail
 

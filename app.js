@@ -12,6 +12,8 @@ const AISLES = [
 
 const STORE_KEY = "eatit.v1";
 const MAX_SERVINGS = 50;
+// Nombre de personnes affiché par défaut, quelle que soit la portion d'origine de la recette.
+const DEFAULT_SERVINGS = 2;
 const $app = document.getElementById("app");
 
 const state = {
@@ -99,7 +101,8 @@ const placeholder = (id, cls) => `<div class="${cls} ph" style="--h:${hue(id)}">
 // Photo de la recette, ou dégradé coloré si elle n'en a pas (ou si elle ne charge pas hors ligne).
 function imgHtml(r, cls = "thumb") {
   if (!r.image) return placeholder(r.id, cls);
-  return `<img class="${cls}" src="${esc(r.image)}" alt="" loading="lazy" data-fallback="${esc(r.id)}">`;
+  const focus = r.imageFocus ? ` style="object-position:${esc(r.imageFocus)}"` : "";
+  return `<img class="${cls}" src="${esc(r.image)}" alt="" loading="lazy" data-fallback="${esc(r.id)}"${focus}>`;
 }
 
 $app.addEventListener(
@@ -162,7 +165,7 @@ function feedHtml() {
           ${imgHtml(r)}
           <div class="body">
             <div class="title">${esc(r.title)}</div>
-            <div class="pills"><span class="pill">⏱ ${r.time} min</span><span class="pill">👥 ${r.servings}</span>${tags}</div>
+            <div class="pills"><span class="pill">⏱ ${r.time} min</span>${tags}</div>
           </div>
         </button>
       </li>`;
@@ -191,7 +194,7 @@ function stepperHtml(id, servings) {
 }
 
 function currentServings(r) {
-  return state.plan[r.id] ?? state.detailServings ?? r.servings;
+  return state.plan[r.id] ?? state.detailServings ?? DEFAULT_SERVINGS;
 }
 
 function detailView(r) {
@@ -327,7 +330,7 @@ const actions = {
   },
   add(el) {
     const r = byId(el.dataset.id);
-    const servings = Number(el.dataset.servings) || r.servings;
+    const servings = Number(el.dataset.servings) || DEFAULT_SERVINGS;
     state.plan[r.id] = servings;
     saveState();
     render();

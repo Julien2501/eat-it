@@ -301,23 +301,28 @@ const activeCount = () =>
   (state.favsOnly ? 1 : 0) +
   (state.fridge.length ? 1 : 0);
 
-function recipeMatches(r) {
+// Une recette correspond-elle à la sélection ? `except` ignore un critère (une catégorie de filtre,
+// "quick" ou "favs") pour calculer ce que donnerait un autre choix dans cette catégorie.
+function matchesExcept(r, except) {
   if (state.course && !courseOf(r).includes(state.course)) return false;
   for (const { key } of FILTERS) {
+    if (key === except) continue;
     const chosen = state.filters[key];
     if (!chosen || !chosen.length) continue;
     const have = tagValues(r, key);
     const ok = chosen.some((v) => have.includes(v) || (key === "season" && have.includes(ALL_YEAR)));
     if (!ok) return false;
   }
-  if (state.quick && r.time > QUICK_MAX_MIN) return false;
-  if (state.favsOnly && !state.favs[r.id]) return false;
+  if (except !== "quick" && state.quick && r.time > QUICK_MAX_MIN) return false;
+  if (except !== "favs" && state.favsOnly && !state.favs[r.id]) return false;
   if (state.fridge.length && fridgeScore(r).have === 0) return false;
   const q = norm(state.query);
   if (!q) return true;
   const hay = norm([r.title, ...Object.values(r.tags || {}).flat(), ...r.ingredients.map((i) => i.name)].join(" "));
   return hay.includes(q);
 }
+
+const recipeMatches = (r) => matchesExcept(r, null);
 
 // Étiquettes affichées sur une recette : plat, cuisine puis protéine.
 function pillsHtml(r, max) {
@@ -368,45 +373,75 @@ function feedHtml() {
     .join("")}</ul>${footer}`;
 }
 
-// Valeurs proposées pour une catégorie, d'après les recettes ; les saisons ont un ordre fixe.
+// Choix d'une catégorie de filtre avec, pour chacun, le nombre de recettes qu'il donnerait
+// (les autres critères restent appliqués). `useful` : la catégorie sert à trier la sélection en cours.
 function filterChoices(key) {
-  if (key === "season") return SEASONS.map(([name, emoji]) => ({ value: name, label: `${emoji} ${name}` }));
-  const values = new Set(state.recipes.flatMap((r) => tagValues(r, key)));
-  return [...values].sort((a, b) => a.localeCompare(b, "fr")).map((v) => ({ value: v, label: v }));
+  const pool = state.recipes.filter((r) => matchesExcept(r, key));
+  const chosen = state.filters[key] || [];
+  const countOf = (pred) => pool.filter(pred).length;
+  let choices;
+  if (key === "season") {
+    const specific = pool.some((r) => tagValues(r, "season").some((s) => s !== ALL_YEAR));
+    choices = specific
+      ? SEASONS.map(([name, emoji]) => ({
+          value: name,
+          label: `${emoji} ${name}`,
+          count: countOf((r) => tagValues(r, "season").includes(name) || tagValues(r, "season").includes(ALL_YEAR)),
+        }))
+      : [];
+  } else {
+    const values = new Set(pool.flatMap((r) => tagValues(r, key)));
+    choices = [...values]
+      .sort((a, b) => a.localeCompare(b, "fr"))
+      .map((v) => ({ value: v, label: v, count: countOf((r) => tagValues(r, key).includes(v)) }));
+  }
+  choices = choices.filter((c) => c.count > 0 || chosen.includes(c.value));
+  const useful = chosen.length > 0 || choices.some((c) => c.count < pool.length);
+  return { choices, useful };
 }
 
 function filtersHtml() {
-  const cats = FILTERS.filter(({ key }) => filterChoices(key).length);
+  const cats = FILTERS.map((f) => ({ ...f, ...filterChoices(f.key) })).filter((c) => c.useful && c.choices.length);
   const pills = cats
     .map(({ key, label, emoji }) => {
       const n = (state.filters[key] || []).length;
       return `<button class="cat ${n ? "on" : ""} ${state.openCat === key ? "open" : ""}" data-action="cat" data-cat="${key}">${emoji} ${label}${n ? `<b>${n}</b>` : ""}</button>`;
     })
     .join("");
-  const favCount = Object.keys(state.favs).filter(byId).length;
+  // « Rapide » et « Favoris » n'apparaissent que s'ils permettent de trier la sélection.
+  const poolQ = state.recipes.filter((r) => matchesExcept(r, "quick"));
+  const quickN = poolQ.filter((r) => r.time <= QUICK_MAX_MIN).length;
+  const poolF = state.recipes.filter((r) => matchesExcept(r, "favs"));
+  const favN = poolF.filter((r) => state.favs[r.id]).length;
   const extras =
-    `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>` +
-    `<button class="cat ${state.favsOnly ? "on" : ""}" data-action="favs">♥ Favoris${favCount ? `<b>${favCount}</b>` : ""}</button>` +
-    `<button class="cat ${state.fridge.length ? "on" : ""} ${state.fridgeOpen ? "open" : ""}" data-action="fridge">🧊 Frigo${state.fridge.length ? `<b>${state.fridge.length}</b>` : ""}</button>`;
+    (state.quick || (quickN > 0 && quickN < poolQ.length)
+      ? `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>`
+      : "") +
+    (state.favsOnly || (favN > 0 && favN < poolF.length)
+      ? `<button class="cat ${state.favsOnly ? "on" : ""}" data-action="favs">♥ Favoris<b>${favN}</b></button>`
+      : "");
   const reset = activeCount() ? `<button class="cat reset" data-action="reset">✕ Réinitialiser</button>` : "";
   const open = cats.find((c) => c.key === state.openCat);
   const panel = open
-    ? `<div class="panel">${filterChoices(open.key)
-        .map(({ value, label }) => {
+    ? `<div class="panel">${open.choices
+        .map(({ value, label, count }) => {
           const on = (state.filters[open.key] || []).includes(value);
-          return `<button class="chip ${on ? "on" : ""}" data-action="tag" data-cat="${open.key}" data-tag="${esc(value)}">${esc(label)}</button>`;
+          return `<button class="chip ${on ? "on" : ""}" data-action="tag" data-cat="${open.key}" data-tag="${esc(value)}">${esc(label)}<i>${count}</i></button>`;
         })
         .join("")}</div>`
     : "";
-  const fridge = state.fridgeOpen
-    ? `<div class="panel fridge-panel">
-        <div class="addrow"><input id="fridge-in" type="text" placeholder="Un ingrédient que j'ai (poulet, riz…)" autocomplete="off">
-          <button data-action="fridge-add">Ajouter</button></div>
-        ${state.fridge.length ? `<div class="fridge-chips">${state.fridge.map((t) => `<button class="chip on" data-action="fridge-del" data-term="${esc(t)}">${esc(t)} ✕</button>`).join("")}</div>` : ""}
-        <p class="muted small">Les recettes qui utilisent le plus d’ingrédients que tu as déjà passent en premier. Sel, poivre, huile et eau ne comptent pas.</p>
-      </div>`
-    : "";
-  return `<div class="cats small">${pills}${extras}${reset}</div>${panel}${fridge}`;
+  if (!pills && !extras && !reset) return "";
+  return `<div class="cats small">${pills}${extras}${reset}</div>${panel}`;
+}
+
+function fridgePanelHtml() {
+  if (!state.fridgeOpen) return "";
+  return `<div class="panel fridge-panel">
+    <div class="addrow"><input id="fridge-in" type="text" placeholder="Un ingrédient que j'ai (poulet, riz…)" autocomplete="off">
+      <button data-action="fridge-add">Ajouter</button></div>
+    ${state.fridge.length ? `<div class="fridge-chips">${state.fridge.map((t) => `<button class="chip on" data-action="fridge-del" data-term="${esc(t)}">${esc(t)} ✕</button>`).join("")}</div>` : ""}
+    <p class="muted small">Les recettes qui utilisent le plus d’ingrédients que tu as déjà passent en premier. Sel, poivre, huile et eau ne comptent pas.</p>
+  </div>`;
 }
 
 function coursesHtml() {
@@ -429,7 +464,11 @@ function recipesView() {
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     ${coursesHtml()}
     ${filtersHtml()}
-    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Une recette au hasard${narrowed ? " parmi la sélection" : ""}</span></div></button>
+    <div class="actions">
+      <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>${narrowed ? "Dans la sélection" : "Au hasard"}</span></div></button>
+      <button class="fridgebtn ${state.fridge.length || state.fridgeOpen ? "on" : ""}" data-action="fridge"><span class="dice">🧊</span><div><b>Mon frigo</b><span>${state.fridge.length ? plural(state.fridge.length, "ingrédient", "ingrédients") : "Ce que j’ai déjà"}</span></div></button>
+    </div>
+    ${fridgePanelHtml()}
     <div id="feed">${feedHtml()}</div>`;
 }
 
@@ -896,6 +935,11 @@ const actions = {
   },
   course(el) {
     state.course = el.dataset.course || null;
+    // Les filtres dépendent de la catégorie : on repart de zéro pour éviter une sélection vide.
+    state.filters = {};
+    state.quick = false;
+    state.favsOnly = false;
+    state.openCat = null;
     render();
   },
   cat(el) {

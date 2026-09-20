@@ -356,3 +356,18 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
   bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
   background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 12px; font-weight: 600; font-size: 14px;
 }
+
+/* ---------- Actions côte à côte : hasard + frigo ---------- */
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+.actions .surprise, .actions .fridgebtn { margin-top: 0; min-width: 0; }
+.fridgebtn {
+  display: flex; align-items: center; gap: 10px; width: 100%; padding: 10px 14px;
+  border-radius: 16px; text-align: left; background: var(--card); box-shadow: var(--shadow);
+  border: 2px solid transparent;
+}
+.fridgebtn .dice { font-size: 24px; }
+.fridgebtn b { display: block; font-size: 15px; }
+.fridgebtn span { font-size: 12px; color: var(--muted); }
+.fridgebtn.on { border-color: #4aa3ff; }
+.chip i { font-style: normal; font-size: 12px; opacity: 0.6; margin-left: 6px; }
+.chip.on i { opacity: 0.85; }

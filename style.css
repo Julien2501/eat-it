@@ -77,6 +77,24 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
 .chip { flex: none; padding: 7px 14px; border-radius: 999px; background: var(--card); box-shadow: var(--shadow); font-size: 14px; font-weight: 500; }
 .chip.on { background: var(--accent); color: var(--on-accent); }
 
+/* Catégories de filtres */
+.cats { display: flex; gap: 8px; overflow-x: auto; margin: 14px -16px 0; padding: 2px 16px 8px; scrollbar-width: none; }
+.cats::-webkit-scrollbar { display: none; }
+.cat {
+  flex: none; display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 600;
+  background: var(--card); box-shadow: var(--shadow); border: 2px solid transparent;
+}
+.cat b { min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px; background: var(--accent); color: var(--on-accent); font-size: 12px; display: grid; place-items: center; }
+.cat.on { background: var(--accent-soft); color: var(--accent); }
+.cat.open { border-color: var(--accent); }
+.panel { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; padding: 12px; background: var(--card); border-radius: 16px; box-shadow: var(--shadow); }
+.panel .chip { box-shadow: none; background: var(--bg); }
+.panel .chip.on { background: var(--accent); }
+.listbar { display: flex; align-items: center; gap: 14px; margin-top: 18px; color: var(--muted); font-size: 14px; }
+.listbar span { flex: 1; }
+.listbar button { color: var(--accent); font-weight: 600; font-size: 14px; padding: 4px 0; }
+
 .surprise {
   display: flex; align-items: center; gap: 12px; width: 100%;
   margin-top: 14px; padding: 14px 16px;

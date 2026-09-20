@@ -10,6 +10,24 @@ const AISLES = [
   ["other", "Autre", "🛍️"],
 ];
 
+// Catégories de filtres : la clé est celle utilisée dans `tags` des recettes (voir SKILL.md).
+const FILTERS = [
+  { key: "protein", label: "Protéine", emoji: "🍗" },
+  { key: "vegetable", label: "Légume", emoji: "🥕" },
+  { key: "season", label: "Saison", emoji: "🍂" },
+  { key: "dish", label: "Plat", emoji: "🍜" },
+  { key: "cuisine", label: "Cuisine", emoji: "🌍" },
+];
+const SEASONS = [
+  ["printemps", "🌸"],
+  ["été", "☀️"],
+  ["automne", "🍂"],
+  ["hiver", "❄️"],
+];
+const ALL_YEAR = "toute l'année"; // compte comme n'importe quelle saison
+const QUICK_MAX_MIN = 25; // « Rapide » : recette de 25 minutes ou moins
+const RESHUFFLE_AFTER_MS = 10 * 60 * 1000; // nouvel ordre si l'app revient au premier plan après 10 min
+
 const STORE_KEY = "eatit.v1";
 const MAX_SERVINGS = 50;
 // Nombre de personnes affiché par défaut, quelle que soit la portion d'origine de la recette.
@@ -22,7 +40,10 @@ const state = {
   error: null,
   view: "recipes", // recipes | plan | shop
   query: "",
-  tag: null,
+  filters: {}, // { catégorie: [valeurs choisies] } : OU dans une catégorie, ET entre catégories
+  quick: false,
+  openCat: null, // catégorie dont les choix sont dépliés
+  rank: {}, // { recipeId: position } : ordre d'affichage aléatoire de la session
   openId: null,
   detailServings: null,
   plan: {}, // { recipeId: nombre de personnes }
@@ -143,21 +164,48 @@ function shoppingList() {
 
 /* ---------- Vues ---------- */
 
+function shuffleOrder() {
+  const ids = state.recipes.map((r) => r.id);
+  for (let i = ids.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ids[i], ids[j]] = [ids[j], ids[i]];
+  }
+  state.rank = Object.fromEntries(ids.map((id, i) => [id, i]));
+}
+
+const tagValues = (r, key) => (r.tags && r.tags[key]) || [];
+const activeCount = () => Object.values(state.filters).reduce((n, v) => n + v.length, 0) + (state.quick ? 1 : 0);
+
 function recipeMatches(r) {
-  if (state.tag && !(r.tags || []).includes(state.tag)) return false;
+  for (const { key } of FILTERS) {
+    const chosen = state.filters[key];
+    if (!chosen || !chosen.length) continue;
+    const have = tagValues(r, key);
+    const ok = chosen.some((v) => have.includes(v) || (key === "season" && have.includes(ALL_YEAR)));
+    if (!ok) return false;
+  }
+  if (state.quick && r.time > QUICK_MAX_MIN) return false;
   const q = norm(state.query);
   if (!q) return true;
-  const hay = norm([r.title, ...(r.tags || []), ...r.ingredients.map((i) => i.name)].join(" "));
+  const hay = norm([r.title, ...Object.values(r.tags || {}).flat(), ...r.ingredients.map((i) => i.name)].join(" "));
   return hay.includes(q);
 }
 
+// Étiquettes affichées sur une recette : plat, cuisine puis protéine.
+function pillsHtml(r, max) {
+  const labels = [...new Set([...tagValues(r, "dish"), ...tagValues(r, "cuisine"), ...tagValues(r, "protein")])].slice(0, max);
+  return `<span class="pill">⏱ ${r.time} min</span>${labels.map((l) => `<span class="pill plain">${esc(l)}</span>`).join("")}`;
+}
+
 function feedHtml() {
-  const items = state.recipes.filter(recipeMatches);
-  if (!items.length) return `<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
-  return `<ul class="feed">${items
+  const items = state.recipes.filter(recipeMatches).sort((a, b) => state.rank[a.id] - state.rank[b.id]);
+  const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}</span>
+    ${activeCount() ? `<button data-action="reset">Réinitialiser</button>` : ""}
+    <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>`;
+  if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
+  return `${bar}<ul class="feed">${items
     .map((r) => {
       const inPlan = r.id in state.plan;
-      const tags = (r.tags || []).map((t) => `<span class="pill plain">${esc(t)}</span>`).join("");
       return `<li class="rcard">
         <button class="fab ${inPlan ? "on" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}"
           aria-label="${inPlan ? "Retirer de la semaine" : "Ajouter à la semaine"}">${inPlan ? "✓" : "+"}</button>
@@ -165,7 +213,7 @@ function feedHtml() {
           ${imgHtml(r)}
           <div class="body">
             <div class="title">${esc(r.title)}</div>
-            <div class="pills"><span class="pill">⏱ ${r.time} min</span>${tags}</div>
+            <div class="pills">${pillsHtml(r, 2)}</div>
           </div>
         </button>
       </li>`;
@@ -173,15 +221,39 @@ function feedHtml() {
     .join("")}</ul>`;
 }
 
+// Valeurs proposées pour une catégorie, d'après les recettes ; les saisons ont un ordre fixe.
+function filterChoices(key) {
+  if (key === "season") return SEASONS.map(([name, emoji]) => ({ value: name, label: `${emoji} ${name}` }));
+  const values = new Set(state.recipes.flatMap((r) => tagValues(r, key)));
+  return [...values].sort((a, b) => a.localeCompare(b, "fr")).map((v) => ({ value: v, label: v }));
+}
+
+function filtersHtml() {
+  const cats = FILTERS.filter(({ key }) => filterChoices(key).length);
+  const pills = cats
+    .map(({ key, label, emoji }) => {
+      const n = (state.filters[key] || []).length;
+      return `<button class="cat ${n ? "on" : ""} ${state.openCat === key ? "open" : ""}" data-action="cat" data-cat="${key}">${emoji} ${label}${n ? `<b>${n}</b>` : ""}</button>`;
+    })
+    .join("");
+  const quick = `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>`;
+  const open = cats.find((c) => c.key === state.openCat);
+  const panel = open
+    ? `<div class="panel">${filterChoices(open.key)
+        .map(({ value, label }) => {
+          const on = (state.filters[open.key] || []).includes(value);
+          return `<button class="chip ${on ? "on" : ""}" data-action="tag" data-cat="${open.key}" data-tag="${esc(value)}">${esc(label)}</button>`;
+        })
+        .join("")}</div>`
+    : "";
+  return `<div class="cats">${pills}${quick}</div>${panel}`;
+}
+
 function recipesView() {
-  const tags = [...new Set(state.recipes.flatMap((r) => r.tags || []))].sort((a, b) => a.localeCompare(b, "fr"));
-  return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div>
-      <div class="count">${plural(state.recipes.length, "recette", "recettes")}</div></div>
+  return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div></div>
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
-    <div class="chips">${tags
-      .map((t) => `<button class="chip ${state.tag === t ? "on" : ""}" data-action="tag" data-tag="${esc(t)}">${esc(t)}</button>`)
-      .join("")}</div>
-    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Tire une recette au hasard</span></div></button>
+    ${filtersHtml()}
+    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Tire une recette au hasard${activeCount() ? " parmi ces filtres" : ""}</span></div></button>
     <div id="feed">${feedHtml()}</div>`;
 }
 
@@ -200,11 +272,14 @@ function currentServings(r) {
 function detailView(r) {
   const servings = currentServings(r);
   const factor = servings / r.servings;
-  const tags = (r.tags || []).map((t) => `<span class="pill plain">${esc(t)}</span>`).join("");
+  const seasons = tagValues(r, "season").filter((s) => s !== ALL_YEAR);
+  const seasonPill = seasons.length
+    ? `<span class="pill plain">${seasons.map((s) => (SEASONS.find(([n]) => n === s) || [, ""])[1] + " " + s).join(" · ")}</span>`
+    : "";
   return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button></div>
     <div class="sheet">
       <h1>${esc(r.title)}</h1>
-      <div class="pills"><span class="pill">⏱ ${r.time} min</span>${tags}</div>
+      <div class="pills">${pillsHtml(r, 6)}${seasonPill}</div>
       <div class="servings-card"><b>Pour</b>${stepperHtml(r.id, servings)}</div>
       <h2>Ingrédients</h2>
       <ul class="ingredients">${r.ingredients
@@ -351,8 +426,29 @@ const actions = {
     }
     render();
   },
+  cat(el) {
+    state.openCat = state.openCat === el.dataset.cat ? null : el.dataset.cat;
+    render();
+  },
   tag(el) {
-    state.tag = state.tag === el.dataset.tag ? null : el.dataset.tag;
+    const chosen = (state.filters[el.dataset.cat] ||= []);
+    const i = chosen.indexOf(el.dataset.tag);
+    if (i < 0) chosen.push(el.dataset.tag);
+    else chosen.splice(i, 1);
+    render();
+  },
+  quick() {
+    state.quick = !state.quick;
+    render();
+  },
+  reset() {
+    state.filters = {};
+    state.quick = false;
+    state.openCat = null;
+    render();
+  },
+  shuffle() {
+    shuffleOrder();
     render();
   },
   random() {
@@ -407,12 +503,27 @@ async function init() {
     // Oublie les recettes supprimées des données.
     for (const id of Object.keys(state.plan)) if (!byId(id)) delete state.plan[id];
     saveState();
+    shuffleOrder();
   } catch {
     state.error = "Impossible de charger les recettes.";
   }
   state.loading = false;
   render();
 }
+
+// Une PWA reste longtemps en mémoire : si on revient sur l'accueil après une pause, on remélange.
+let hiddenAt = 0;
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    hiddenAt = Date.now();
+    return;
+  }
+  const away = hiddenAt && Date.now() - hiddenAt > RESHUFFLE_AFTER_MS;
+  if (away && !state.loading && !state.openId && state.view === "recipes") {
+    shuffleOrder();
+    render({ top: true });
+  }
+});
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});

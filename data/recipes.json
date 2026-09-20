@@ -5,7 +5,7 @@
     "servings": 2,
     "time": 20,
     "image": "images/carbonara.jpg",
-    "tags": ["pâtes", "rapide", "classique"],
+    "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
       { "name": "lardons", "qty": 120, "unit": "g", "aisle": "meat" },
@@ -31,7 +31,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/choux-bruxelles-patate-douce.jpg",
-    "tags": ["végétarien", "four", "légumes"],
+    "tags": { "protein": ["tofu", "fromage", "végétarien"], "vegetable": ["chou", "patate douce"], "season": ["automne", "hiver"], "dish": ["four"] },
     "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
     "ingredients": [
       { "name": "choux de Bruxelles", "qty": 400, "unit": "g", "aisle": "produce" },
@@ -64,7 +64,7 @@
     "servings": 2,
     "time": 18,
     "image": "images/udon-cacahuete-gochujang.jpg",
-    "tags": ["rapide", "asiatique", "nouilles"],
+    "tags": { "protein": ["viande hachée"], "season": ["toute l'année"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7631227747515370774",
     "ingredients": [
       { "name": "udon précuits", "qty": 350, "unit": "g", "aisle": "pantry" },
@@ -97,7 +97,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/pates-bolognaises.jpg",
-    "tags": ["pâtes", "viande", "classique"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["carotte", "tomate"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
       { "name": "viande hachée 5 %", "qty": 250, "unit": "g", "aisle": "meat" },
@@ -129,7 +129,7 @@
     "servings": 2,
     "time": 25,
     "image": "images/pates-pesto-cottage-courgettes.jpg",
-    "tags": ["pâtes", "végétarien", "rapide"],
+    "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["courgette"], "season": ["été"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "pâtes", "qty": 200, "unit": "g", "aisle": "pantry" },
       { "name": "courgette", "qty": 2, "unit": "", "aisle": "produce" },
@@ -156,7 +156,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/chili-con-carne.jpg",
-    "tags": ["viande", "mijoté", "classique"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["poivron", "tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["tex-mex"] },
     "ingredients": [
       { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
       { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
@@ -188,7 +188,7 @@
     "servings": 2,
     "time": 30,
     "image": "images/sushi-bowl-truite-avocat.jpg",
-    "tags": ["japonais", "poisson", "healthy"],
+    "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["avocat"], "season": ["toute l'année"], "dish": ["bowl"], "cuisine": ["japonaise"] },
     "source": "https://www.tiktok.com/@eatwithflower/video/7488376597314112790",
     "ingredients": [
       { "name": "riz à sushi", "qty": 120, "unit": "g", "aisle": "pantry" },
@@ -217,7 +217,7 @@
     "servings": 1,
     "time": 25,
     "image": "images/taglyoza.jpg",
-    "tags": ["asiatique", "nouilles", "protéiné"],
+    "tags": { "protein": ["porc", "poisson & fruits de mer"], "vegetable": ["chou"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://swissfitcook.com/blogs/recettes/taglyoza",
     "ingredients": [
       { "name": "pâte à gyoza", "qty": 120, "unit": "g", "aisle": "other" },
@@ -249,7 +249,7 @@
     "servings": 1,
     "time": 40,
     "image": "images/salade-riz-croustillant.jpg",
-    "tags": ["salade", "végétarien", "asiatique"],
+    "tags": { "protein": ["tofu", "végétarien"], "vegetable": ["carotte", "avocat"], "season": ["printemps", "été"], "dish": ["salade", "bowl"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@unzestepourdeux/video/7613475586463370518",
     "ingredients": [
       { "name": "riz cuit", "qty": 150, "unit": "g", "aisle": "pantry" },
@@ -284,7 +284,7 @@
     "time": 20,
     "image": "images/porc-hoisin-saute.jpg",
     "imageFocus": "50% 72%",
-    "tags": ["asiatique", "porc", "rapide"],
+    "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["sauté"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@mariongrasby_/video/7608759256522788104",
     "ingredients": [
       { "name": "poitrine de porc sans couenne", "qty": 600, "unit": "g", "aisle": "meat" },
@@ -317,7 +317,7 @@
     "servings": 4,
     "time": 35,
     "image": "images/gnocchis-champignons-lardons.jpg",
-    "tags": ["gnocchis", "crémeux", "viande"],
+    "tags": { "protein": ["porc"], "vegetable": ["champignon"], "season": ["automne", "hiver"], "dish": ["gnocchis"] },
     "source": "https://www.tiktok.com/@casalitaaa/video/7616023848445562134",
     "ingredients": [
       { "name": "gnocchis", "qty": 700, "unit": "g", "aisle": "pantry" },

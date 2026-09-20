@@ -44,7 +44,7 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
   "time": 25,                   // minutes, total
   "image": "images/carbonara.jpg",
   "imageFocus": "50% 70%",      // optionnel : cadrage de la photo dans les cartes 16/10 (object-position)
-  "tags": ["pâtes", "rapide"],
+  "tags": { "protein": ["porc"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
   "source": "https://...",      // optionnel : lien d'origine
   "ingredients": [
     { "name": "spaghetti", "qty": 400, "unit": "g", "aisle": "pantry" },
@@ -57,6 +57,14 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 
 - **Nombre de personnes : l'app affiche 2 par défaut pour toute recette** (`DEFAULT_SERVINGS` dans `app.js`, demandé par l'utilisateur), quelle que soit la valeur de `servings`. Donc `servings` = la portion telle que la source l'écrit, sans rééchelonner à la main. Si la source ne donne pas le nombre de personnes, l'estimer d'après les quantités (ex. 700 g de gnocchis ≈ 4) et le signaler dans `notes`.
 - **Ne jamais inventer en silence** : quantité, temps ou nombre de personnes absents de la source = estimés, et dit clairement (dans `notes` de façon courte, et à l'utilisateur dans le compte rendu). Ingrédient cité dans les étapes mais absent de la liste : l'ajouter avec `qty: null` et le signaler.
+- **`tags` = objet par catégorie de filtre** (chaque catégorie est un tableau, omise si vide). Ce sont les filtres de l'accueil : OU à l'intérieur d'une catégorie, ET entre catégories. Toujours remplir tous les champs pertinents pour une nouvelle recette, en réutilisant les valeurs existantes :
+  - `protein` (protéine principale) : `viande hachée`, `porc`, `poisson & fruits de mer`, `tofu`, `fromage`, `végétarien` (à ajouter dès qu'il n'y a ni viande ni poisson). Ajouter `poulet`, `bœuf`… si une recette l'exige.
+  - `vegetable` (légumes mis en avant, en forme générique : `chou`, `courgette`, `champignon`, `patate douce`, `carotte`, `avocat`, `poivron`, `tomate`…). Peut être vide.
+  - `season` : `printemps`, `été`, `automne`, `hiver`, ou `["toute l'année"]` (qui correspond à n'importe quelle saison choisie). Saison = celle où les légumes principaux sont de saison / où le plat a du sens (plat réconfortant = automne/hiver, salade fraîche = printemps/été).
+  - `dish` (type de plat) : `pâtes`, `nouilles`, `gnocchis`, `bowl`, `salade`, `mijoté`, `four`, `sauté`…
+  - `cuisine` : `italienne`, `asiatique`, `japonaise`, `tex-mex`… (optionnel).
+  - Le filtre « ⚡ Rapide » n'est pas un tag : il est calculé (`time` ≤ 25 min, `QUICK_MAX_MIN` dans `app.js`). Ajouter une nouvelle catégorie = l'ajouter à `FILTERS` dans `app.js` ; les nouvelles valeurs, elles, apparaissent toutes seules.
+  - Les étiquettes affichées sur les cartes viennent de `dish`, `cuisine` puis `protein` (2 max sur la carte).
 - `aisle` : `produce`, `meat`, `dairy`, `pantry`, `bakery`, `frozen`, `other` (rayons de la liste de courses).
 - `qty: null` = « au goût », non additionné dans la liste de courses.
 - `unit` : `g`, `ml`, `c. à soupe`, `c. à café`, ou `""` pour des pièces. Unités-mots au singulier (`boîte`, `gousse`, `pincée`) : l'app met le pluriel toute seule et ajoute « de/d’ » (« 2 boîtes de pois chiches »). Le nom de l'ingrédient s'écrit donc sans unité entre parenthèses.
@@ -104,6 +112,11 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 - **Redimensionner avec `python tools/resize_image.py`** (Pillow, installé sur la machine avec `pip install --user pillow`) : sans argument, il réduit toutes les images de `images/` plus larges que 960 px. À lancer après chaque téléchargement (les vignettes TikTok font jusqu'à 2160×3840 et ~1 Mo).
 - Les vignettes TikTok sont en portrait : la carte en montre le centre 16/10. Vérifier le recadrage (aperçu avec Pillow) et, si un visage ou du texte gêne, régler `imageFocus`.
 - Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les recettes classiques utilisent des photos Wikimedia (`-A "Eat-it/1.0 (personal recipe app)"` obligatoire, sinon refusé), créditées dans `images/CREDITS.md`.
+
+## Filtres et ordre d'affichage
+
+- L'accueil a des filtres par catégorie (Protéine, Légume, Saison, Plat, Cuisine + ⚡ Rapide) dépliables au toucher, avec compteur de choix par catégorie et bouton Réinitialiser. Le « 🎲 Surprends-moi » tire au hasard parmi les recettes filtrées.
+- **L'ordre des recettes est aléatoire** : mélangé au chargement, sur demande (« 🔀 Mélanger »), et automatiquement quand l'app revient au premier plan après plus de 10 min sur l'accueil (`RESHUFFLE_AFTER_MS`). Il reste stable pendant qu'on consulte l'accueil, pour que la liste ne saute pas.
 
 ## Design de l'app
 

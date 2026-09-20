@@ -69,7 +69,19 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 6. Image : télécharger la version ~768–960 px (les sites WordPress proposent des variantes `-768x960.jpg`), la regarder avant de l'intégrer, la nommer `images/<id>.jpg`. Les photos en portrait sont recadrées au centre dans les cartes 16/10 : vérifier que le plat reste visible.
 7. Valider le JSON (ids uniques, champs obligatoires, fichier image existant), tester la liste de courses, puis commit + push.
 
-Cas non traités pour l'instant : vidéos TikTok/autres (récupérer légende/sous-titres, à définir avec l'utilisateur quand il en enverra une), recette collée en texte (même normalisation, sans étape de téléchargement).
+## Ajouter une recette depuis TikTok
+
+L'utilisateur a TikTok sur son téléphone : il envoie le lien (Partager > Copier le lien, transmis au PC par message). Sans rien installer :
+
+1. Résoudre le lien court : `curl -sL -o /dev/null -w "%{url_effective}" "https://vm.tiktok.com/XXXX/"` donne l'URL complète `https://www.tiktok.com/@auteur/video/ID`.
+2. Légende et vignette via l'API oEmbed, sans authentification : `curl -s -A "Mozilla/5.0" "https://www.tiktok.com/oembed?url=<URL complète>"`. Le champ `title` contient la légende (la recette y est souvent en entier), `thumbnail_url` la couverture de la vidéo (portrait, ~1048×1518), `author_name` le créateur.
+3. Télécharger la vignette tout de suite : son URL est signée et expire.
+4. Ensuite, même normalisation que pour un lien de site (étapes 4 à 7 ci-dessus). `source` = URL complète sans les paramètres de suivi (`?_r=…`).
+5. Si la légende ne contient pas la recette (texte seulement à l'écran ou à l'oral) : demander à l'utilisateur des captures d'écran de la vidéo et les lire (les images sont lisibles). N'installer `yt-dlp`/`ffmpeg`/Whisper que si l'utilisateur le décide.
+
+Conversions faites à la main quand la légende donne des poids pour des ingrédients déjà présents ailleurs en cuillères : convertir vers l'unité déjà utilisée (ex. sirop d'érable 5-10 g ≈ ½ c. à soupe) et garder la valeur d'origine dans l'étape, pour que la liste de courses additionne.
+
+Cas non traité : recette collée en texte (même normalisation, sans étape de téléchargement).
 
 ## Images des recettes
 
@@ -101,6 +113,8 @@ Cas non traités pour l'instant : vidéos TikTok/autres (récupérer légende/so
 - Syntaxe : `node --check app.js`. Données : charger `data/recipes.json` et vérifier `id` uniques et champs obligatoires.
 - Rendu : servir le dossier (`python -m http.server`), puis capture avec Edge headless à taille d'iPhone (`--window-size=390,844 --force-device-scale-factor=2 --virtual-time-budget=4000 --screenshot=...`) et regarder l'image. Pour capturer un écran autre que l'accueil, une page temporaire avec une iframe permet d'appeler `actions.*` via `contentWindow.eval` ; la supprimer ensuite. Le chemin de sortie de `--screenshot` doit être un chemin Windows absolu.
 - Arrêter le serveur de test ensuite (cibler uniquement `Get-NetTCPConnection -LocalPort 8123 -State Listen`, sinon on tombe sur des connexions fermées appartenant au système, et `Stop-Process` échoue en boucle).
+
+- Piège de capture : Edge headless impose une largeur de fenêtre minimale, donc `--window-size=390,...` sur la page directe donne un rendu plus large que 390 px, recadré à droite (faux positif). Pour vérifier la mise en page mobile, charger l'app dans une iframe de 390 px de large (page de test temporaire).
 
 ## Publication
 

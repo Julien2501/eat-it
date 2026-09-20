@@ -83,5 +83,38 @@
       "Servir avec la feta émiettée et un filet de vinaigre balsamique."
     ],
     "notes": "Piment à ajuster au goût. Recette de Free the Pickle."
+  },
+  {
+    "id": "udon-cacahuete-gochujang",
+    "title": "Udon cacahuète gochujang",
+    "servings": 2,
+    "time": 18,
+    "image": "images/udon-cacahuete-gochujang.jpg",
+    "tags": ["rapide", "asiatique", "nouilles"],
+    "source": "https://www.tiktok.com/@swiss_fit.cook/video/7631227747515370774",
+    "ingredients": [
+      { "name": "udon précuits", "qty": 350, "unit": "g", "aisle": "pantry" },
+      { "name": "viande hachée 5 %", "qty": 350, "unit": "g", "aisle": "meat" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre râpé", "qty": 1, "unit": "c. à café", "aisle": "produce" },
+      { "name": "sauce soja", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre de cacahuète en poudre", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 0.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "herbes fraîches", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Plonger les udon précuits 1 à 2 minutes dans l'eau bouillante, puis les égoutter en gardant l'eau de cuisson : elle servira pour la sauce.",
+      "Pendant ce temps, faire revenir la viande hachée à feu vif avec l'ail haché, du sel et du poivre, environ 6 minutes, jusqu'à ce qu'elle soit bien colorée. La réserver.",
+      "Dans la même poêle, ajouter le gingembre râpé, la sauce soja et le gochujang. Mélanger.",
+      "Ajouter le beurre de cacahuète en poudre, le sirop d'érable (5 à 10 g) et le vinaigre de riz. Verser peu à peu de l'eau de cuisson des udon en remuant, jusqu'à obtenir une sauce lisse qui nappe.",
+      "Remettre la viande dans la sauce, ajouter les udon et bien les enrober.",
+      "Servir avec l'huile de sésame (ou de l'huile pimentée) et quelques herbes fraîches."
+    ],
+    "notes": "Environ 500 kcal et 41 g de protéines par portion, selon l'auteur. Option : 1 c. à café de sauce huître dans la sauce pour plus de profondeur. Recette de Babou | SwissFitCook sur TikTok."
   }
 ]

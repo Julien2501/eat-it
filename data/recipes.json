@@ -376,40 +376,6 @@
     "notes": "Quantités pour 1 personne, ajustées automatiquement dans l'app. Recette de Jow, notée 4,6/5 sur 201 avis."
   },
   {
-    "id": "banana-bread",
-    "title": "Banana bread ultra moelleux",
-    "servings": 8,
-    "scalable": false,
-    "yieldLabel": "parts",
-    "time": 65,
-    "image": "images/banana-bread.jpg",
-    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
-    "source": "https://www.delscookingtwist.com/fr/banana-bread-ultra-moelleux/",
-    "ingredients": [
-      { "name": "farine", "qty": 180, "unit": "g", "aisle": "pantry" },
-      { "name": "levure chimique", "qty": 0.75, "unit": "c. à café", "aisle": "pantry" },
-      { "name": "bicarbonate de soude", "qty": 0.75, "unit": "c. à café", "aisle": "pantry" },
-      { "name": "cannelle", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
-      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "noix", "qty": 50, "unit": "g", "aisle": "pantry" },
-      { "name": "beurre", "qty": 60, "unit": "g", "aisle": "dairy" },
-      { "name": "sucre", "qty": 180, "unit": "g", "aisle": "pantry" },
-      { "name": "œuf", "qty": 1, "unit": "", "aisle": "dairy" },
-      { "name": "banane bien mûre", "plural": "bananes bien mûres", "qty": 3, "unit": "", "aisle": "produce" },
-      { "name": "babeurre", "qty": 120, "unit": "ml", "aisle": "dairy" }
-    ],
-    "steps": [
-      "Préchauffer le four à 180 °C et beurrer un moule à cake sur toutes les faces.",
-      "Mélanger dans un saladier la farine, la levure, le bicarbonate, la cannelle et une pincée de sel. Ajouter les noix grossièrement hachées (facultatif, mais recommandé).",
-      "Dans un autre saladier, battre le beurre ramolli et le sucre au batteur jusqu'à obtenir une texture mousseuse. Ajouter l'œuf et battre à nouveau.",
-      "Écraser les bananes à la fourchette en purée, les ajouter au mélange, puis verser le babeurre.",
-      "Incorporer les ingrédients secs, en plusieurs fois, jusqu'à ce que la pâte soit homogène.",
-      "Verser dans le moule et enfourner 50 à 55 minutes, jusqu'à ce que la lame d'un couteau ressorte propre.",
-      "Laisser refroidir 10 minutes dans le moule, puis démouler sur une grille et laisser refroidir complètement."
-    ],
-    "notes": "Pas de babeurre ? Mélanger 1 c. à soupe de jus de citron avec du lait pour arriver à 120 ml. Les noix sont facultatives. Un cake entier (8 parts) : les quantités ne changent pas avec le nombre de personnes. Recette de Del's Cooking Twist, notée 5/5 sur 117 avis."
-  },
-  {
     "id": "moelleux-chocolat",
     "title": "Moelleux au chocolat",
     "servings": 4,
@@ -605,65 +571,6 @@
       "Cuire 20 minutes à 180 °C, en ajustant selon la taille des pilons."
     ],
     "notes": "Recette de Cuisine et Création. Aucune note publiée sur la page. Vérifier que la chair est bien cuite à cœur."
-  },
-  {
-    "id": "hachis-parmentier",
-    "title": "Hachis parmentier",
-    "servings": 6,
-    "time": 50,
-    "image": "images/hachis-parmentier.jpg",
-    "tags": { "protein": ["viande hachée"], "vegetable": ["pomme de terre"], "season": ["automne", "hiver"], "dish": ["gratin"], "method": ["four"], "cuisine": ["française"] },
-    "source": "https://ouestdelices.com/2023/11/14/hachis-parmentier-facile/",
-    "ingredients": [
-      { "name": "pommes de terre à purée", "qty": 1200, "unit": "g", "aisle": "produce" },
-      { "name": "bœuf haché", "qty": 750, "unit": "g", "aisle": "meat" },
-      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
-      { "name": "lait", "qty": 300, "unit": "ml", "aisle": "dairy" },
-      { "name": "beurre", "qty": 90, "unit": "g", "aisle": "dairy" },
-      { "name": "fromage râpé", "qty": 80, "unit": "g", "aisle": "dairy" },
-      { "name": "chapelure", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
-    ],
-    "steps": [
-      "Laver et éplucher les pommes de terre, puis les cuire 20 à 30 minutes dans de l'eau salée.",
-      "Pendant ce temps, ciseler les oignons. Préchauffer le four à 200 °C (chaleur tournante).",
-      "Faire fondre un peu de beurre dans une poêle et y faire revenir les oignons 1 minute. Ajouter la viande hachée, saler, poivrer et cuire 10 minutes en remuant.",
-      "Passer les pommes de terre égouttées au moulin à légumes, puis ajouter le lait tiède et 60 g de beurre pour obtenir une purée lisse.",
-      "Étaler la viande dans un plat à gratin et la recouvrir de purée. Lisser la surface avec une spatule ou une fourchette.",
-      "Parsemer de fromage râpé et de chapelure, puis déposer quelques noisettes de beurre (30 g au total).",
-      "Enfourner 15 à 20 minutes, puis passer 3 à 5 minutes sous le gril pour gratiner."
-    ],
-    "notes": "En option : ail, échalote, carotte en brunoise, muscade, herbes, concentré de tomate. Quantités pour 6 personnes, ajustées automatiquement dans l'app. Recette d'Ouest Délices ; la page n'affiche pas de note."
-  },
-  {
-    "id": "gratin-dauphinois",
-    "title": "Gratin dauphinois",
-    "servings": 4,
-    "time": 75,
-    "image": "images/gratin-dauphinois.jpg",
-    "tags": { "protein": ["végétarien"], "vegetable": ["pomme de terre"], "season": ["automne", "hiver"], "dish": ["gratin"], "method": ["four"], "cuisine": ["française"] },
-    "source": "https://www.yumelise.fr/vrai-gratin-dauphinois/",
-    "ingredients": [
-      { "name": "pommes de terre", "qty": 1000, "unit": "g", "aisle": "produce" },
-      { "name": "crème liquide", "qty": 330, "unit": "ml", "aisle": "dairy" },
-      { "name": "lait", "qty": 330, "unit": "ml", "aisle": "dairy" },
-      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
-      { "name": "beurre", "qty": null, "unit": "", "aisle": "dairy" },
-      { "name": "noix de muscade", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
-    ],
-    "steps": [
-      "Éplucher les pommes de terre, les laver puis les couper en fines rondelles. Ne pas les rincer ensuite : l'amidon aide à lier le gratin.",
-      "Préchauffer le four à 180 °C (mode gratin).",
-      "Dans une grande casserole, porter le lait à ébullition avec l'ail pressé, du sel, du poivre et de la muscade râpée.",
-      "Ajouter les pommes de terre, baisser le feu et cuire une dizaine de minutes en remuant régulièrement, à feu doux, pour qu'elles n'accrochent pas.",
-      "Beurrer un plat à gratin aux bords assez hauts, car la crème monte et bouillonne pendant la cuisson.",
-      "Verser les pommes de terre avec leur lait dans le plat, puis la crème par-dessus.",
-      "Baisser le four à 160 °C et enfourner 1 heure. Piquer les pommes de terre pour vérifier la cuisson : elles doivent être fondantes."
-    ],
-    "notes": "Pas de fromage : c'est la version traditionnelle. Recette de Yumelise ; peu d'avis publiés (5/5 sur 2 avis)."
   },
   {
     "id": "smashed-potatoes",

@@ -1,13 +1,13 @@
 "use strict";
 
 const AISLES = [
-  ["produce", "Fruits & légumes"],
-  ["meat", "Viandes & poissons"],
-  ["dairy", "Crèmerie & œufs"],
-  ["pantry", "Épicerie"],
-  ["bakery", "Boulangerie"],
-  ["frozen", "Surgelés"],
-  ["other", "Autre"],
+  ["produce", "Fruits & légumes", "🥬"],
+  ["meat", "Viandes & poissons", "🥩"],
+  ["dairy", "Crèmerie & œufs", "🧀"],
+  ["pantry", "Épicerie", "🥫"],
+  ["bakery", "Boulangerie", "🥖"],
+  ["frozen", "Surgelés", "🧊"],
+  ["other", "Autre", "🛍️"],
 ];
 
 const STORE_KEY = "eatit.v1";
@@ -76,6 +76,7 @@ function pluralName(name, plural) {
 }
 
 function ingText(name, qty, unit, plural) {
+  name = name.replace(/'/g, "’");
   const q = fmtQty(qty);
   if (!q) return name;
   if (!unit) return `${q} ${qty > 1 ? pluralName(name, plural) : name}`;
@@ -88,6 +89,28 @@ function ingText(name, qty, unit, plural) {
 function plural(n, one, many) {
   return `${n} ${n > 1 ? many : one}`;
 }
+
+/* ---------- Images ---------- */
+
+const hue = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
+
+const placeholder = (id, cls) => `<div class="${cls} ph" style="--h:${hue(id)}">🍽️</div>`;
+
+// Photo de la recette, ou dégradé coloré si elle n'en a pas (ou si elle ne charge pas hors ligne).
+function imgHtml(r, cls = "thumb") {
+  if (!r.image) return placeholder(r.id, cls);
+  return `<img class="${cls}" src="${esc(r.image)}" alt="" loading="lazy" data-fallback="${esc(r.id)}">`;
+}
+
+$app.addEventListener(
+  "error",
+  (e) => {
+    const img = e.target;
+    if (img.tagName !== "IMG" || !img.dataset.fallback) return;
+    img.outerHTML = placeholder(img.dataset.fallback, img.className);
+  },
+  true
+);
 
 /* ---------- Liste de courses ---------- */
 
@@ -125,19 +148,23 @@ function recipeMatches(r) {
   return hay.includes(q);
 }
 
-function listHtml() {
+function feedHtml() {
   const items = state.recipes.filter(recipeMatches);
-  if (!items.length) return `<p class="empty">Aucune recette ne correspond.</p>`;
-  return `<ul class="list">${items
+  if (!items.length) return `<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
+  return `<ul class="feed">${items
     .map((r) => {
       const inPlan = r.id in state.plan;
-      return `<li class="card">
-        <button class="main" data-action="open" data-id="${esc(r.id)}">
-          <div class="title">${esc(r.title)}</div>
-          <div class="meta">${r.time} min · ${esc((r.tags || []).join(" · "))}</div>
-        </button>
-        <button class="icon-btn ${inPlan ? "on" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}"
+      const tags = (r.tags || []).map((t) => `<span class="pill plain">${esc(t)}</span>`).join("");
+      return `<li class="rcard">
+        <button class="fab ${inPlan ? "on" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}"
           aria-label="${inPlan ? "Retirer de la semaine" : "Ajouter à la semaine"}">${inPlan ? "✓" : "+"}</button>
+        <button class="open" data-action="open" data-id="${esc(r.id)}">
+          ${imgHtml(r)}
+          <div class="body">
+            <div class="title">${esc(r.title)}</div>
+            <div class="pills"><span class="pill">⏱ ${r.time} min</span><span class="pill">👥 ${r.servings}</span>${tags}</div>
+          </div>
+        </button>
       </li>`;
     })
     .join("")}</ul>`;
@@ -145,13 +172,14 @@ function listHtml() {
 
 function recipesView() {
   const tags = [...new Set(state.recipes.flatMap((r) => r.tags || []))].sort((a, b) => a.localeCompare(b, "fr"));
-  return `<h1>Eat-it</h1>
-    <input id="q" class="search" type="search" placeholder="Rechercher une recette ou un ingrédient" value="${esc(state.query)}">
+  return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div>
+      <div class="count">${plural(state.recipes.length, "recette", "recettes")}</div></div>
+    <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     <div class="chips">${tags
       .map((t) => `<button class="chip ${state.tag === t ? "on" : ""}" data-action="tag" data-tag="${esc(t)}">${esc(t)}</button>`)
       .join("")}</div>
-    <button class="btn soft" data-action="random">🎲 Surprends-moi</button>
-    <div id="list">${listHtml()}</div>`;
+    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Tire une recette au hasard</span></div></button>
+    <div id="feed">${feedHtml()}</div>`;
 }
 
 function stepperHtml(id, servings) {
@@ -162,45 +190,57 @@ function stepperHtml(id, servings) {
   </div>`;
 }
 
+function currentServings(r) {
+  return state.plan[r.id] ?? state.detailServings ?? r.servings;
+}
+
 function detailView(r) {
-  const inPlan = r.id in state.plan;
-  const servings = state.plan[r.id] ?? state.detailServings ?? r.servings;
+  const servings = currentServings(r);
   const factor = servings / r.servings;
-  return `<button class="back" data-action="close">‹ Retour</button>
-    <h1>${esc(r.title)}</h1>
-    <p class="detail-meta">${r.time} min${r.tags?.length ? " · " + esc(r.tags.join(" · ")) : ""}</p>
-    <div class="servings-row">${stepperHtml(r.id, servings)}</div>
-    <h2>Ingrédients</h2>
-    <ul class="ingredients">${r.ingredients
-      .map((i) => `<li>${esc(ingText(i.name, i.qty == null ? null : i.qty * factor, i.unit, i.plural))}</li>`)
-      .join("")}</ul>
-    <h2>Préparation</h2>
-    <ol class="steps">${r.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
-    ${r.notes ? `<p class="notes">${esc(r.notes)}</p>` : ""}
-    ${r.source ? `<a class="source" href="${esc(r.source)}" target="_blank" rel="noopener">Voir la source ↗</a>` : ""}
-    <h2></h2>
+  const tags = (r.tags || []).map((t) => `<span class="pill plain">${esc(t)}</span>`).join("");
+  return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button></div>
+    <div class="sheet">
+      <h1>${esc(r.title)}</h1>
+      <div class="pills"><span class="pill">⏱ ${r.time} min</span>${tags}</div>
+      <div class="servings-card"><b>Pour</b>${stepperHtml(r.id, servings)}</div>
+      <h2>Ingrédients</h2>
+      <ul class="ingredients">${r.ingredients
+        .map((i) => `<li>${esc(ingText(i.name, i.qty == null ? null : i.qty * factor, i.unit, i.plural))}</li>`)
+        .join("")}</ul>
+      <h2>Préparation</h2>
+      <ol class="steps">${r.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
+      ${r.notes ? `<p class="notes">${esc(r.notes)}</p>` : ""}
+      ${r.source ? `<a class="source" href="${esc(r.source)}" target="_blank" rel="noopener">Voir la source ↗</a>` : ""}
+    </div>`;
+}
+
+function ctaBar(r) {
+  const inPlan = r.id in state.plan;
+  const servings = currentServings(r);
+  return `<div class="cta"><div>
     <button class="btn ${inPlan ? "soft" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}" data-servings="${servings}">
-      ${inPlan ? "✓ Dans la semaine · retirer" : `Ajouter à la semaine (${plural(servings, "pers.", "pers.")})`}
-    </button>`;
+      ${inPlan ? "✓ Dans la semaine · retirer" : `Ajouter à la semaine · ${plural(servings, "personne", "personnes")}`}
+    </button></div></div>`;
 }
 
 function planView() {
   const ids = Object.keys(state.plan).filter(byId);
   if (!ids.length) {
-    return `<h1>Ma semaine</h1><p class="empty">Aucune recette choisie.<br>Ajoute-en depuis l’onglet Recettes avec le bouton +.</p>`;
+    return `<h1>Ma semaine</h1><p class="empty"><span class="big">📅</span>Aucune recette choisie.<br>Ajoute-en depuis l’onglet Recettes avec le bouton +.</p>`;
   }
   const total = ids.reduce((n, id) => n + state.plan[id], 0);
   return `<h1>Ma semaine</h1>
-    <p class="muted">${plural(ids.length, "recette", "recettes")} · ${plural(total, "repas-personne", "repas-personnes")}</p>
-    <ul class="list">${ids
+    <p class="muted">${plural(ids.length, "recette", "recettes")} · ${plural(total, "repas", "repas")} au total</p>
+    <ul class="plan">${ids
       .map((id) => {
         const r = byId(id);
-        return `<li class="card">
-          <div class="main">
+        return `<li class="prow">
+          ${imgHtml(r)}
+          <div class="info">
             <button class="title" data-action="open" data-id="${esc(id)}">${esc(r.title)}</button>
-            <div class="meta">${stepperHtml(id, state.plan[id])}</div>
+            ${stepperHtml(id, state.plan[id])}
           </div>
-          <button class="icon-btn" data-action="remove" data-id="${esc(id)}" aria-label="Retirer">×</button>
+          <button class="x" data-action="remove" data-id="${esc(id)}" aria-label="Retirer">×</button>
         </li>`;
       })
       .join("")}</ul>
@@ -211,15 +251,15 @@ function planView() {
 function shopView() {
   const items = shoppingList();
   if (!items.length) {
-    return `<h1>Courses</h1><p class="empty">La liste est vide.<br>Choisis des recettes pour la semaine d’abord.</p>`;
+    return `<h1>Courses</h1><p class="empty"><span class="big">🛒</span>La liste est vide.<br>Choisis des recettes pour la semaine d’abord.</p>`;
   }
   const done = items.filter((i) => state.checked[i.key]).length;
-  const groups = AISLES.map(([key, label]) => {
+  const groups = AISLES.map(([key, label, ico]) => {
     const rows = items
       .filter((i) => i.aisle === key || (!AISLES.some(([k]) => k === i.aisle) && key === "other"))
       .sort((a, b) => !!state.checked[a.key] - !!state.checked[b.key] || a.name.localeCompare(b.name, "fr"));
     if (!rows.length) return "";
-    return `<h2>${label}</h2><ul class="shop">${rows
+    return `<div class="aisle"><span>${ico}</span>${label}</div><ul class="shop">${rows
       .map((i) => {
         const text = ingText(i.name, i.hasQty ? i.qty : null, i.unit, i.plural);
         const isDone = !!state.checked[i.key];
@@ -230,9 +270,10 @@ function shopView() {
       .join("")}</ul>`;
   }).join("");
   return `<h1>Courses</h1>
-    <p class="muted">${done} / ${items.length} dans le panier</p>
+    <p class="muted">${done} sur ${items.length} dans le panier</p>
+    <div class="progress"><i style="width:${(done / items.length) * 100}%"></i></div>
     ${groups}
-    ${done ? `<h2></h2><button class="btn soft" data-action="uncheck-all">Tout décocher</button>` : ""}`;
+    ${done ? `<div style="height:20px"></div><button class="btn soft" data-action="uncheck-all">Tout décocher</button>` : ""}`;
 }
 
 function tabbar() {
@@ -254,8 +295,8 @@ function tabbar() {
 
 function render({ top = false } = {}) {
   const y = window.scrollY;
-  let body;
   const r = state.openId && byId(state.openId);
+  let body;
   if (state.loading) body = `<p class="empty">Chargement…</p>`;
   else if (state.error) body = `<p class="empty">${esc(state.error)}</p>`;
   else if (r) body = detailView(r);
@@ -263,7 +304,7 @@ function render({ top = false } = {}) {
   else if (state.view === "shop") body = shopView();
   else body = recipesView();
 
-  $app.innerHTML = `<main class="page">${body}</main>${r ? "" : tabbar()}`;
+  $app.innerHTML = `<main class="page ${r ? "flush" : ""}">${body}</main>${r ? ctaBar(r) : tabbar()}`;
   window.scrollTo(0, top ? 0 : y);
 }
 
@@ -298,8 +339,7 @@ const actions = {
   },
   step(el) {
     const r = byId(el.dataset.id);
-    const current = state.plan[r.id] ?? state.detailServings ?? r.servings;
-    const next = clamp(current + Number(el.dataset.delta), 1, MAX_SERVINGS);
+    const next = clamp(currentServings(r) + Number(el.dataset.delta), 1, MAX_SERVINGS);
     if (r.id in state.plan) {
       state.plan[r.id] = next;
       saveState();
@@ -345,11 +385,11 @@ $app.addEventListener("click", (e) => {
   if (el && actions[el.dataset.action]) actions[el.dataset.action](el);
 });
 
-// La recherche ne re-rend que la liste, pour ne pas perdre le focus du champ.
+// La recherche ne re-rend que le fil, pour ne pas perdre le focus du champ.
 $app.addEventListener("input", (e) => {
   if (e.target.id !== "q") return;
   state.query = e.target.value;
-  document.getElementById("list").innerHTML = listHtml();
+  document.getElementById("feed").innerHTML = feedHtml();
 });
 
 /* ---------- Démarrage ---------- */

@@ -59,10 +59,44 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 - Pièces sans unité (`unit: ""`) : le nom s'écrit au singulier (« oignon », « œuf »), l'app ajoute le « s » si qté > 1. Pour un nom composé ou irrégulier, ajouter `"plural": "pommes de terre"` à l'ingrédient.
 - Pour que la liste de courses additionne bien, un même ingrédient doit toujours s'écrire pareil (minuscules, pluriel cohérent : « oignon », « œuf »…) et avec la même unité d'une recette à l'autre. Pas de conversion d'unités pour l'instant.
 
+## Images des recettes
+
+- Champ `image` de la recette : chemin relatif `images/<id>.jpg`. Sans image (ou si elle ne charge pas), l'app affiche un dégradé coloré avec 🍽️ : une recette sans photo reste présentable.
+- **Les images sont stockées dans le dépôt**, jamais en lien externe (hotlinking cassé, pas de hors ligne). Format JPEG, ~960 px de large, idéalement < 250 Ko.
+- Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les deux recettes d'exemple utilisent des photos Wikipédia (`curl -A "Eat-it/1.0"` obligatoire, sinon refusé).
+
+## Design de l'app
+
+- Style « blog culinaire » : fil de grandes cartes photo (16/10), fiche recette avec image en en-tête et bouton d'action fixe en bas, vignettes dans la semaine, courses classées par rayon avec barre de progression.
+- Couleur d'accent orange `#e8590c`. Thème clair/sombre automatique (`prefers-color-scheme`), tout passe par les variables CSS de `:root` dans `style.css`.
+- Mobile d'abord : marges de sécurité iOS via `env(safe-area-inset-*)`, cibles tactiles ≥ 34 px, largeur max 640 px.
+
+## Icône de l'app
+
+- Source : `icons/icon.svg` (bol fumant blanc sur dégradé orange). Les PNG `icon-180/192/512.png` en sont rendus ; iOS utilise `icon-180.png` (apple-touch-icon), il faut un carré plein, sans transparence (iOS arrondit lui-même).
+- Pour la changer : éditer le SVG, ou partir d'une image fournie par l'utilisateur, puis régénérer les 3 PNG. Rendu sans dépendance avec Edge headless (`msedge --headless --screenshot=... --window-size=S,S`) sur une page qui affiche le SVG à la taille S.
+- Sur iPhone, une nouvelle icône n'apparaît qu'après avoir supprimé l'app de l'écran d'accueil puis l'avoir réinstallée depuis Safari.
+
 ## Conventions de code
 
-_À définir avec la stack._
+- Vanilla JS, pas de framework, pas de build ni de dépendance. Le rendu est une fonction `render()` qui reconstruit le HTML depuis `state` ; les clics passent par un seul écouteur délégué sur `data-action` (objet `actions`).
+- Tout texte venant des données passe par `esc()` avant d'entrer dans le HTML.
+- Code et identifiants en anglais, textes de l'interface en français.
+- Quand on change les fichiers du shell (JS/CSS), incrémenter `CACHE` dans `sw.js` (`eatit-vN`).
+
+## Vérifier son travail
+
+- Syntaxe : `node --check app.js`. Données : charger `data/recipes.json` et vérifier `id` uniques et champs obligatoires.
+- Rendu : servir le dossier (`python -m http.server`), puis capture avec Edge headless à taille d'iPhone (`--window-size=390,844 --force-device-scale-factor=2 --virtual-time-budget=4000 --screenshot=...`) et regarder l'image. Pour capturer un écran autre que l'accueil, une page temporaire avec une iframe permet d'appeler `actions.*` via `contentWindow.eval` ; la supprimer ensuite. Le chemin de sortie de `--screenshot` doit être un chemin Windows absolu.
+- Arrêter le serveur de test ensuite (cibler uniquement `Get-NetTCPConnection -LocalPort 8123 -State Listen`, sinon on tombe sur des connexions fermées appartenant au système, et `Stop-Process` échoue en boucle).
+
+## Publication
+
+- Dépôt : https://github.com/Julien2501/eat-it (public, GitHub Pages depuis `main`, dossier racine). App : https://julien2501.github.io/eat-it/.
+- Ajouter une recette ou modifier l'app = commit + `git push` sur `main` ; Pages se met à jour en ~1 min. C'est le seul moyen pour l'utilisateur de voir le résultat sur son téléphone.
+- Le git de la machine est connecté à un autre compte GitHub (JulienV2501) que celui du dépôt (Julien2501) : en cas d'erreur 403 au push, les identifiants mémorisés sont les mauvais.
 
 ## Pièges et leçons
 
-_À compléter._
+- Les noms d'ingrédients doivent être écrits pareil d'une recette à l'autre, sinon la liste de courses ne les additionne pas (voir schéma).
+- Un lien `<a href>` vers une page externe depuis une PWA iOS s'ouvre dans l'app ; c'est voulu pour `source`, mais ne pas y mettre de navigation interne.

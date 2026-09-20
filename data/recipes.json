@@ -4,6 +4,7 @@
     "title": "Pâtes carbonara",
     "servings": 4,
     "time": 25,
+    "image": "images/carbonara.jpg",
     "tags": ["pâtes", "rapide"],
     "ingredients": [
       { "name": "spaghetti", "qty": 400, "unit": "g", "aisle": "pantry" },
@@ -27,6 +28,7 @@
     "title": "Curry de pois chiches",
     "servings": 4,
     "time": 35,
+    "image": "images/curry-pois-chiches.jpg",
     "tags": ["végétarien", "curry"],
     "ingredients": [
       { "name": "pois chiches", "qty": 2, "unit": "boîte", "aisle": "pantry" },

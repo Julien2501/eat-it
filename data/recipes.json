@@ -700,5 +700,81 @@
       "Enfourner 30 minutes à 180 °C, puis 15 minutes de plus en éteignant le four, pour cuire doucement l'intérieur."
     ],
     "notes": "Sans beurre ni sucre raffiné, selon l'auteur. Un cake entier : les quantités ne changent pas avec le nombre de personnes. La légende ne précise ni le moule, ni le nombre de parts ; le temps de préparation est estimé."
+  },
+  {
+    "id": "ramen-miso-cremeux",
+    "title": "Ramen crémeux au miso",
+    "servings": 4,
+    "time": 35,
+    "image": "images/ramen-miso-cremeux.jpg",
+    "tags": { "protein": ["tofu", "végétarien"], "season": ["automne", "hiver"], "dish": ["soupe", "nouilles"], "cuisine": ["asiatique"] },
+    "source": "https://www.tiktok.com/@bosh.tv/video/7481605936876932374",
+    "ingredients": [
+      { "name": "nouilles ramen", "qty": 400, "unit": "g", "aisle": "pantry" },
+      { "name": "bouillon de légumes", "qty": 1500, "unit": "ml", "aisle": "pantry" },
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "huile végétale", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile pimentée croustillante (chili crisp)", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 5, "unit": "cm", "aisle": "produce" },
+      { "name": "curcuma frais", "qty": 2.5, "unit": "cm", "aisle": "produce" },
+      { "name": "citron vert", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 6, "unit": "", "aisle": "produce" },
+      { "name": "pâte de miso", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "beurre de cacahuète", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "purée de sésame (tahini)", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "mirin", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "tofu fumé", "qty": 225, "unit": "g", "aisle": "dairy" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "fumée liquide", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile pimentée", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "graines de sésame grillées", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sucre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préparer le bouillon : chauffer 1 c. à soupe d'huile végétale et l'huile pimentée croustillante dans une grande casserole. Y faire revenir 5 minutes l'ail, le gingembre et le curcuma râpés, le zeste d'un citron vert et le blanc des oignons verts.",
+      "Incorporer la pâte de miso, le beurre de cacahuète, le tahini et le mirin. Ajouter le lait de coco, puis le bouillon de légumes, et laisser mijoter.",
+      "Cuire le tofu : l'émietter dans une poêle avec 2 c. à soupe d'huile végétale et le faire dorer. L'enrober ensuite de sauce soja, de fumée liquide (facultatif) et d'huile pimentée.",
+      "Porter le bouillon à ébullition, ajouter les nouilles et les cuire selon les indications du paquet. Saler, poivrer et sucrer selon le goût.",
+      "Répartir les nouilles dans des bols, verser le bouillon dessus et garnir de tofu émietté.",
+      "Terminer avec de l'huile pimentée croustillante, des graines de sésame grillées, le vert des oignons verts, de la coriandre fraîche et des quartiers de citron vert."
+    ],
+    "notes": "Recette végane. Le mirin est cité dans la préparation mais absent de la liste d'ingrédients, sans quantité. Le temps est estimé : la légende n'en donne pas. Recette de BOSH! sur TikTok."
+  },
+  {
+    "id": "pois-chiches-croustillants-gochujang",
+    "title": "Pois chiches croustillants au gochujang",
+    "servings": 2,
+    "time": 45,
+    "image": "images/pois-chiches-croustillants-gochujang.jpg",
+    "tags": { "protein": ["légumineuses", "végétarien"], "season": ["toute l'année"], "dish": ["riz"], "method": ["four"], "cuisine": ["coréenne"] },
+    "source": "https://www.tiktok.com/@benrebuck/video/7254956197831314715",
+    "ingredients": [
+      { "name": "pois chiches", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 0.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron vert", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Égoutter les pois chiches et les sécher soigneusement avec du papier absorbant.",
+      "Les étaler sur une plaque de cuisson avec un peu d'huile d'olive et du sel. Enfourner 35 à 40 minutes à 180 °C, jusqu'à ce qu'ils soient croustillants.",
+      "Préparer la sauce dans une poêle : y faire d'abord revenir l'ail et le gingembre râpés, pour qu'il ne reste aucun goût cru. Ajouter le gochujang, la sauce soja, le vinaigre de riz, l'huile de sésame et le sirop d'érable, et mélanger.",
+      "Laisser la sauce sur feu doux, puis ajouter les pois chiches et bien les enrober.",
+      "Servir sur du riz, avec des oignons verts émincés, des graines de sésame et un jus de citron vert."
+    ],
+    "notes": "Recette végane. Le sirop d'agave peut remplacer le sirop d'érable. La légende ne précise ni le nombre de portions (1 boîte de pois chiches ≈ 2 portions, estimé), ni le temps, ni les quantités d'huile d'olive, de gingembre et de garnitures ; la température (180) est donnée sans unité, 180 °C supposés. Recette de Ben Rebuck sur TikTok."
   }
 ]

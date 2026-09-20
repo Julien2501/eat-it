@@ -21,6 +21,7 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 ## Règles de fonctionnement
 
 - Langue : échanges et README en français. Code et identifiants en anglais.
+- **Tout en français dans l'app** (demande explicite de l'utilisateur) : quand une source est en anglais, tout est traduit : titre, noms d'ingrédients, unités, étapes, notes, tags. Termes usuels : `light soy sauce` → sauce soja légère, `dark soy sauce` → sauce soja foncée, `oyster sauce` → sauce d'huître, `corn flour/starch` → fécule de maïs, `bean sprouts` → germes de soja, `spring onions` → oignons verts, `peppers` → poivrons, `chilli oil` → huile pimentée, `meal prep` → préparer ses repas à l'avance. Les emprunts entrés dans l'usage (banana bread, sushi bowl, airfryer, teriyaki) et les noms propres restent tels quels.
 - Le README est une première version de l'utilisateur ; il sera entièrement réécrit au fil du projet, proprement.
 - Chaque décision validée (stack, structure, conventions) est ajoutée ci-dessous, avec son pourquoi.
 
@@ -97,7 +98,11 @@ L'utilisateur a TikTok sur son téléphone : il envoie le lien (Partager > Copie
 
 ## Ajouter une recette depuis Instagram
 
-**Pas possible sans l'utilisateur.** Les pages `instagram.com/reel/...` (y compris `/embed/captioned/`) renvoient un mur de connexion de ~627 Ko identique pour tous les reels, sans légende ni image. Ne pas passer par des proxys tiers. Demander à l'utilisateur des captures d'écran (légende dépliée avec « … plus », et texte affiché dans la vidéo) déposées dans `_inbox/` (dossier ignoré par git), puis les lire avec l'outil de lecture d'images. Pour la photo du plat, une capture nette de la vidéo suffit (recadrer avec Pillow si besoin).
+**Pas possible sans l'utilisateur.** Les pages `instagram.com/reel/...` (y compris `/embed/captioned/`) renvoient un mur de connexion de ~627 Ko identique pour tous les reels, sans légende ni image. Ne pas passer par des proxys tiers.
+
+Ce qui marche : l'utilisateur ouvre le reel dans son navigateur sur le PC (légende copiable sur la version web, pas dans l'appli mobile), **colle la légende dans le chat** et joint **une capture d'écran du plat** (les images collées arrivent dans le dossier `images/` de la session, chemin donné dans le message ; les lire avec l'outil de lecture d'images). Il numérote les recettes dans l'ordre des liens : associer chaque légende au reel du même rang et le dire dans le compte rendu.
+
+Photos : les captures de reels contiennent souvent une bannière de texte (« HIGH PROTEIN… ») ou des mains. Recadrer avec Pillow pour garder le plat (ex. `crop((0, 195, w, h))`), sinon régler `imageFocus`. Attention aux chemins Windows en Python : utiliser des `/` (un `\1.png` est lu comme le caractère `\x01`). Pour les légendes, ne pas inventer ce qui manque (nombre de parts, temps) : l'indiquer dans `notes`.
 
 Conversions faites à la main quand la légende donne des poids pour des ingrédients déjà présents ailleurs en cuillères : convertir vers l'unité déjà utilisée (ex. sirop d'érable 5-10 g ≈ ½ c. à soupe) et garder la valeur d'origine dans l'étape, pour que la liste de courses additionne.
 

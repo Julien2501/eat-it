@@ -599,5 +599,106 @@
       "Enfourner 35 à 45 minutes, jusqu'à ce qu'elles soient bien dorées. Laisser refroidir légèrement et parsemer de persil frais haché."
     ],
     "notes": "Recette de Marie Food Tips, notée 5/5 sur 4 avis."
+  },
+  {
+    "id": "riz-frit-poulet-teriyaki",
+    "title": "Riz frit au poulet teriyaki",
+    "servings": 4,
+    "time": 45,
+    "image": "images/riz-poulet-teriyaki-frit.jpg",
+    "tags": { "protein": ["poulet"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["riz"], "cuisine": ["asiatique"] },
+    "source": "https://www.instagram.com/reel/C1NffBOoJ1n/",
+    "ingredients": [
+      { "name": "blanc de poulet", "qty": 800, "unit": "g", "aisle": "meat" },
+      { "name": "sauce soja légère", "qty": 55, "unit": "ml", "aisle": "pantry" },
+      { "name": "assaisonnement polyvalent (sel, poivre, paprika, ail, persil)", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 4, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "miel", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 2.5, "unit": "gousse", "aisle": "produce" },
+      { "name": "fécule de maïs", "qty": 15, "unit": "g", "aisle": "pantry" },
+      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 20, "unit": "g", "aisle": "produce" },
+      { "name": "carotte", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "petits pois surgelés", "qty": 40, "unit": "g", "aisle": "frozen" },
+      { "name": "germes de soja", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "riz cuit", "qty": 500, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Couper le poulet en cubes et le faire mariner au moins 30 minutes avec 25 ml de sauce soja légère, l'assaisonnement et 2 c. à café d'huile d'olive.",
+      "Préparer la sauce teriyaki en mélangeant 30 ml de sauce soja légère, 30 g de miel, l'ail émincé, 50 ml d'eau et la fécule de maïs.",
+      "Cuire le poulet à feu vif en remuant, jusqu'à ce qu'il soit bien doré. Baisser à feu moyen, verser la sauce et la laisser épaissir. Retirer du feu avec toute la sauce et réserver.",
+      "Pour le riz frit, chauffer 2 c. à café d'huile d'olive dans une grande poêle. Cuire les œufs à feu vif en les brouillant tout de suite : 3 à 4 minutes au maximum pour des œufs moelleux. Les réserver.",
+      "Faire revenir l'oignon, le gingembre et les carottes hachés, jusqu'à ce que les carottes soient tendres. Ajouter les petits pois et les germes de soja.",
+      "Ajouter le riz, la sauce soja foncée et la sauce d'huître, et bien mélanger. Remettre les œufs, puis le poulet teriyaki avec sa sauce.",
+      "Servir garni d'oignons verts émincés et de graines de sésame."
+    ],
+    "notes": "Environ 527 kcal, 49 g de protéines, 45 g de glucides et 16 g de lipides par portion (4 portions), selon l'auteur. Idéal pour préparer ses repas à l'avance : le riz de la veille donne le meilleur résultat. Le miel, donné en grammes, est converti en cuillères. L'ordre des étapes du riz frit est déduit de la liste d'ingrédients et des conseils, et le temps est estimé : la légende n'en indique pas."
+  },
+  {
+    "id": "poulet-miel-ail-piment-riz",
+    "title": "Poulet miel, ail et piment avec du riz",
+    "servings": 4,
+    "time": 20,
+    "image": "images/poulet-miel-ail-piment-riz.jpg",
+    "tags": { "protein": ["poulet"], "vegetable": ["poivron"], "season": ["toute l'année"], "dish": ["riz", "poêlée"], "cuisine": ["asiatique"] },
+    "source": "https://www.instagram.com/reel/C40xDczobgf/",
+    "ingredients": [
+      { "name": "blanc de poulet", "qty": 500, "unit": "g", "aisle": "meat" },
+      { "name": "assaisonnement pour poulet", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "purée de gingembre", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile pimentée ou pâte de piment", "qty": 1.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sauce soja légère", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignons verts", "qty": 1, "unit": "botte", "aisle": "produce" },
+      { "name": "poivron", "qty": 1.5, "unit": "", "aisle": "produce" },
+      { "name": "riz cuit", "qty": 500, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Mélanger dans un bol tous les ingrédients de la sauce : le miel, l'ail, la purée de gingembre, l'huile pimentée et la sauce soja légère.",
+      "Assaisonner le poulet coupé en dés et le faire dorer dans une grande poêle jusqu'à ce qu'il soit cuit à cœur. Verser la sauce et cuire jusqu'à ce que le poulet soit bien enrobé, puis le retirer de la poêle.",
+      "Dans la même poêle, faire revenir les oignons verts émincés et les poivrons en dés, jusqu'à ce qu'ils commencent à ramollir.",
+      "Ajouter le riz cuit et la sauce soja foncée, bien mélanger, puis remettre le poulet.",
+      "Servir garni de piment, d'oignon vert et de graines de sésame (facultatif)."
+    ],
+    "notes": "Tout est cuit dans une seule poêle, en moins de 20 minutes. Environ 389 kcal et 35,8 g de protéines par portion (4 portions), selon l'auteur (@dinner_at_hols). Bon avec des légumes sautés à côté. Du riz micro-ondes du commerce convient très bien. Piment et poivrons au goût : la légende donne 1 à 2 c. à café d'huile pimentée et 1 à 2 poivrons."
+  },
+  {
+    "id": "banana-bread",
+    "title": "Banana bread sans beurre ni sucre raffiné",
+    "servings": 1,
+    "scalable": false,
+    "yieldLabel": "cake",
+    "time": 55,
+    "image": "images/banana-bread.jpg",
+    "imageFocus": "50% 35%",
+    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
+    "source": "https://www.instagram.com/reel/CvUCyDwASug/",
+    "ingredients": [
+      { "name": "banane", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "œuf", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "compote", "qty": 80, "unit": "g", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "lait végétal", "qty": 40, "unit": "ml", "aisle": "pantry" },
+      { "name": "farine", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "levure chimique", "qty": 11, "unit": "g", "aisle": "pantry" },
+      { "name": "pépites de chocolat", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préchauffer le four à 180 °C.",
+      "Dans un saladier, écraser 3 bananes, puis ajouter les 2 œufs, la compote, le sirop d'érable et le lait végétal.",
+      "Ajouter la farine et la levure (1 sachet de 11 g).",
+      "Incorporer des pépites de chocolat en quantité au choix et, si on veut, des carrés de chocolat au cœur de la préparation.",
+      "Verser la pâte dans un moule. Déposer dessus la quatrième banane coupée en longueur et quelques pépites de chocolat pour la décoration.",
+      "Enfourner 30 minutes à 180 °C, puis 15 minutes de plus en éteignant le four, pour cuire doucement l'intérieur."
+    ],
+    "notes": "Sans beurre ni sucre raffiné, selon l'auteur. Un cake entier : les quantités ne changent pas avec le nombre de personnes. La légende ne précise ni le moule, ni le nombre de parts ; le temps de préparation est estimé."
   }
 ]

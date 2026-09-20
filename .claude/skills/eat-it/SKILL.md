@@ -55,14 +55,16 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 }
 ```
 
+- **Gâteaux, cakes et autres recettes non proportionnelles** : ajouter `"scalable": false` et `"yieldLabel": "parts"` (ou `"moelleux"`…). L'app n'affiche alors pas de sélecteur de personnes mais « Donne 8 parts », et les quantités restent celles de la source. Sans `scalable: false`, `yieldLabel` n'est utilisé que pour l'affichage. Petites préparations individuelles (ex. 4 moelleux) : les laisser proportionnelles.
 - **Nombre de personnes : l'app affiche 2 par défaut pour toute recette** (`DEFAULT_SERVINGS` dans `app.js`, demandé par l'utilisateur), quelle que soit la valeur de `servings`. Donc `servings` = la portion telle que la source l'écrit, sans rééchelonner à la main. Si la source ne donne pas le nombre de personnes, l'estimer d'après les quantités (ex. 700 g de gnocchis ≈ 4) et le signaler dans `notes`.
 - **Ne jamais inventer en silence** : quantité, temps ou nombre de personnes absents de la source = estimés, et dit clairement (dans `notes` de façon courte, et à l'utilisateur dans le compte rendu). Ingrédient cité dans les étapes mais absent de la liste : l'ajouter avec `qty: null` et le signaler.
 - **`tags` = objet par catégorie de filtre** (chaque catégorie est un tableau, omise si vide). Ce sont les filtres de l'accueil : OU à l'intérieur d'une catégorie, ET entre catégories. Toujours remplir tous les champs pertinents pour une nouvelle recette, en réutilisant les valeurs existantes :
-  - `protein` (protéine principale) : `viande hachée`, `porc`, `poisson & fruits de mer`, `tofu`, `fromage`, `végétarien` (à ajouter dès qu'il n'y a ni viande ni poisson). Ajouter `poulet`, `bœuf`… si une recette l'exige.
-  - `vegetable` (légumes mis en avant, en forme générique : `chou`, `courgette`, `champignon`, `patate douce`, `carotte`, `avocat`, `poivron`, `tomate`…). Peut être vide.
+  - `protein` (protéine principale) : `viande hachée`, `porc`, `poulet`, `poisson & fruits de mer`, `tofu`, `fromage`, `œufs`, `légumineuses`, `végétarien` (à ajouter dès qu'il n'y a ni viande ni poisson, en plus de la protéine réelle). Ajouter `bœuf`… si une recette l'exige.
+  - `vegetable` (légumes mis en avant, en forme générique : `chou`, `courgette`, `champignon`, `patate douce`, `pomme de terre`, `brocoli`, `carotte`, `avocat`, `poivron`, `tomate`…). Peut être vide.
+  - `method` (cuisson) : `airfryer`, `four`. Catégorie « 🔥 Cuisson » de l'accueil.
   - `season` : `printemps`, `été`, `automne`, `hiver`, ou `["toute l'année"]` (qui correspond à n'importe quelle saison choisie). Saison = celle où les légumes principaux sont de saison / où le plat a du sens (plat réconfortant = automne/hiver, salade fraîche = printemps/été).
-  - `dish` (type de plat) : `pâtes`, `nouilles`, `gnocchis`, `bowl`, `salade`, `mijoté`, `four`, `sauté`…
-  - `cuisine` : `italienne`, `asiatique`, `japonaise`, `tex-mex`… (optionnel).
+  - `dish` (type de plat) : `pâtes`, `nouilles`, `gnocchis`, `riz`, `bowl`, `salade`, `mijoté`, `sauté`, `poêlée`, `gratin`, `grillade`, `poisson`, `légumes rôtis`, `accompagnement`, `dessert`, `gâteau`…
+  - `cuisine` : `italienne`, `asiatique`, `japonaise`, `tex-mex`, `indienne`, `orientale`, `française`… (optionnel).
   - Le filtre « ⚡ Rapide » n'est pas un tag : il est calculé (`time` ≤ 25 min, `QUICK_MAX_MIN` dans `app.js`). Ajouter une nouvelle catégorie = l'ajouter à `FILTERS` dans `app.js` ; les nouvelles valeurs, elles, apparaissent toutes seules.
   - Les étiquettes affichées sur les cartes viennent de `dish`, `cuisine` puis `protein` (2 max sur la carte).
 - `aisle` : `produce`, `meat`, `dairy`, `pantry`, `bakery`, `frozen`, `other` (rayons de la liste de courses).
@@ -99,6 +101,19 @@ L'utilisateur a TikTok sur son téléphone : il envoie le lien (Partager > Copie
 
 Conversions faites à la main quand la légende donne des poids pour des ingrédients déjà présents ailleurs en cuillères : convertir vers l'unité déjà utilisée (ex. sirop d'érable 5-10 g ≈ ½ c. à soupe) et garder la valeur d'origine dans l'étape, pour que la liste de courses additionne.
 
+## Chercher « les meilleures recettes » sur internet
+
+Quand l'utilisateur demande de trouver les meilleures recettes d'un plat ou d'un thème :
+
+1. Outils : `WebSearch` et `WebFetch` sont différés, les charger avec `ToolSearch` (`select:WebSearch,WebFetch`). Lancer une recherche par plat, en parallèle.
+2. **Marmiton et CuisineAZ refusent le robot de l'outil de recherche** (erreur 400 sur `allowed_domains`) : ne pas les utiliser ni contourner le blocage ; passer par `blocked_domains: ["marmiton.org", "cuisineaz.com"]`. Sources qui fonctionnent bien : Jow, 750g, Del's Cooking Twist, Mamie Simone, blogs. Certains sites répondent 403 au téléchargement direct (chefcuisto.com, papillesetpupilles.fr) : passer à un autre candidat.
+3. Choisir sur des **critères objectifs** : lire le JSON-LD `Recipe` de chaque candidat (`aggregateRating.ratingValue` et `ratingCount`) avec un script Node (`fetch` + parse des `<script type="application/ld+json">`, `@graph` aplati) et privilégier la meilleure note avec beaucoup d'avis. Une note de 5 sur 2 avis ne vaut pas 4,6 sur 400 : le dire.
+4. **Vérifier que la recette correspond vraiment à la demande** : ex. le « hachis parmentier express » de Jow utilise des flocons de purée, pas de vraies pommes de terre → choisir une autre source. Préférer aussi la version complète à la version minimaliste quand la note n'est pas décisive, et l'expliquer à l'utilisateur.
+5. Jow donne les quantités **pour 1 portion** (`servings: 1`) : l'app les multiplie pour 2, ne pas les modifier.
+6. Noter dans `notes` la source et sa note quand elle existe (« notée 4,6/5 sur 201 avis »), ou « aucune note publiée » sinon.
+7. Photo : voir « Images des recettes ». Écarter les photos avec texte incrusté ou trop petites (vignettes `-225x225` : retirer le suffixe pour la taille réelle) et prendre une photo libre de Wikimedia Commons à la place.
+8. Réécrire (pas de copie), normaliser, valider, tester la liste de courses, commit + push.
+
 ## Recettes classiques (sans source)
 
 Quand l'utilisateur demande un plat classique par son nom (bolognaises, chili…), écrire la recette soi-même, sans champ `source`, avec les mêmes conventions de normalisation. Réutiliser les noms d'ingrédients déjà présents (ex. `viande hachée 5 %`, `tomates concassées` en `boîte`, `ail` en `gousse`). Pour la photo, chercher une image libre sur Wikimedia Commons (`https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=960&format=json&titles=File:...`), regarder le résultat avant de l'utiliser, et **ajouter une ligne dans `images/CREDITS.md`** (auteur + licence, souvent CC BY-SA, l'attribution est obligatoire et le dépôt est public).
@@ -109,6 +124,7 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 
 - Champ `image` de la recette : chemin relatif `images/<id>.jpg`. Sans image (ou si elle ne charge pas), l'app affiche un dégradé coloré avec 🍽️ : une recette sans photo reste présentable.
 - **Les images sont stockées dans le dépôt**, jamais en lien externe (hotlinking cassé, pas de hors ligne). Format JPEG, ~960 px de large, idéalement < 250 Ko.
+- **Droits** : le dépôt est public. Les photos des sites/vidéos d'origine appartiennent à leurs auteurs (on les garde pour un usage personnel, avec renvoi vers `source`) ; les photos Wikimedia sont sous licence libre et à créditer dans `images/CREDITS.md`. Certaines sources servent du PNG/WebP sous un nom `.jpg` : `tools/resize_image.py` re-encode en vrai JPEG (vérifier avec `file`).
 - **Redimensionner avec `python tools/resize_image.py`** (Pillow, installé sur la machine avec `pip install --user pillow`) : sans argument, il réduit toutes les images de `images/` plus larges que 960 px. À lancer après chaque téléchargement (les vignettes TikTok font jusqu'à 2160×3840 et ~1 Mo).
 - Les vignettes TikTok sont en portrait : la carte en montre le centre 16/10. Vérifier le recadrage (aperçu avec Pillow) et, si un visage ou du texte gêne, régler `imageFocus`.
 - Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les recettes classiques utilisent des photos Wikimedia (`-A "Eat-it/1.0 (personal recipe app)"` obligatoire, sinon refusé), créditées dans `images/CREDITS.md`.

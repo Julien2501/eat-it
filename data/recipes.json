@@ -31,7 +31,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/choux-bruxelles-patate-douce.jpg",
-    "tags": { "protein": ["tofu", "fromage", "végétarien"], "vegetable": ["chou", "patate douce"], "season": ["automne", "hiver"], "dish": ["four"] },
+    "tags": { "protein": ["tofu", "fromage", "végétarien"], "vegetable": ["chou", "patate douce"], "season": ["automne", "hiver"], "dish": ["légumes rôtis"], "method": ["four"] },
     "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
     "ingredients": [
       { "name": "choux de Bruxelles", "qty": 400, "unit": "g", "aisle": "produce" },
@@ -344,5 +344,353 @@
       "Retirer du feu, ajouter les lardons croustillants et le parmesan. Poivrer selon le goût et parsemer de persil si souhaité."
     ],
     "notes": "La légende ne donne pas le nombre de personnes (4 estimé pour 700 g de gnocchis). L'origan est cité dans la préparation mais absent de la liste d'ingrédients, sans quantité. Recette de casalitaaa sur TikTok."
+  },
+  {
+    "id": "poulet-moutarde-brocoli-riz",
+    "title": "Poulet sauce moutarde, brocoli et riz",
+    "servings": 1,
+    "time": 21,
+    "image": "images/poulet-moutarde-brocoli-riz.jpg",
+    "tags": { "protein": ["poulet"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["riz"] },
+    "source": "https://jow.fr/recipes/poulet-sauce-moutarde-brocoli-et-riz-8uyw6kg6elo3jgw609ye",
+    "ingredients": [
+      { "name": "escalope de poulet", "plural": "escalopes de poulet", "qty": 1, "unit": "", "aisle": "meat" },
+      { "name": "riz", "qty": 70, "unit": "g", "aisle": "pantry" },
+      { "name": "brocoli", "qty": 200, "unit": "g", "aisle": "produce" },
+      { "name": "oignon", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "crème liquide", "qty": 50, "unit": "ml", "aisle": "dairy" },
+      { "name": "moutarde à l'ancienne", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Laver le brocoli et le couper en petits bouquets. Éplucher et émincer l'oignon.",
+      "Cuire le riz dans une casserole d'eau bouillante salée selon les indications du paquet, puis l'égoutter et le réserver.",
+      "En parallèle, cuire le brocoli 5 minutes dans une autre casserole d'eau bouillante salée.",
+      "Pendant ce temps, faire chauffer un filet d'huile d'olive dans une poêle à feu moyen. Y faire revenir l'oignon 1 minute.",
+      "Ajouter le poulet, saler, poivrer et le faire dorer 5 à 6 minutes sur chaque face.",
+      "Baisser le feu, ajouter la crème et la moutarde, saler, poivrer et laisser mijoter 3 à 4 minutes.",
+      "Servir le riz avec le brocoli, le poulet et la sauce à la moutarde."
+    ],
+    "notes": "Quantités pour 1 personne, ajustées automatiquement dans l'app. Recette de Jow, notée 4,6/5 sur 201 avis."
+  },
+  {
+    "id": "banana-bread",
+    "title": "Banana bread ultra moelleux",
+    "servings": 8,
+    "scalable": false,
+    "yieldLabel": "parts",
+    "time": 65,
+    "image": "images/banana-bread.jpg",
+    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
+    "source": "https://www.delscookingtwist.com/fr/banana-bread-ultra-moelleux/",
+    "ingredients": [
+      { "name": "farine", "qty": 180, "unit": "g", "aisle": "pantry" },
+      { "name": "levure chimique", "qty": 0.75, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "bicarbonate de soude", "qty": 0.75, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "cannelle", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "noix", "qty": 50, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre", "qty": 60, "unit": "g", "aisle": "dairy" },
+      { "name": "sucre", "qty": 180, "unit": "g", "aisle": "pantry" },
+      { "name": "œuf", "qty": 1, "unit": "", "aisle": "dairy" },
+      { "name": "banane bien mûre", "plural": "bananes bien mûres", "qty": 3, "unit": "", "aisle": "produce" },
+      { "name": "babeurre", "qty": 120, "unit": "ml", "aisle": "dairy" }
+    ],
+    "steps": [
+      "Préchauffer le four à 180 °C et beurrer un moule à cake sur toutes les faces.",
+      "Mélanger dans un saladier la farine, la levure, le bicarbonate, la cannelle et une pincée de sel. Ajouter les noix grossièrement hachées (facultatif, mais recommandé).",
+      "Dans un autre saladier, battre le beurre ramolli et le sucre au batteur jusqu'à obtenir une texture mousseuse. Ajouter l'œuf et battre à nouveau.",
+      "Écraser les bananes à la fourchette en purée, les ajouter au mélange, puis verser le babeurre.",
+      "Incorporer les ingrédients secs, en plusieurs fois, jusqu'à ce que la pâte soit homogène.",
+      "Verser dans le moule et enfourner 50 à 55 minutes, jusqu'à ce que la lame d'un couteau ressorte propre.",
+      "Laisser refroidir 10 minutes dans le moule, puis démouler sur une grille et laisser refroidir complètement."
+    ],
+    "notes": "Pas de babeurre ? Mélanger 1 c. à soupe de jus de citron avec du lait pour arriver à 120 ml. Les noix sont facultatives. Un cake entier (8 parts) : les quantités ne changent pas avec le nombre de personnes. Recette de Del's Cooking Twist, notée 5/5 sur 117 avis."
+  },
+  {
+    "id": "moelleux-chocolat",
+    "title": "Moelleux au chocolat",
+    "servings": 4,
+    "yieldLabel": "moelleux",
+    "time": 20,
+    "image": "images/moelleux-chocolat.jpg",
+    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
+    "source": "https://www.750g.com/moelleux-au-chocolat-r43027.htm",
+    "ingredients": [
+      { "name": "chocolat noir", "qty": 110, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre", "qty": 30, "unit": "g", "aisle": "dairy" },
+      { "name": "sucre", "qty": 50, "unit": "g", "aisle": "pantry" },
+      { "name": "farine", "qty": 50, "unit": "g", "aisle": "pantry" },
+      { "name": "œuf", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préchauffer le four à 200 °C. Beurrer 4 ramequins ou préparer 4 moules en papier.",
+      "Fouetter les œufs avec le sucre et une pincée de sel, puis ajouter la farine.",
+      "Faire fondre le chocolat avec le beurre, puis verser ce mélange sur la pâte aux œufs et mélanger.",
+      "Répartir dans les ramequins et enfourner 8 à 12 minutes : environ 8 minutes pour un cœur coulant, 12 pour un moelleux plus ferme."
+    ],
+    "notes": "Quantités pour 4 moelleux : elles sont divisées automatiquement pour 2 personnes (2 moelleux). Recette de 750g, notée 4,2/5 sur 198 avis."
+  },
+  {
+    "id": "dahl-lentilles-corail",
+    "title": "Dahl de lentilles corail crémeux",
+    "servings": 4,
+    "time": 30,
+    "image": "images/dahl-lentilles-corail.jpg",
+    "tags": { "protein": ["légumineuses", "végétarien"], "vegetable": ["tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["indienne"] },
+    "source": "https://edithetsacuisine.fr/dahl-lentilles-corail-coco-facile/",
+    "ingredients": [
+      { "name": "lentilles corail", "qty": 250, "unit": "g", "aisle": "pantry" },
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "bouillon de légumes", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 2, "unit": "cm", "aisle": "produce" },
+      { "name": "curry de Madras", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "curcuma", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Rincer les lentilles sous l'eau froide jusqu'à ce que l'eau ne soit plus trouble (environ 30 secondes) : cela évite l'écume et rend le dahl plus digeste.",
+      "Ciseler l'oignon. Râper l'ail et le gingembre. Réunir les épices dans un petit bol pour les verser d'un coup.",
+      "Faire chauffer un filet d'huile dans une cocotte et y faire revenir l'oignon 3 minutes, jusqu'à ce qu'il soit translucide. Ajouter l'ail et le gingembre et remuer 1 minute.",
+      "Ajouter le curry, le cumin et le curcuma et remuer vivement 30 secondes, jusqu'à ce que les épices dégagent une forte odeur.",
+      "Verser les tomates concassées en grattant bien le fond de la cocotte.",
+      "Ajouter les lentilles rincées, le lait de coco et le bouillon, puis porter à ébullition.",
+      "Baisser le feu, couvrir et laisser mijoter 20 minutes en remuant de temps en temps, jusqu'à ce que les lentilles s'écrasent et que la sauce épaississe."
+    ],
+    "notes": "Recette d'Édith et sa cuisine."
+  },
+  {
+    "id": "shakshuka",
+    "title": "Shakshuka",
+    "servings": 2,
+    "time": 35,
+    "image": "images/shakshuka.jpg",
+    "imageFocus": "50% 35%",
+    "tags": { "protein": ["œufs", "végétarien"], "vegetable": ["poivron", "tomate"], "season": ["été", "automne"], "dish": ["poêlée"], "cuisine": ["orientale"] },
+    "source": "https://www.mamiesimone.com/recettes/comment-reussir-la-fameuse-shakshuka-a-lisraelienne",
+    "ingredients": [
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "poivron rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "tomate", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "paprika", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "piment d'Espelette", "qty": 1, "unit": "pincée", "aisle": "pantry" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "feta", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Émincer l'oignon et couper le poivron en petits dés. Les faire revenir quelques minutes dans une poêle avec l'huile d'olive, puis ajouter l'ail émincé.",
+      "Ajouter la tomate fraîche coupée en petits morceaux, la pulpe de tomates et le concentré de tomate.",
+      "Assaisonner avec le sel, le poivre, le cumin, le paprika et le piment d'Espelette. Laisser mijoter à feu doux une bonne quinzaine de minutes.",
+      "Goûter et rectifier l'assaisonnement, puis former 4 creux dans la sauce. Y casser les œufs en faisant attention à ne pas crever les jaunes.",
+      "Saler et poivrer les œufs, couvrir la poêle et laisser cuire juste le temps que le blanc soit pris : le jaune doit rester coulant.",
+      "Retirer du feu et parsemer de persil (ou de basilic) haché, et de feta émiettée si on veut. Servir dans la poêle avec du pain."
+    ],
+    "notes": "La feta est facultative. Recette de Mamie Simone, notée 5/5 sur 12 avis."
+  },
+  {
+    "id": "nouilles-saumon-brocoli",
+    "title": "Nouilles au saumon, brocoli et sésame",
+    "servings": 1,
+    "time": 26,
+    "image": "images/nouilles-saumon-brocoli.jpg",
+    "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
+    "source": "https://jow.fr/recipes/nouilles-au-saumon-brocoli-et-sesame-96ulj1u933bwelyx0nz7",
+    "ingredients": [
+      { "name": "nouilles précuites", "qty": 120, "unit": "g", "aisle": "pantry" },
+      { "name": "pavé de saumon", "plural": "pavés de saumon", "qty": 1, "unit": "", "aisle": "meat" },
+      { "name": "brocoli", "qty": 100, "unit": "g", "aisle": "produce" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 0.25, "unit": "gousse", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préparer la marinade en mélangeant la sauce soja et l'ail râpé. La verser sur le saumon et laisser mariner au frais 10 minutes.",
+      "Pendant ce temps, laver le brocoli et le couper en petits bouquets, coupés en deux ou en quatre selon leur taille.",
+      "Cuire le brocoli 6 minutes dans de l'eau bouillante salée (3 à 4 minutes s'il est surgelé), puis l'égoutter.",
+      "Faire chauffer un filet d'huile d'olive dans une poêle à feu moyen. Y poser le saumon côté peau, poivrer et le faire dorer 6 à 8 minutes. Parsemer de graines de sésame et réserver au chaud.",
+      "Dans la même poêle, chauffer un filet d'huile d'olive et ajouter les nouilles avec 1 c. à soupe d'eau par personne. Couvrir et cuire 2 à 3 minutes, puis mélanger pour les détacher.",
+      "Ajouter l'assaisonnement des nouilles (ou une pincée d'ail en poudre, de gingembre en poudre et 1 c. à café de sauce soja par personne) et le brocoli. Mélanger et poursuivre la cuisson 2 minutes.",
+      "Servir dans un bol, avec le saumon et le reste des graines de sésame."
+    ],
+    "notes": "Quantités pour 1 personne, ajustées automatiquement dans l'app. Recette de Jow, notée 4,6/5 sur 461 avis."
+  },
+  {
+    "id": "airfryer-saumon",
+    "title": "Saumon à l'airfryer",
+    "servings": 4,
+    "time": 15,
+    "image": "images/airfryer-saumon.jpg",
+    "tags": { "protein": ["poisson & fruits de mer"], "season": ["toute l'année"], "dish": ["poisson"], "method": ["airfryer"] },
+    "source": "https://airfryer-recette.fr/saumon-dans-lairfryer/",
+    "ingredients": [
+      { "name": "pavé de saumon", "plural": "pavés de saumon", "qty": 4, "unit": "", "aisle": "meat" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "paprika", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Essuyer les pavés de saumon (environ 150 g chacun) avec du papier absorbant et retirer les arêtes si besoin.",
+      "Mélanger dans un bol l'huile d'olive, le paprika, l'ail en poudre, du sel et du poivre, puis en badigeonner les pavés.",
+      "Préchauffer l'airfryer à 180 °C pendant 3 minutes. Poser le saumon dans le panier en une seule couche et cuire 8 à 10 minutes selon l'épaisseur.",
+      "Servir chaud, avec des légumes vapeur ou une salade."
+    ],
+    "notes": "Recette d'airfryer-recette.fr, notée 4,9/5 sur 245 avis."
+  },
+  {
+    "id": "airfryer-gnocchis-croustillants",
+    "title": "Gnocchis croustillants à l'airfryer",
+    "servings": 6,
+    "time": 20,
+    "image": "images/airfryer-gnocchis-croustillants.jpg",
+    "tags": { "protein": ["fromage", "végétarien"], "season": ["toute l'année"], "dish": ["gnocchis"], "method": ["airfryer"], "cuisine": ["italienne"] },
+    "source": "https://marcwiner.com/gnocchis-air-fryer/",
+    "ingredients": [
+      { "name": "gnocchis", "qty": 450, "unit": "g", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 15, "unit": "g", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sauce marinara", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préchauffer l'airfryer à 200 °C et huiler légèrement le panier.",
+      "Dans un grand bol, mélanger les gnocchis (frais ou surgelés, sans les décongeler) avec l'huile d'olive, l'ail en poudre, le parmesan, du sel et du poivre.",
+      "Les répartir dans le panier en évitant qu'ils se chevauchent.",
+      "Cuire environ 11 à 16 minutes, en secouant le panier toutes les 4 à 5 minutes, jusqu'à ce qu'ils soient dorés et croustillants à l'extérieur, sans brûler.",
+      "Parsemer d'un peu de parmesan et de persil frais haché. Servir en accompagnement ou à l'apéritif, avec de la sauce marinara pour tremper."
+    ],
+    "notes": "Le temps de cuisson est à ajuster : la source donne 11 à 14 minutes et 13 à 16 minutes selon la variante. Recette de Marc Winer, notée 4,98/5 sur 44 avis."
+  },
+  {
+    "id": "airfryer-pilons-poulet",
+    "title": "Pilons de poulet à l'airfryer",
+    "servings": 4,
+    "time": 25,
+    "image": "images/airfryer-pilons-poulet.jpg",
+    "tags": { "protein": ["poulet"], "season": ["toute l'année"], "dish": ["grillade"], "method": ["airfryer"] },
+    "source": "https://www.cuisineetcreation.fr/pilons-de-poulet-au-airfryer/",
+    "ingredients": [
+      { "name": "pilon de poulet", "plural": "pilons de poulet", "qty": 8, "unit": "", "aisle": "meat" },
+      { "name": "huile d'olive", "qty": 4, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "épices cajun", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "thym", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Mettre les pilons crus dans un grand saladier avec l'huile d'olive, les épices cajun, le thym, du sel et du poivre.",
+      "Bien mélanger à la main pour enrober chaque pilon.",
+      "Les placer dans le panier de l'airfryer sans les superposer.",
+      "Cuire 20 minutes à 180 °C, en ajustant selon la taille des pilons."
+    ],
+    "notes": "Recette de Cuisine et Création. Aucune note publiée sur la page. Vérifier que la chair est bien cuite à cœur."
+  },
+  {
+    "id": "hachis-parmentier",
+    "title": "Hachis parmentier",
+    "servings": 6,
+    "time": 50,
+    "image": "images/hachis-parmentier.jpg",
+    "tags": { "protein": ["viande hachée"], "vegetable": ["pomme de terre"], "season": ["automne", "hiver"], "dish": ["gratin"], "method": ["four"], "cuisine": ["française"] },
+    "source": "https://ouestdelices.com/2023/11/14/hachis-parmentier-facile/",
+    "ingredients": [
+      { "name": "pommes de terre à purée", "qty": 1200, "unit": "g", "aisle": "produce" },
+      { "name": "bœuf haché", "qty": 750, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "lait", "qty": 300, "unit": "ml", "aisle": "dairy" },
+      { "name": "beurre", "qty": 90, "unit": "g", "aisle": "dairy" },
+      { "name": "fromage râpé", "qty": 80, "unit": "g", "aisle": "dairy" },
+      { "name": "chapelure", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Laver et éplucher les pommes de terre, puis les cuire 20 à 30 minutes dans de l'eau salée.",
+      "Pendant ce temps, ciseler les oignons. Préchauffer le four à 200 °C (chaleur tournante).",
+      "Faire fondre un peu de beurre dans une poêle et y faire revenir les oignons 1 minute. Ajouter la viande hachée, saler, poivrer et cuire 10 minutes en remuant.",
+      "Passer les pommes de terre égouttées au moulin à légumes, puis ajouter le lait tiède et 60 g de beurre pour obtenir une purée lisse.",
+      "Étaler la viande dans un plat à gratin et la recouvrir de purée. Lisser la surface avec une spatule ou une fourchette.",
+      "Parsemer de fromage râpé et de chapelure, puis déposer quelques noisettes de beurre (30 g au total).",
+      "Enfourner 15 à 20 minutes, puis passer 3 à 5 minutes sous le gril pour gratiner."
+    ],
+    "notes": "En option : ail, échalote, carotte en brunoise, muscade, herbes, concentré de tomate. Quantités pour 6 personnes, ajustées automatiquement dans l'app. Recette d'Ouest Délices ; la page n'affiche pas de note."
+  },
+  {
+    "id": "gratin-dauphinois",
+    "title": "Gratin dauphinois",
+    "servings": 4,
+    "time": 75,
+    "image": "images/gratin-dauphinois.jpg",
+    "tags": { "protein": ["végétarien"], "vegetable": ["pomme de terre"], "season": ["automne", "hiver"], "dish": ["gratin"], "method": ["four"], "cuisine": ["française"] },
+    "source": "https://www.yumelise.fr/vrai-gratin-dauphinois/",
+    "ingredients": [
+      { "name": "pommes de terre", "qty": 1000, "unit": "g", "aisle": "produce" },
+      { "name": "crème liquide", "qty": 330, "unit": "ml", "aisle": "dairy" },
+      { "name": "lait", "qty": 330, "unit": "ml", "aisle": "dairy" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "beurre", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "noix de muscade", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Éplucher les pommes de terre, les laver puis les couper en fines rondelles. Ne pas les rincer ensuite : l'amidon aide à lier le gratin.",
+      "Préchauffer le four à 180 °C (mode gratin).",
+      "Dans une grande casserole, porter le lait à ébullition avec l'ail pressé, du sel, du poivre et de la muscade râpée.",
+      "Ajouter les pommes de terre, baisser le feu et cuire une dizaine de minutes en remuant régulièrement, à feu doux, pour qu'elles n'accrochent pas.",
+      "Beurrer un plat à gratin aux bords assez hauts, car la crème monte et bouillonne pendant la cuisson.",
+      "Verser les pommes de terre avec leur lait dans le plat, puis la crème par-dessus.",
+      "Baisser le four à 160 °C et enfourner 1 heure. Piquer les pommes de terre pour vérifier la cuisson : elles doivent être fondantes."
+    ],
+    "notes": "Pas de fromage : c'est la version traditionnelle. Recette de Yumelise ; peu d'avis publiés (5/5 sur 2 avis)."
+  },
+  {
+    "id": "smashed-potatoes",
+    "title": "Smashed potatoes parmesan et ail",
+    "servings": 4,
+    "time": 75,
+    "image": "images/smashed-potatoes.jpg",
+    "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["pomme de terre"], "season": ["toute l'année"], "dish": ["accompagnement"], "method": ["four"] },
+    "source": "https://mariefoodtips.com/smashed-potatoes/",
+    "ingredients": [
+      { "name": "pommes de terre", "qty": 1000, "unit": "g", "aisle": "produce" },
+      { "name": "beurre", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "herbes de Provence", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "zaatar", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "persil", "qty": 1, "unit": "c. à soupe", "aisle": "produce" },
+      { "name": "sel", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "poivre", "qty": 1, "unit": "c. à café", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Cuire les pommes de terre 20 minutes dans une casserole d'eau bouillante.",
+      "Pendant ce temps, mélanger au beurre fondu l'ail pressé, le parmesan, les herbes de Provence, le zaatar, le sel et le poivre.",
+      "Égoutter les pommes de terre et les sécher le plus possible avec un torchon propre. Les mettre dans un saladier avec le beurre aromatisé et bien mélanger.",
+      "Préchauffer le four à 200 °C en chaleur tournante. Poser les pommes de terre sur une plaque recouverte de papier cuisson et écraser chacune avec un verre. Les badigeonner du reste de beurre.",
+      "Enfourner 35 à 45 minutes, jusqu'à ce qu'elles soient bien dorées. Laisser refroidir légèrement et parsemer de persil frais haché."
+    ],
+    "notes": "Recette de Marie Food Tips, notée 5/5 sur 4 avis."
   }
 ]

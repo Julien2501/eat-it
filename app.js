@@ -16,6 +16,7 @@ const FILTERS = [
   { key: "vegetable", label: "Légume", emoji: "🥕" },
   { key: "season", label: "Saison", emoji: "🍂" },
   { key: "dish", label: "Plat", emoji: "🍜" },
+  { key: "method", label: "Cuisson", emoji: "🔥" },
   { key: "cuisine", label: "Cuisine", emoji: "🌍" },
 ];
 const SEASONS = [
@@ -265,8 +266,20 @@ function stepperHtml(id, servings) {
   </div>`;
 }
 
+// Recette à quantités fixes (gâteau, cake…) : on ne l'ajuste pas au nombre de personnes.
+const isFixed = (r) => r.scalable === false;
+
 function currentServings(r) {
+  if (isFixed(r)) return r.servings;
   return state.plan[r.id] ?? state.detailServings ?? DEFAULT_SERVINGS;
+}
+
+function servingsLabel(r, n) {
+  return isFixed(r) ? `${n} ${r.yieldLabel || "parts"}` : plural(n, "personne", "personnes");
+}
+
+function servingsControl(r, n) {
+  return isFixed(r) ? `<div class="fixed-yield">${esc(servingsLabel(r, n))}</div>` : stepperHtml(r.id, n);
 }
 
 function detailView(r) {
@@ -280,7 +293,7 @@ function detailView(r) {
     <div class="sheet">
       <h1>${esc(r.title)}</h1>
       <div class="pills">${pillsHtml(r, 6)}${seasonPill}</div>
-      <div class="servings-card"><b>Pour</b>${stepperHtml(r.id, servings)}</div>
+      <div class="servings-card"><b>${isFixed(r) ? "Donne" : "Pour"}</b>${servingsControl(r, servings)}</div>
       <h2>Ingrédients</h2>
       <ul class="ingredients">${r.ingredients
         .map((i) => `<li>${esc(ingText(i.name, i.qty == null ? null : i.qty * factor, i.unit, i.plural))}</li>`)
@@ -297,7 +310,7 @@ function ctaBar(r) {
   const servings = currentServings(r);
   return `<div class="cta"><div>
     <button class="btn ${inPlan ? "soft" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}" data-servings="${servings}">
-      ${inPlan ? "✓ Dans la semaine · retirer" : `Ajouter à la semaine · ${plural(servings, "personne", "personnes")}`}
+      ${inPlan ? "✓ Dans la semaine · retirer" : `Ajouter à la semaine · ${servingsLabel(r, servings)}`}
     </button></div></div>`;
 }
 
@@ -306,7 +319,7 @@ function planView() {
   if (!ids.length) {
     return `<h1>Ma semaine</h1><p class="empty"><span class="big">📅</span>Aucune recette choisie.<br>Ajoute-en depuis l’onglet Recettes avec le bouton +.</p>`;
   }
-  const total = ids.reduce((n, id) => n + state.plan[id], 0);
+  const total = ids.reduce((n, id) => n + (isFixed(byId(id)) ? 0 : state.plan[id]), 0);
   return `<h1>Ma semaine</h1>
     <p class="muted">${plural(ids.length, "recette", "recettes")} · ${plural(total, "repas", "repas")} au total</p>
     <ul class="plan">${ids
@@ -316,7 +329,7 @@ function planView() {
           ${imgHtml(r)}
           <div class="info">
             <button class="title" data-action="open" data-id="${esc(id)}">${esc(r.title)}</button>
-            ${stepperHtml(id, state.plan[id])}
+            ${servingsControl(r, state.plan[id])}
           </div>
           <button class="x" data-action="remove" data-id="${esc(id)}" aria-label="Retirer">×</button>
         </li>`;
@@ -405,7 +418,7 @@ const actions = {
   },
   add(el) {
     const r = byId(el.dataset.id);
-    const servings = Number(el.dataset.servings) || DEFAULT_SERVINGS;
+    const servings = isFixed(r) ? r.servings : Number(el.dataset.servings) || DEFAULT_SERVINGS;
     state.plan[r.id] = servings;
     saveState();
     render();

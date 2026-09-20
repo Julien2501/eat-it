@@ -122,6 +122,16 @@ Quand l'utilisateur demande de trouver les meilleures recettes d'un plat ou d'un
 7. Photo : voir « Images des recettes ». Écarter les photos avec texte incrusté ou trop petites (vignettes `-225x225` : retirer le suffixe pour la taille réelle) et prendre une photo libre de Wikimedia Commons à la place.
 8. Réécrire (pas de copie), normaliser, valider, tester la liste de courses, commit + push.
 
+## Proposer de nouvelles recettes (TikTok, web) : de la variété avant tout
+
+L'utilisateur a rejeté une sélection de 11 recettes TikTok parce que c'étaient « des variantes de ce qu'il a déjà » (poulet croustillant, bowls de saumon, pâtes au cottage cheese, alors que la bibliothèque en compte déjà). Avant de proposer :
+
+1. **Comparer chaque idée à la bibliothèque** (`data/recipes.json`) sur la cuisine, le format (tacos, soupe, quiche, wrap, bol, gratin…) et l'ingrédient principal. Écarter toute variante d'un plat déjà présent (poulet + riz, saumon + riz, pâtes crémeuses, nouilles sautées, bowl asiatique, airfryer poulet/saumon/gnocchis).
+2. **Chercher ce qui manque** : autres cuisines (mexicaine, coréenne, japonaise, indienne, espagnole, vietnamienne, grecque, libanaise…), autres formats (tacos, wraps, soupes/veloutés, quiches/tartes, omelettes, curry, sandwichs), catégories vides (entrée, apéro, dessert).
+3. Lancer une recherche **par plat précis** (« tiktok recette bibimbap ») plutôt que par thème (« recette protéinée ») qui ramène toujours les mêmes idées fitness.
+4. Vérifier que chaque vidéo est accessible et que la légende contient la recette (oEmbed), signaler celles où les étapes manquent, et **présenter la liste à l'utilisateur pour validation avant d'ajouter quoi que ce soit** quand il l'a demandé.
+5. Pour chaque idée, dire en une phrase **ce qu'elle apporte de nouveau**.
+
 ## Recettes classiques (sans source)
 
 Quand l'utilisateur demande un plat classique par son nom (bolognaises, chili…), écrire la recette soi-même, sans champ `source`, avec les mêmes conventions de normalisation. Réutiliser les noms d'ingrédients déjà présents (ex. `viande hachée 5 %`, `tomates concassées` en `boîte`, `ail` en `gousse`). Pour la photo, chercher une image libre sur Wikimedia Commons (`https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=960&format=json&titles=File:...`), regarder le résultat avant de l'utiliser, et **ajouter une ligne dans `images/CREDITS.md`** (auteur + licence, souvent CC BY-SA, l'attribution est obligatoire et le dépôt est public).

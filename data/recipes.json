@@ -50,5 +50,38 @@
       "Ajouter les épinards en fin de cuisson, laisser tomber 2 minutes, saler et servir sur le riz."
     ],
     "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
+  },
+  {
+    "id": "choux-bruxelles-patate-douce",
+    "title": "Choux de Bruxelles et patate douce rôtis",
+    "servings": 2,
+    "time": 45,
+    "image": "images/choux-bruxelles-patate-douce.jpg",
+    "tags": ["végétarien", "four", "légumes"],
+    "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
+    "ingredients": [
+      { "name": "choux de Bruxelles", "qty": 400, "unit": "g", "aisle": "produce" },
+      { "name": "patate douce", "plural": "patates douces", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "tofu fumé", "qty": 200, "unit": "g", "aisle": "dairy" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "flocons de piment", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "graines de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "pâte de miso blanc", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "feta", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "vinaigre balsamique", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Préchauffer le four à 200 °C.",
+      "Retirer les feuilles abîmées des choux de Bruxelles, couper la base dure, puis les couper en deux.",
+      "Éplucher la patate douce, puis la couper en dés avec le tofu fumé.",
+      "Étaler les choux, la patate douce et le tofu sur une plaque de cuisson.",
+      "Mélanger dans un bol l'ail en poudre, les flocons de piment, les graines de sésame, l'huile d'olive, le vinaigre, le miso et le sirop d'érable. Verser cette marinade sur la plaque, bien mélanger et répartir en une seule couche.",
+      "Enfourner 35 minutes, en remuant à mi-cuisson.",
+      "Servir avec la feta émiettée et un filet de vinaigre balsamique."
+    ],
+    "notes": "Piment à ajuster au goût. Recette de Free the Pickle."
   }
 ]

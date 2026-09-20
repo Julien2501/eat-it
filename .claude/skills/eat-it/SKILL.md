@@ -59,6 +59,18 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 - Pièces sans unité (`unit: ""`) : le nom s'écrit au singulier (« oignon », « œuf »), l'app ajoute le « s » si qté > 1. Pour un nom composé ou irrégulier, ajouter `"plural": "pommes de terre"` à l'ingrédient.
 - Pour que la liste de courses additionne bien, un même ingrédient doit toujours s'écrire pareil (minuscules, pluriel cohérent : « oignon », « œuf »…) et avec la même unité d'une recette à l'autre. Pas de conversion d'unités pour l'instant.
 
+## Ajouter une recette depuis un lien
+
+1. Télécharger la page avec `curl -sL -A "Mozilla/5.0"` (dans le dossier temporaire, pas dans le projet).
+2. Chercher d'abord le JSON-LD (`<script type="application/ld+json">`, objet `@type: Recipe`, souvent dans un `@graph`) : ingrédients, étapes, durées, nombre de personnes, images. Les sites WordPress avec WP Recipe Maker (ex. freethepickle.fr) le fournissent. Sinon, lire le HTML.
+3. Les groupes d'ingrédients (« Pour la marinade »…) ne sont pas dans le JSON-LD : les retrouver dans le HTML (`wprm-recipe-group-name`) pour ne pas mal interpréter les étapes.
+4. **Réécrire** la recette avec nos mots (infinitif, phrases courtes), au lieu de copier le texte. Toujours renseigner `source` avec l'URL d'origine et citer le site dans `notes`.
+5. Normaliser : `càs` → `c. à soupe`, `càc` → `c. à café`, fractions en décimaux (`½` → `0.5`), noms d'ingrédients au singulier sauf « choux de Bruxelles »-style avec unité de poids, un `aisle` par ingrédient, `time` = préparation + cuisson. Réutiliser exactement les noms déjà présents dans `data/recipes.json` (ex. `huile d'olive`) pour que la liste de courses additionne.
+6. Image : télécharger la version ~768–960 px (les sites WordPress proposent des variantes `-768x960.jpg`), la regarder avant de l'intégrer, la nommer `images/<id>.jpg`. Les photos en portrait sont recadrées au centre dans les cartes 16/10 : vérifier que le plat reste visible.
+7. Valider le JSON (ids uniques, champs obligatoires, fichier image existant), tester la liste de courses, puis commit + push.
+
+Cas non traités pour l'instant : vidéos TikTok/autres (récupérer légende/sous-titres, à définir avec l'utilisateur quand il en enverra une), recette collée en texte (même normalisation, sans étape de téléchargement).
+
 ## Images des recettes
 
 - Champ `image` de la recette : chemin relatif `images/<id>.jpg`. Sans image (ou si elle ne charge pas), l'app affiche un dégradé coloré avec 🍽️ : une recette sans photo reste présentable.

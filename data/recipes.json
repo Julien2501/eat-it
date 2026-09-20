@@ -24,34 +24,6 @@
     "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
   },
   {
-    "id": "curry-pois-chiches",
-    "title": "Curry de pois chiches",
-    "servings": 4,
-    "time": 35,
-    "image": "images/curry-pois-chiches.jpg",
-    "tags": ["végétarien", "curry"],
-    "ingredients": [
-      { "name": "pois chiches", "qty": 2, "unit": "boîte", "aisle": "pantry" },
-      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
-      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
-      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
-      { "name": "ail", "qty": 3, "unit": "gousse", "aisle": "produce" },
-      { "name": "épinards frais", "qty": 200, "unit": "g", "aisle": "produce" },
-      { "name": "pâte de curry", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
-      { "name": "riz basmati", "qty": 300, "unit": "g", "aisle": "pantry" },
-      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
-      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
-    ],
-    "steps": [
-      "Émincer les oignons et l'ail. Les faire revenir dans l'huile d'olive 5 minutes.",
-      "Ajouter la pâte de curry et remuer 1 minute.",
-      "Verser les tomates, le lait de coco et les pois chiches égouttés. Laisser mijoter 15 minutes.",
-      "Pendant ce temps, cuire le riz.",
-      "Ajouter les épinards en fin de cuisson, laisser tomber 2 minutes, saler et servir sur le riz."
-    ],
-    "notes": "Recette d'exemple pour tester l'app : à supprimer ou remplacer."
-  },
-  {
     "id": "choux-bruxelles-patate-douce",
     "title": "Choux de Bruxelles et patate douce rôtis",
     "servings": 2,
@@ -61,7 +33,7 @@
     "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
     "ingredients": [
       { "name": "choux de Bruxelles", "qty": 400, "unit": "g", "aisle": "produce" },
-      { "name": "patate douce", "plural": "patates douces", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "patate douce", "qty": 500, "unit": "g", "aisle": "produce" },
       { "name": "tofu fumé", "qty": 200, "unit": "g", "aisle": "dairy" },
       { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
       { "name": "flocons de piment", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
@@ -116,5 +88,96 @@
       "Servir avec l'huile de sésame (ou de l'huile pimentée) et quelques herbes fraîches."
     ],
     "notes": "Environ 500 kcal et 41 g de protéines par portion, selon l'auteur. Option : 1 c. à café de sauce huître dans la sauce pour plus de profondeur. Recette de Babou | SwissFitCook sur TikTok."
+  },
+  {
+    "id": "pates-bolognaises",
+    "title": "Pâtes bolognaises",
+    "servings": 2,
+    "time": 45,
+    "image": "images/pates-bolognaises.jpg",
+    "tags": ["pâtes", "viande", "classique"],
+    "ingredients": [
+      { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "viande hachée 5 %", "qty": 250, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "carotte", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "origan séché", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 30, "unit": "g", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Éplucher l'oignon, la carotte et l'ail, puis les hacher finement.",
+      "Chauffer l'huile d'olive dans une sauteuse. Y faire revenir l'oignon et la carotte 5 minutes à feu moyen, puis l'ail 1 minute.",
+      "Monter le feu, ajouter la viande hachée et l'émietter. La faire dorer 5 minutes, puis saler et poivrer.",
+      "Ajouter le concentré de tomate, remuer 1 minute, puis verser les tomates concassées et l'origan.",
+      "Laisser mijoter à feu doux 25 à 30 minutes, à moitié couvert, en remuant de temps en temps. Ajouter un peu d'eau si la sauce épaissit trop.",
+      "Cuire les spaghetti al dente dans une grande casserole d'eau bouillante salée, puis les égoutter.",
+      "Mélanger les pâtes avec la sauce et servir avec le parmesan râpé."
+    ],
+    "notes": "La sauce est encore meilleure réchauffée le lendemain."
+  },
+  {
+    "id": "pates-pesto-cottage-courgettes",
+    "title": "Pâtes pesto, cottage cheese et courgettes",
+    "servings": 2,
+    "time": 25,
+    "image": "images/pates-pesto-cottage-courgettes.jpg",
+    "tags": ["pâtes", "végétarien", "rapide"],
+    "ingredients": [
+      { "name": "pâtes", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "courgette", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "cottage cheese", "qty": 200, "unit": "g", "aisle": "dairy" },
+      { "name": "pesto vert", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 20, "unit": "g", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Cuire les pâtes dans une grande casserole d'eau bouillante salée. Avant de les égoutter, garder un verre d'eau de cuisson.",
+      "Pendant ce temps, couper les courgettes en demi-rondelles fines et hacher l'ail.",
+      "Faire dorer les courgettes dans l'huile d'olive à feu vif 6 à 8 minutes. Ajouter l'ail pour la dernière minute, puis saler et poivrer.",
+      "Hors du feu, ajouter le cottage cheese et le pesto. Mélanger en allongeant avec un peu d'eau de cuisson jusqu'à obtenir une sauce crémeuse.",
+      "Ajouter les pâtes égouttées, bien mélanger et servir avec le parmesan."
+    ],
+    "notes": "Si le cottage cheese est très liquide, l'égoutter avant de l'utiliser."
+  },
+  {
+    "id": "chili-con-carne",
+    "title": "Chili con carne",
+    "servings": 2,
+    "time": 45,
+    "image": "images/chili-con-carne.jpg",
+    "tags": ["viande", "mijoté", "classique"],
+    "ingredients": [
+      { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "poivron rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "haricots rouges", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "paprika fumé", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "piment en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "riz", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Hacher l'oignon et l'ail, et couper le poivron en petits dés.",
+      "Chauffer l'huile d'olive dans une cocotte. Y faire revenir l'oignon et le poivron 5 minutes, puis l'ail 1 minute.",
+      "Ajouter la viande hachée et la faire dorer 5 minutes en l'émiettant.",
+      "Ajouter le cumin, le paprika fumé et le piment. Remuer 1 minute, puis ajouter le concentré de tomate et remuer encore 1 minute.",
+      "Verser les tomates concassées et les haricots rouges égouttés et rincés. Saler, puis laisser mijoter à feu doux 25 à 30 minutes, à moitié couvert, en ajoutant un peu d'eau si besoin.",
+      "Cuire le riz selon les indications du paquet et servir le chili dessus."
+    ],
+    "notes": "Se réchauffe très bien et se garde 3 jours au frais. Piment à ajuster selon le goût."
   }
 ]

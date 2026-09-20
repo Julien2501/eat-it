@@ -81,6 +81,10 @@ L'utilisateur a TikTok sur son téléphone : il envoie le lien (Partager > Copie
 
 Conversions faites à la main quand la légende donne des poids pour des ingrédients déjà présents ailleurs en cuillères : convertir vers l'unité déjà utilisée (ex. sirop d'érable 5-10 g ≈ ½ c. à soupe) et garder la valeur d'origine dans l'étape, pour que la liste de courses additionne.
 
+## Recettes classiques (sans source)
+
+Quand l'utilisateur demande un plat classique par son nom (bolognaises, chili…), écrire la recette soi-même, sans champ `source`, avec les mêmes conventions de normalisation. Réutiliser les noms d'ingrédients déjà présents (ex. `viande hachée 5 %`, `tomates concassées` en `boîte`, `ail` en `gousse`). Pour la photo, chercher une image libre sur Wikimedia Commons (`https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=960&format=json&titles=File:...`), regarder le résultat avant de l'utiliser, et **ajouter une ligne dans `images/CREDITS.md`** (auteur + licence, souvent CC BY-SA, l'attribution est obligatoire et le dépôt est public).
+
 Cas non traité : recette collée en texte (même normalisation, sans étape de téléchargement).
 
 ## Images des recettes

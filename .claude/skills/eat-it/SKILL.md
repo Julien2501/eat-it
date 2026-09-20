@@ -45,6 +45,7 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
   "time": 25,                   // minutes, total
   "image": "images/carbonara.jpg",
   "imageFocus": "50% 70%",      // optionnel : cadrage de la photo dans les cartes 16/10 (object-position)
+  "categories": ["repas"],      // catégorie(s) de plat : repas, entrée, apéro, dessert, encas, boisson, cocktail
   "tags": { "protein": ["porc"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
   "source": "https://...",      // optionnel : lien d'origine
   "ingredients": [
@@ -59,6 +60,7 @@ Objectif final : sélectionner des recettes et un nombre de personnes, puis prod
 - **Gâteaux, cakes et autres recettes non proportionnelles** : ajouter `"scalable": false` et `"yieldLabel": "parts"` (ou `"moelleux"`…). L'app n'affiche alors pas de sélecteur de personnes mais « Donne 8 parts », et les quantités restent celles de la source. Sans `scalable: false`, `yieldLabel` n'est utilisé que pour l'affichage. Petites préparations individuelles (ex. 4 moelleux) : les laisser proportionnelles.
 - **Nombre de personnes : l'app affiche 2 par défaut pour toute recette** (`DEFAULT_SERVINGS` dans `app.js`, demandé par l'utilisateur), quelle que soit la valeur de `servings`. Donc `servings` = la portion telle que la source l'écrit, sans rééchelonner à la main. Si la source ne donne pas le nombre de personnes, l'estimer d'après les quantités (ex. 700 g de gnocchis ≈ 4) et le signaler dans `notes`.
 - **Ne jamais inventer en silence** : quantité, temps ou nombre de personnes absents de la source = estimés, et dit clairement (dans `notes` de façon courte, et à l'utilisateur dans le compte rendu). Ingrédient cité dans les étapes mais absent de la liste : l'ajouter avec `qty: null` et le signaler.
+- **`categories` = catégorie(s) de plat, obligatoire pour toute nouvelle recette** : `repas` (plat principal, accompagnement compris), `entrée`, `apéro`, `dessert`, `encas`, `boisson`, `cocktail`. Plusieurs valeurs possibles (ex. `["apéro", "encas"]`, `["dessert", "encas"]`). C'est la navigation principale de l'accueil (rangée « Tout · Repas · Apéro… »). Seules les catégories qui contiennent au moins une recette apparaissent : ajouter la première recette d'une catégorie suffit à faire apparaître son onglet, sans toucher au code. Une recette sans `categories` compte comme `repas`. Ne pas confondre avec `tags.dish` (type de plat : pâtes, gratin…).
 - **`tags` = objet par catégorie de filtre** (chaque catégorie est un tableau, omise si vide). Ce sont les filtres de l'accueil : OU à l'intérieur d'une catégorie, ET entre catégories. Toujours remplir tous les champs pertinents pour une nouvelle recette, en réutilisant les valeurs existantes :
   - `protein` (protéine principale) : `viande hachée`, `porc`, `poulet`, `poisson & fruits de mer`, `tofu`, `fromage`, `œufs`, `légumineuses`, `végétarien` (à ajouter dès qu'il n'y a ni viande ni poisson, en plus de la protéine réelle). Ajouter `bœuf`… si une recette l'exige.
   - `vegetable` (légumes mis en avant, en forme générique : `chou`, `courgette`, `champignon`, `patate douce`, `pomme de terre`, `brocoli`, `carotte`, `avocat`, `poivron`, `tomate`…). Peut être vide.
@@ -137,7 +139,7 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 
 ## Filtres et ordre d'affichage
 
-- L'accueil a des filtres par catégorie (Protéine, Légume, Saison, Plat, Cuisine + ⚡ Rapide) dépliables au toucher, avec compteur de choix par catégorie et bouton Réinitialiser. Le « 🎲 Surprends-moi » tire au hasard parmi les recettes filtrées.
+- Structure de l'accueil (pensée pour ne pas être fouillis) : recherche → **rangée de catégories de plats** (Tout, Repas, Apéro, Desserts…, avec compteur) → bannière « 🎲 Pas d'idée ? » → barre « N recettes · ⚙️ Filtres · 🔀 Mélanger » → cartes. Les **filtres détaillés sont repliés** derrière le bouton Filtres (avec compteur de filtres actifs) ; une fois ouverts : Protéine, Légume, Saison, Plat, Cuisson, Cuisine + ⚡ Rapide, dépliables au toucher, et « ✕ Réinitialiser ». Catégorie de plat et filtres se cumulent. Le « 🎲 » tire au hasard parmi la sélection courante.
 - **L'ordre des recettes est aléatoire** : mélangé au chargement, sur demande (« 🔀 Mélanger »), et automatiquement quand l'app revient au premier plan après plus de 10 min sur l'accueil (`RESHUFFLE_AFTER_MS`). Il reste stable pendant qu'on consulte l'accueil, pour que la liste ne saute pas.
 
 ## Design de l'app

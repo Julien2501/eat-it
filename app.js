@@ -10,6 +10,19 @@ const AISLES = [
   ["other", "Autre", "🛍️"],
 ];
 
+// Catégories de plats (navigation principale de l'accueil). Une recette peut être dans plusieurs :
+// champ `categories` (tableau). Seules celles qui contiennent au moins une recette sont affichées.
+const COURSES = [
+  { key: "repas", label: "Repas", emoji: "🍽️" },
+  { key: "entrée", label: "Entrées", emoji: "🥗" },
+  { key: "apéro", label: "Apéro", emoji: "🥂" },
+  { key: "dessert", label: "Desserts", emoji: "🍰" },
+  { key: "encas", label: "Encas", emoji: "🍿" },
+  { key: "boisson", label: "Boissons", emoji: "🥤" },
+  { key: "cocktail", label: "Cocktails", emoji: "🍹" },
+];
+const courseOf = (r) => r.categories || ["repas"];
+
 // Catégories de filtres : la clé est celle utilisée dans `tags` des recettes (voir SKILL.md).
 const FILTERS = [
   { key: "protein", label: "Protéine", emoji: "🍗" },
@@ -41,6 +54,8 @@ const state = {
   error: null,
   view: "recipes", // recipes | plan | shop
   query: "",
+  course: null, // catégorie de plat choisie (null = tout)
+  filtersOpen: false,
   filters: {}, // { catégorie: [valeurs choisies] } : OU dans une catégorie, ET entre catégories
   quick: false,
   openCat: null, // catégorie dont les choix sont dépliés
@@ -178,6 +193,7 @@ const tagValues = (r, key) => (r.tags && r.tags[key]) || [];
 const activeCount = () => Object.values(state.filters).reduce((n, v) => n + v.length, 0) + (state.quick ? 1 : 0);
 
 function recipeMatches(r) {
+  if (state.course && !courseOf(r).includes(state.course)) return false;
   for (const { key } of FILTERS) {
     const chosen = state.filters[key];
     if (!chosen || !chosen.length) continue;
@@ -200,9 +216,10 @@ function pillsHtml(r, max) {
 
 function feedHtml() {
   const items = state.recipes.filter(recipeMatches).sort((a, b) => state.rank[a.id] - state.rank[b.id]);
+  const n = activeCount();
   const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}</span>
-    ${activeCount() ? `<button data-action="reset">Réinitialiser</button>` : ""}
-    <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>`;
+    <button class="ftoggle ${state.filtersOpen ? "open" : ""}" data-action="filters">⚙️ Filtres${n ? `<b>${n}</b>` : ""}</button>
+    <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>${state.filtersOpen ? filtersHtml() : ""}`;
   if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
   return `${bar}<ul class="feed">${items
     .map((r) => {
@@ -238,6 +255,7 @@ function filtersHtml() {
     })
     .join("");
   const quick = `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>`;
+  const reset = activeCount() ? `<button class="cat reset" data-action="reset">✕ Réinitialiser</button>` : "";
   const open = cats.find((c) => c.key === state.openCat);
   const panel = open
     ? `<div class="panel">${filterChoices(open.key)
@@ -247,14 +265,29 @@ function filtersHtml() {
         })
         .join("")}</div>`
     : "";
-  return `<div class="cats">${pills}${quick}</div>${panel}`;
+  return `<div class="cats">${pills}${quick}${reset}</div>${panel}`;
+}
+
+function coursesHtml() {
+  const count = (key) => state.recipes.filter((r) => courseOf(r).includes(key)).length;
+  const present = COURSES.filter(({ key }) => count(key));
+  if (present.length < 2) return "";
+  const all = `<button class="course ${state.course ? "" : "on"}" data-action="course" data-course="">Tout</button>`;
+  const pills = present
+    .map(
+      ({ key, label, emoji }) =>
+        `<button class="course ${state.course === key ? "on" : ""}" data-action="course" data-course="${key}">${emoji} ${label}<i>${count(key)}</i></button>`
+    )
+    .join("");
+  return `<div class="courses">${all}${pills}</div>`;
 }
 
 function recipesView() {
+  const narrowed = activeCount() || state.course;
   return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div></div>
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
-    ${filtersHtml()}
-    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Tire une recette au hasard${activeCount() ? " parmi ces filtres" : ""}</span></div></button>
+    ${coursesHtml()}
+    <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Une recette au hasard${narrowed ? " parmi la sélection" : ""}</span></div></button>
     <div id="feed">${feedHtml()}</div>`;
 }
 
@@ -437,6 +470,15 @@ const actions = {
     } else {
       state.detailServings = next;
     }
+    render();
+  },
+  course(el) {
+    state.course = el.dataset.course || null;
+    render();
+  },
+  filters() {
+    state.filtersOpen = !state.filtersOpen;
+    if (!state.filtersOpen) state.openCat = null;
     render();
   },
   cat(el) {

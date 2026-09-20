@@ -5,6 +5,7 @@
     "servings": 2,
     "time": 20,
     "image": "images/carbonara.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
@@ -31,6 +32,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/choux-bruxelles-patate-douce.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["tofu", "fromage", "végétarien"], "vegetable": ["chou", "patate douce"], "season": ["automne", "hiver"], "dish": ["légumes rôtis"], "method": ["four"] },
     "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
     "ingredients": [
@@ -64,6 +66,7 @@
     "servings": 2,
     "time": 18,
     "image": "images/udon-cacahuete-gochujang.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["viande hachée"], "season": ["toute l'année"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7631227747515370774",
     "ingredients": [
@@ -97,6 +100,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/pates-bolognaises.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["viande hachée"], "vegetable": ["carotte", "tomate"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
@@ -129,6 +133,7 @@
     "servings": 2,
     "time": 25,
     "image": "images/pates-pesto-cottage-courgettes.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["courgette"], "season": ["été"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
       { "name": "pâtes", "qty": 200, "unit": "g", "aisle": "pantry" },
@@ -156,6 +161,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/chili-con-carne.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["viande hachée"], "vegetable": ["poivron", "tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["tex-mex"] },
     "ingredients": [
       { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
@@ -188,6 +194,7 @@
     "servings": 2,
     "time": 30,
     "image": "images/sushi-bowl-truite-avocat.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["avocat"], "season": ["toute l'année"], "dish": ["bowl"], "cuisine": ["japonaise"] },
     "source": "https://www.tiktok.com/@eatwithflower/video/7488376597314112790",
     "ingredients": [
@@ -217,6 +224,7 @@
     "servings": 1,
     "time": 25,
     "image": "images/taglyoza.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["porc", "poisson & fruits de mer"], "vegetable": ["chou"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://swissfitcook.com/blogs/recettes/taglyoza",
     "ingredients": [
@@ -249,6 +257,7 @@
     "servings": 1,
     "time": 40,
     "image": "images/salade-riz-croustillant.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["tofu", "végétarien"], "vegetable": ["carotte", "avocat"], "season": ["printemps", "été"], "dish": ["salade", "bowl"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@unzestepourdeux/video/7613475586463370518",
     "ingredients": [
@@ -284,6 +293,7 @@
     "time": 20,
     "image": "images/porc-hoisin-saute.jpg",
     "imageFocus": "50% 72%",
+    "categories": ["repas"],
     "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["sauté"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@mariongrasby_/video/7608759256522788104",
     "ingredients": [
@@ -317,6 +327,7 @@
     "servings": 4,
     "time": 35,
     "image": "images/gnocchis-champignons-lardons.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["porc"], "vegetable": ["champignon"], "season": ["automne", "hiver"], "dish": ["gnocchis"] },
     "source": "https://www.tiktok.com/@casalitaaa/video/7616023848445562134",
     "ingredients": [
@@ -351,6 +362,7 @@
     "servings": 1,
     "time": 21,
     "image": "images/poulet-moutarde-brocoli-riz.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poulet"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["riz"] },
     "source": "https://jow.fr/recipes/poulet-sauce-moutarde-brocoli-et-riz-8uyw6kg6elo3jgw609ye",
     "ingredients": [
@@ -382,6 +394,7 @@
     "yieldLabel": "moelleux",
     "time": 20,
     "image": "images/moelleux-chocolat.jpg",
+    "categories": ["dessert"],
     "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
     "source": "https://www.750g.com/moelleux-au-chocolat-r43027.htm",
     "ingredients": [
@@ -406,6 +419,7 @@
     "servings": 4,
     "time": 30,
     "image": "images/dahl-lentilles-corail.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["légumineuses", "végétarien"], "vegetable": ["tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["indienne"] },
     "source": "https://edithetsacuisine.fr/dahl-lentilles-corail-coco-facile/",
     "ingredients": [
@@ -439,6 +453,7 @@
     "time": 35,
     "image": "images/shakshuka.jpg",
     "imageFocus": "50% 35%",
+    "categories": ["repas"],
     "tags": { "protein": ["œufs", "végétarien"], "vegetable": ["poivron", "tomate"], "season": ["été", "automne"], "dish": ["poêlée"], "cuisine": ["orientale"] },
     "source": "https://www.mamiesimone.com/recettes/comment-reussir-la-fameuse-shakshuka-a-lisraelienne",
     "ingredients": [
@@ -474,6 +489,7 @@
     "servings": 1,
     "time": 26,
     "image": "images/nouilles-saumon-brocoli.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://jow.fr/recipes/nouilles-au-saumon-brocoli-et-sesame-96ulj1u933bwelyx0nz7",
     "ingredients": [
@@ -503,6 +519,7 @@
     "servings": 4,
     "time": 15,
     "image": "images/airfryer-saumon.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poisson & fruits de mer"], "season": ["toute l'année"], "dish": ["poisson"], "method": ["airfryer"] },
     "source": "https://airfryer-recette.fr/saumon-dans-lairfryer/",
     "ingredients": [
@@ -527,6 +544,7 @@
     "servings": 6,
     "time": 20,
     "image": "images/airfryer-gnocchis-croustillants.jpg",
+    "categories": ["apéro", "encas"],
     "tags": { "protein": ["fromage", "végétarien"], "season": ["toute l'année"], "dish": ["gnocchis"], "method": ["airfryer"], "cuisine": ["italienne"] },
     "source": "https://marcwiner.com/gnocchis-air-fryer/",
     "ingredients": [
@@ -554,6 +572,7 @@
     "servings": 4,
     "time": 25,
     "image": "images/airfryer-pilons-poulet.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poulet"], "season": ["toute l'année"], "dish": ["grillade"], "method": ["airfryer"] },
     "source": "https://www.cuisineetcreation.fr/pilons-de-poulet-au-airfryer/",
     "ingredients": [
@@ -578,6 +597,7 @@
     "servings": 4,
     "time": 75,
     "image": "images/smashed-potatoes.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["pomme de terre"], "season": ["toute l'année"], "dish": ["accompagnement"], "method": ["four"] },
     "source": "https://mariefoodtips.com/smashed-potatoes/",
     "ingredients": [
@@ -606,6 +626,7 @@
     "servings": 4,
     "time": 45,
     "image": "images/riz-poulet-teriyaki-frit.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poulet"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["riz"], "cuisine": ["asiatique"] },
     "source": "https://www.instagram.com/reel/C1NffBOoJ1n/",
     "ingredients": [
@@ -645,6 +666,7 @@
     "servings": 4,
     "time": 20,
     "image": "images/poulet-miel-ail-piment-riz.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["poulet"], "vegetable": ["poivron"], "season": ["toute l'année"], "dish": ["riz", "poêlée"], "cuisine": ["asiatique"] },
     "source": "https://www.instagram.com/reel/C40xDczobgf/",
     "ingredients": [
@@ -679,6 +701,7 @@
     "time": 55,
     "image": "images/banana-bread.jpg",
     "imageFocus": "50% 35%",
+    "categories": ["dessert", "encas"],
     "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
     "source": "https://www.instagram.com/reel/CvUCyDwASug/",
     "ingredients": [
@@ -707,6 +730,7 @@
     "servings": 4,
     "time": 35,
     "image": "images/ramen-miso-cremeux.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["tofu", "végétarien"], "season": ["automne", "hiver"], "dish": ["soupe", "nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@bosh.tv/video/7481605936876932374",
     "ingredients": [
@@ -750,6 +774,7 @@
     "servings": 2,
     "time": 45,
     "image": "images/pois-chiches-croustillants-gochujang.jpg",
+    "categories": ["repas"],
     "tags": { "protein": ["légumineuses", "végétarien"], "season": ["toute l'année"], "dish": ["riz"], "method": ["four"], "cuisine": ["coréenne"] },
     "source": "https://www.tiktok.com/@benrebuck/video/7254956197831314715",
     "ingredients": [

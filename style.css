@@ -371,3 +371,9 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
 .fridgebtn.on { border-color: #4aa3ff; }
 .chip i { font-style: normal; font-size: 12px; opacity: 0.6; margin-left: 6px; }
 .chip.on i { opacity: 0.85; }
+
+/* ---------- Courses par rayon / par recette, partage de recette ---------- */
+.seg { display: flex; background: var(--card); border-radius: 12px; padding: 3px; margin: 12px 0 4px; box-shadow: var(--shadow); }
+.seg button { flex: 1; padding: 8px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--muted); }
+.seg button.on { background: var(--accent); color: var(--on-accent); }
+.hero .hero-share { right: 66px; font-size: 22px; }

@@ -801,5 +801,197 @@
       "Servir sur du riz, avec des oignons verts émincés, des graines de sésame et un jus de citron vert."
     ],
     "notes": "Recette végane. Le sirop d'agave peut remplacer le sirop d'érable. La légende ne précise ni le nombre de portions (1 boîte de pois chiches ≈ 2 portions, estimé), ni le temps, ni les quantités d'huile d'olive, de gingembre et de garnitures ; la température (180) est donnée sans unité, 180 °C supposés. Recette de Ben Rebuck sur TikTok."
+  },
+  {
+    "id": "mojito",
+    "title": "Mojito",
+    "servings": 1,
+    "time": 5,
+    "image": "images/mojito.jpg",
+    "imageFocus": "50% 10%",
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["été"], "dish": ["cocktail"], "cuisine": ["cubaine"] },
+    "ingredients": [
+      { "name": "rhum blanc", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "menthe", "qty": 8, "unit": "feuille", "aisle": "produce" },
+      { "name": "sucre", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "eau gazeuse", "qty": 10, "unit": "cl", "aisle": "drinks" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
+    ],
+    "steps": [
+      "Couper le demi-citron vert en petits morceaux et les mettre dans un grand verre avec le sucre et les feuilles de menthe.",
+      "Écraser doucement avec un pilon ou le manche d'une cuillère, sans broyer la menthe, pour libérer les arômes.",
+      "Remplir le verre de glaçons, verser le rhum et remuer.",
+      "Compléter avec l'eau gazeuse, mélanger et décorer d'une branche de menthe."
+    ],
+    "notes": "Recette classique, pour 1 verre. À consommer avec modération."
+  },
+  {
+    "id": "aperol-spritz",
+    "title": "Aperol Spritz",
+    "servings": 1,
+    "time": 3,
+    "image": "images/aperol-spritz.jpg",
+    "imageFocus": "50% 20%",
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["été"], "dish": ["cocktail"], "cuisine": ["italienne"] },
+    "ingredients": [
+      { "name": "prosecco", "qty": 9, "unit": "cl", "aisle": "drinks" },
+      { "name": "Aperol", "qty": 6, "unit": "cl", "aisle": "drinks" },
+      { "name": "eau gazeuse", "qty": 3, "unit": "cl", "aisle": "drinks" },
+      { "name": "orange", "qty": 1, "unit": "tranche", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
+    ],
+    "steps": [
+      "Remplir un grand verre à pied de glaçons.",
+      "Verser le prosecco, puis l'Aperol.",
+      "Ajouter un trait d'eau gazeuse et mélanger délicatement.",
+      "Décorer d'une tranche d'orange."
+    ],
+    "notes": "Les proportions classiques : 3 parts de prosecco, 2 d'Aperol, 1 d'eau gazeuse. Pour 1 verre. À consommer avec modération."
+  },
+  {
+    "id": "margarita",
+    "title": "Margarita",
+    "servings": 1,
+    "time": 5,
+    "image": "images/margarita.jpg",
+    "imageFocus": "50% 20%",
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["toute l'année"], "dish": ["cocktail"], "cuisine": ["mexicaine"] },
+    "ingredients": [
+      { "name": "tequila", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "triple sec", "qty": 2, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "sel fin", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
+    ],
+    "steps": [
+      "Frotter le bord d'un verre avec un quartier de citron vert, puis le tremper dans du sel fin pour former un givre.",
+      "Presser le reste du citron vert (environ 3 cl de jus) dans un shaker.",
+      "Ajouter la tequila, le triple sec et des glaçons, puis secouer énergiquement une dizaine de secondes.",
+      "Filtrer dans le verre, sur des glaçons si on veut, et décorer d'une rondelle de citron vert."
+    ],
+    "notes": "Pour 1 verre. À consommer avec modération."
+  },
+  {
+    "id": "moscow-mule",
+    "title": "Moscow Mule",
+    "servings": 1,
+    "time": 3,
+    "image": "images/moscow-mule.jpg",
+    "imageFocus": "50% 50%",
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["toute l'année"], "dish": ["cocktail"] },
+    "ingredients": [
+      { "name": "vodka", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "bière de gingembre", "qty": 12, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" },
+      { "name": "menthe", "qty": null, "unit": "", "aisle": "produce" }
+    ],
+    "steps": [
+      "Remplir un mug (en cuivre, si possible) de glaçons.",
+      "Verser la vodka et le jus du demi-citron vert.",
+      "Compléter avec la bière de gingembre et mélanger doucement.",
+      "Décorer d'un quartier de citron vert et de menthe fraîche."
+    ],
+    "notes": "La bière de gingembre est une boisson gazeuse sans alcool, à ne pas confondre avec la bière. Pour 1 verre. À consommer avec modération."
+  },
+  {
+    "id": "limonade-maison",
+    "title": "Limonade maison",
+    "servings": 4,
+    "time": 15,
+    "image": "images/limonade-maison.jpg",
+    "imageFocus": "50% 25%",
+    "categories": ["boisson"],
+    "tags": { "season": ["été"], "dish": ["boisson"] },
+    "ingredients": [
+      { "name": "citron", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "sucre", "qty": 100, "unit": "g", "aisle": "pantry" },
+      { "name": "eau", "qty": 1000, "unit": "ml", "aisle": "other" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" },
+      { "name": "menthe", "qty": null, "unit": "", "aisle": "produce" }
+    ],
+    "steps": [
+      "Préparer un sirop : chauffer un cinquième de l'eau avec le sucre, en remuant jusqu'à ce qu'il soit entièrement dissous, puis laisser refroidir.",
+      "Presser les citrons et filtrer le jus.",
+      "Mélanger le jus, le sirop refroidi et le reste de l'eau froide. Goûter et ajuster le sucre.",
+      "Servir très frais, avec des glaçons, des rondelles de citron et un peu de menthe."
+    ],
+    "notes": "Se garde 2 à 3 jours au frais, dans une bouteille ou une carafe fermée."
+  },
+  {
+    "id": "the-glace-peche",
+    "title": "Thé glacé à la pêche",
+    "servings": 4,
+    "time": 15,
+    "image": "images/the-glace-peche.jpg",
+    "imageFocus": "50% 50%",
+    "categories": ["boisson"],
+    "tags": { "season": ["été"], "dish": ["boisson"] },
+    "ingredients": [
+      { "name": "thé noir", "qty": 4, "unit": "sachet", "aisle": "pantry" },
+      { "name": "eau", "qty": 1000, "unit": "ml", "aisle": "other" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "pêche", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "citron", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
+    ],
+    "steps": [
+      "Faire infuser les sachets de thé 5 minutes dans l'eau bouillante, puis les retirer.",
+      "Dissoudre le miel dans le thé encore chaud, puis laisser refroidir.",
+      "Ajouter les pêches coupées en fines tranches et le jus du demi-citron.",
+      "Réfrigérer au moins 2 heures. Servir bien frais, sur des glaçons."
+    ],
+    "notes": "15 minutes de préparation, puis au moins 2 heures au frais."
+  },
+  {
+    "id": "smoothie-banane-cacahuete",
+    "title": "Smoothie banane et beurre de cacahuète",
+    "servings": 1,
+    "time": 5,
+    "image": "images/smoothie-banane-cacahuete.jpg",
+    "imageFocus": "50% 35%",
+    "categories": ["boisson", "encas"],
+    "tags": { "season": ["toute l'année"], "dish": ["smoothie"] },
+    "ingredients": [
+      { "name": "banane", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "yaourt grec", "qty": 125, "unit": "g", "aisle": "dairy" },
+      { "name": "lait", "qty": 200, "unit": "ml", "aisle": "dairy" },
+      { "name": "beurre de cacahuète", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
+    ],
+    "steps": [
+      "Éplucher la banane et la couper en morceaux.",
+      "Mettre tous les ingrédients dans un blender : la banane, le yaourt grec, le lait, le beurre de cacahuète et quelques glaçons.",
+      "Mixer environ 1 minute, jusqu'à obtenir une texture bien lisse.",
+      "Servir aussitôt."
+    ],
+    "notes": "Le yaourt grec et le beurre de cacahuète en font un encas riche en protéines. Le lait peut être remplacé par une boisson végétale."
+  },
+  {
+    "id": "chocolat-chaud",
+    "title": "Chocolat chaud maison",
+    "servings": 2,
+    "time": 10,
+    "image": "images/chocolat-chaud.jpg",
+    "imageFocus": "50% 50%",
+    "categories": ["boisson"],
+    "tags": { "season": ["automne", "hiver"], "dish": ["boisson chaude"] },
+    "ingredients": [
+      { "name": "lait", "qty": 500, "unit": "ml", "aisle": "dairy" },
+      { "name": "chocolat noir", "qty": 60, "unit": "g", "aisle": "pantry" },
+      { "name": "sucre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Chauffer le lait dans une casserole, sans le laisser bouillir.",
+      "Hors du feu, ajouter le chocolat cassé en morceaux et laisser fondre 1 minute.",
+      "Fouetter jusqu'à obtenir un chocolat lisse et mousseux, puis sucrer selon le goût.",
+      "Servir bien chaud."
+    ],
+    "notes": "Avec 60 g de chocolat noir pour 500 ml de lait, il est plutôt peu sucré : ajouter du sucre à volonté."
   }
 ]

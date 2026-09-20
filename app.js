@@ -7,6 +7,7 @@ const AISLES = [
   ["pantry", "Épicerie", "🥫"],
   ["bakery", "Boulangerie", "🥖"],
   ["frozen", "Surgelés", "🧊"],
+  ["drinks", "Boissons & alcools", "🥤"],
   ["other", "Autre", "🛍️"],
 ];
 
@@ -72,6 +73,7 @@ const state = {
   lastCook: null,
   timers: [], // { id, label, end, done } : minuteurs du mode cuisine
   pantryOpen: false,
+  shopMode: "aisle", // aisle | recipe : liste de courses par rayon ou par recette
   // --- données de l'utilisateur, enregistrées sur le téléphone ---
   plan: {}, // { recipeId: nombre de personnes }
   planDay: {}, // { recipeId: 0..6 } (0 = lundi)
@@ -94,6 +96,7 @@ const persistable = () => ({
   extras: state.extras,
   hidden: state.hidden,
   fridge: state.fridge,
+  shopMode: state.shopMode,
 });
 
 function applySaved(s) {
@@ -105,6 +108,7 @@ function applySaved(s) {
   state.extras = Array.isArray(s.extras) ? s.extras : [];
   state.hidden = Array.isArray(s.hidden) ? s.hidden : [...DEFAULT_HIDDEN];
   state.fridge = Array.isArray(s.fridge) ? s.fridge : [];
+  state.shopMode = s.shopMode === "recipe" ? "recipe" : "aisle";
 }
 
 function loadState() {
@@ -186,6 +190,14 @@ function ingText(name, qty, unit, plural) {
   return `${q} ${u} ${elide ? "d’" : "de "}${name}`;
 }
 
+const unitLabel = (qty, unit) => (qty > 1 && /^[a-zéèêôîâ]{3,}$/i.test(unit) ? `${unit}s` : unit);
+
+function deName(name) {
+  name = name.replace(/'/g, "’");
+  const elide = /^[aeiouyàâéèêëîïôöûüœ]/i.test(name) || (/^h/i.test(name) && !ASPIRATED_H.test(name));
+  return `${elide ? "d’" : "de "}${name}`;
+}
+
 function plural(n, one, many) {
   return `${n} ${n > 1 ? many : one}`;
 }
@@ -218,6 +230,25 @@ $app.addEventListener(
 
 /* ---------- Liste de courses ---------- */
 
+// Regroupe les unités qui se convertissent sans deviner (cl→ml, kg→g, c. à café→c. à soupe),
+// seulement si l'autre unité est déjà présente : « 4 c. à café » + « 2 c. à soupe » → « 3⅓ c. à soupe ».
+function mergeUnits(parts) {
+  const p = new Map(parts);
+  const move = (from, to, mult) => {
+    if (p.has(from) && p.has(to)) {
+      p.set(to, p.get(to) + p.get(from) * mult);
+      p.delete(from);
+    }
+  };
+  move("cl", "ml", 10);
+  move("l", "ml", 1000);
+  move("kg", "g", 1000);
+  move("c. à café", "c. à soupe", 1 / 3);
+  return [...p.entries()].map(([unit, qty]) => ({ unit, qty }));
+}
+
+// Un seul article par produit, même si les recettes le comptent en unités différentes
+// (« 25 g + 1 c. à soupe de sauce soja »). La clé (nom normalisé) sert aux cases cochées.
 function shoppingList() {
   const map = new Map();
   for (const [id, servings] of Object.entries(state.plan)) {
@@ -225,27 +256,39 @@ function shoppingList() {
     if (!r) continue;
     const factor = servings / r.servings;
     for (const ing of r.ingredients) {
-      const unit = ing.unit || "";
-      const key = `${norm(ing.name)}|${unit}`;
+      const key = norm(ing.name);
       let e = map.get(key);
       if (!e) {
-        e = { key, name: ing.name, plural: ing.plural, unit, aisle: ing.aisle || "other", qty: 0, hasQty: false, from: new Set() };
+        e = { key, name: ing.name, plural: ing.plural, aisle: ing.aisle || "other", raw: new Map(), from: new Set() };
         map.set(key, e);
       }
       if (ing.qty != null) {
-        e.qty += ing.qty * factor;
-        e.hasQty = true;
+        const u = ing.unit || "";
+        e.raw.set(u, (e.raw.get(u) || 0) + ing.qty * factor);
       }
       e.from.add(r.title);
     }
   }
-  return [...map.values()];
+  return [...map.values()].map((e) => ({ ...e, parts: mergeUnits(e.raw) }));
 }
 
-const isHidden = (i) => state.hidden.includes(norm(i.name));
+const ALWAYS_HIDDEN = ["eau"]; // jamais dans la liste de courses (robinet)
+const hiddenName = (name) => ALWAYS_HIDDEN.includes(norm(name)) || state.hidden.includes(norm(name));
+const isHidden = (i) => hiddenName(i.name);
 const rowsFor = (items, key) =>
   items.filter((i) => i.aisle === key || (!AISLES.some(([k]) => k === i.aisle) && key === "other"));
-const itemText = (i) => ingText(i.name, i.hasQty ? i.qty : null, i.unit, i.plural);
+function itemText(i) {
+  const withUnit = i.parts.filter((p) => p.unit);
+  const pieces = i.parts.filter((p) => !p.unit);
+  if (!i.parts.length) return i.name.replace(/'/g, "’");
+  if (!withUnit.length) return ingText(i.name, pieces.reduce((n, p) => n + p.qty, 0), "", i.plural);
+  if (!pieces.length) {
+    if (withUnit.length === 1) return ingText(i.name, withUnit[0].qty, withUnit[0].unit, i.plural);
+    const qs = withUnit.map((p) => `${fmtQty(p.qty)} ${unitLabel(p.qty, p.unit)}`).join(" + ");
+    return `${qs} ${deName(i.name)}`;
+  }
+  return i.parts.map((p) => ingText(i.name, p.qty, p.unit, i.plural)).join(" + ");
+}
 
 function shopText() {
   const items = shoppingList().filter((i) => !isHidden(i));
@@ -524,7 +567,7 @@ function detailView(r) {
   const seasonPill = seasons.length
     ? `<span class="pill plain">${seasons.map((s) => (SEASONS.find(([n]) => n === s) || [, ""])[1] + " " + s).join(" · ")}</span>`
     : "";
-  return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button>${heartBtn(r, "hero-heart")}</div>
+  return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button>${heartBtn(r, "hero-heart")}<button class="heart hero-share" data-action="share-recipe" data-id="${esc(r.id)}" aria-label="Partager la recette">⤴</button></div>
     <div class="sheet">
       <h1>${esc(r.title)}</h1>
       <div class="pills">${pillsHtml(r, 6)}${seasonPill}</div>
@@ -763,6 +806,28 @@ function pantryHtml(all) {
   return `<div class="panel pantry"><p class="muted small">Touche ce que tu as déjà à la maison : ça disparaît de la liste.</p><div class="fridge-chips">${chips || "<span class='muted'>Rien à afficher.</span>"}</div></div>`;
 }
 
+function shopByRecipeHtml() {
+  const ids = Object.keys(state.plan)
+    .filter(byId)
+    .sort((a, b) => (state.planDay[a] ?? 9) - (state.planDay[b] ?? 9) || byId(a).title.localeCompare(byId(b).title, "fr"));
+  return ids
+    .map((id) => {
+      const r = byId(id);
+      const factor = state.plan[id] / r.servings;
+      const rows = r.ingredients
+        .filter((g) => !hiddenName(g.name))
+        .map((g) => {
+          const key = norm(g.name);
+          const text = ingText(g.name, g.qty == null ? null : g.qty * factor, g.unit, g.plural);
+          return `<li><button class="row ${state.checked[key] ? "done" : ""}" data-action="check" data-key="${esc(key)}">
+            <span class="box">✓</span><span class="label">${esc(text)}</span></button></li>`;
+        })
+        .join("");
+      return `<div class="aisle"><span>🍽️</span>${esc(r.title)} · ${esc(servingsLabel(r, state.plan[id]))}</div><ul class="shop">${rows}</ul>`;
+    })
+    .join("");
+}
+
 function shopView() {
   const all = shoppingList();
   const items = all.filter((i) => !isHidden(i));
@@ -776,6 +841,10 @@ function shopView() {
   const bar = `<div class="shopbar">
     <button data-action="share">📤 Partager</button>
     <button class="${state.pantryOpen ? "on" : ""}" data-action="pantry">🏠 J’ai déjà${hiddenN ? ` (${hiddenN})` : ""}</button></div>${state.pantryOpen ? pantryHtml(all) : ""}`;
+  const seg = items.length
+    ? `<div class="seg"><button class="${state.shopMode === "aisle" ? "on" : ""}" data-action="shop-mode" data-mode="aisle">Par rayon</button>
+        <button class="${state.shopMode === "recipe" ? "on" : ""}" data-action="shop-mode" data-mode="recipe">Par recette</button></div>`
+    : "";
 
   const extrasHtml = extras.length
     ? `<div class="aisle"><span>✍️</span>Mes ajouts</div><ul class="shop">${extras
@@ -787,7 +856,7 @@ function shopView() {
         .join("")}</ul>`
     : "";
 
-  const groups = AISLES.map(([key, label, ico]) => {
+  const byAisle = AISLES.map(([key, label, ico]) => {
     const rows = rowsFor(items, key).sort(
       (a, b) => !!state.checked[a.key] - !!state.checked[b.key] || a.name.localeCompare(b.name, "fr")
     );
@@ -801,6 +870,7 @@ function shopView() {
       })
       .join("")}</ul>`;
   }).join("");
+  const groups = state.shopMode === "recipe" ? shopByRecipeHtml() : byAisle;
 
   const empty = !totalN
     ? `<p class="empty"><span class="big">🛒</span>La liste est vide.<br>Choisis des recettes pour la semaine, ou ajoute un article ci-dessus.</p>`
@@ -811,7 +881,7 @@ function shopView() {
   const cleanup =
     (doneN ? `<div style="height:20px"></div><button class="btn soft" data-action="uncheck-all">Tout décocher</button>` : "") +
     (extras.some((e) => e.done) ? `<button class="btn soft" data-action="extras-clean">Retirer mes ajouts cochés</button>` : "");
-  return `<h1>Courses</h1>${addRow}${bar}${progress}${extrasHtml}${groups}${empty}${cleanup}`;
+  return `<h1>Courses</h1>${addRow}${bar}${seg}${progress}${extrasHtml}${groups}${empty}${cleanup}`;
 }
 
 /* ---------- Vues : réglages et sauvegarde ---------- */
@@ -874,6 +944,38 @@ function render({ top = false } = {}) {
   window.scrollTo(0, top ? 0 : y);
 }
 
+/* ---------- Partage d'une recette : lien qui rouvre l'app sur cette recette ---------- */
+
+// /r/<id>/ est une petite page générée (tools/build_share_pages.py) : aperçu photo + titre dans les
+// messageries, puis redirection vers l'app (#/r/<id>).
+function recipeUrl(id) {
+  try {
+    return new URL(`r/${encodeURIComponent(id)}/`, location.href.split("#")[0]).href;
+  } catch {
+    return "";
+  }
+}
+
+function setHash(id) {
+  try {
+    history.replaceState(null, "", id ? `#/r/${encodeURIComponent(id)}` : location.pathname + location.search);
+  } catch {
+    /* pas d'historique : sans conséquence */
+  }
+}
+
+function applyHash() {
+  if (typeof location === "undefined") return;
+  const m = /^#\/r\/(.+)$/.exec(location.hash || "");
+  const id = m && decodeURIComponent(m[1]);
+  if (!id || !byId(id)) return;
+  state.view = "recipes";
+  state.openId = id;
+  state.detailServings = null;
+  state.cook = null;
+  render({ top: true });
+}
+
 /* ---------- Actions ---------- */
 
 const focusLater = (id) => {
@@ -885,6 +987,7 @@ const actions = {
   tab(el) {
     state.view = el.dataset.view;
     state.openId = null;
+    setHash(null);
     render({ top: true });
   },
   settings() {
@@ -895,10 +998,36 @@ const actions = {
   open(el) {
     state.openId = el.dataset.id;
     state.detailServings = null;
+    setHash(state.openId);
     render({ top: true });
   },
   close() {
     state.openId = null;
+    setHash(null);
+    render();
+  },
+  async "share-recipe"(el) {
+    const r = byId(el.dataset.id);
+    const url = recipeUrl(r.id);
+    const text = `${r.title} (${r.time} min). Regarde la recette dans Eat-it :`;
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: r.title, text, url });
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+    try {
+      await navigator.clipboard.writeText(`${r.title}\n${url}`);
+      toast("Lien copié");
+    } catch {
+      window.prompt("Copie le lien :", url);
+    }
+  },
+  "shop-mode"(el) {
+    state.shopMode = el.dataset.mode === "recipe" ? "recipe" : "aisle";
+    saveState();
     render();
   },
   add(el) {
@@ -980,6 +1109,7 @@ const actions = {
     if (!pool.length) return;
     state.openId = pool[Math.floor(Math.random() * pool.length)].id;
     state.detailServings = null;
+    setHash(state.openId);
     render({ top: true });
   },
   /* favoris */
@@ -1252,6 +1382,7 @@ async function init() {
   }
   state.loading = false;
   render();
+  applyHash();
 }
 
 // Une PWA reste longtemps en mémoire : si on revient sur l'accueil après une pause, on remélange.
@@ -1269,6 +1400,8 @@ document.addEventListener("visibilitychange", () => {
     render({ top: true });
   }
 });
+
+if (typeof window.addEventListener === "function") window.addEventListener("hashchange", applyHash);
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js").catch(() => {});

@@ -244,3 +244,115 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
   background: var(--accent); color: var(--on-accent);
   font-size: 11px; font-weight: 700; display: grid; place-items: center;
 }
+
+/* ---------- Filtres : rangée compacte sous les catégories ---------- */
+.cats.small { margin-top: 8px; padding-bottom: 4px; gap: 6px; }
+.cats.small .cat { padding: 5px 11px; font-size: 13px; gap: 4px; box-shadow: none; background: var(--card); border-width: 1.5px; }
+.cats.small .cat.on { background: var(--accent-soft); }
+.cats.small .cat b { min-width: 17px; height: 17px; padding: 0 5px; font-size: 11px; border-radius: 9px; }
+.cats.small .cat.reset { background: transparent; border-color: var(--line); }
+.muted.small { font-size: 13px; margin: 8px 2px 0; }
+
+/* ---------- Favoris ---------- */
+.heart {
+  position: absolute; top: 12px; left: 12px; z-index: 1;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--overlay); color: var(--muted);
+  font-size: 24px; line-height: 1; padding-bottom: 2px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.heart.on { color: #e0245e; }
+.hero .heart { left: auto; right: 14px; top: calc(env(safe-area-inset-top, 0px) + 12px); z-index: 2; }
+.pill.fridge { background: #e3f2fd; color: #1565c0; }
+.pill.star { background: #fff4d6; color: #b7791f; }
+@media (prefers-color-scheme: dark) {
+  .pill.fridge { background: #16324a; color: #8ec5ff; }
+  .pill.star { background: #40320f; color: #f5c451; }
+}
+.linkbtn { display: block; margin: 28px auto 0; color: var(--muted); font-size: 14px; padding: 8px; }
+
+/* ---------- Fiche : mode cuisine, avis ---------- */
+.cookbtn { margin-top: 14px; background: var(--accent-soft); color: var(--accent); }
+.avis { background: var(--card); border-radius: 18px; box-shadow: var(--shadow); padding: 14px; }
+.stars { display: flex; gap: 2px; margin-bottom: 10px; }
+.stars button { font-size: 32px; line-height: 1; color: var(--line); padding: 2px 4px; }
+.stars button.on { color: #f5a623; }
+.note {
+  width: 100%; min-height: 96px; padding: 12px; border-radius: 14px;
+  border: 1px solid var(--line); background: var(--bg); color: inherit;
+  font: inherit; resize: vertical; outline: none; margin-bottom: 12px;
+}
+.cooked-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.cooked-row .btn { width: auto; padding: 10px 16px; }
+.cooked-row .muted { font-size: 13px; }
+
+/* ---------- Mode cuisine ---------- */
+.cook {
+  position: fixed; inset: 0; z-index: 40; background: var(--bg);
+  display: flex; flex-direction: column;
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+}
+.cook-top { display: flex; align-items: center; gap: 10px; padding: 12px 16px 10px; }
+.cook-x, .cook-ingbtn { flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--card); box-shadow: var(--shadow); font-size: 20px; }
+.cook-ingbtn.on { background: var(--accent-soft); }
+.cook-title { flex: 1; min-width: 0; text-align: center; }
+.cook-title b { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cook-title small { color: var(--muted); }
+.cook-progress { height: 5px; background: var(--line); margin: 0 16px; border-radius: 3px; overflow: hidden; }
+.cook-progress i { display: block; height: 100%; background: var(--accent); border-radius: 3px; transition: width 0.2s; }
+.timers { display: flex; gap: 8px; overflow-x: auto; padding: 10px 16px 0; }
+.timers:empty { display: none; }
+.tchip { flex: none; display: flex; align-items: center; gap: 8px; background: var(--accent-soft); color: var(--accent); border-radius: 14px; padding: 6px 8px 6px 12px; }
+.tchip b { font-variant-numeric: tabular-nums; font-size: 18px; }
+.tchip span { font-size: 12px; color: var(--muted); }
+.tchip button { width: 26px; height: 26px; border-radius: 50%; background: rgba(0, 0, 0, 0.12); }
+.tchip.done { background: var(--accent); color: var(--on-accent); animation: pulse 1s infinite; }
+.tchip.done span { color: inherit; }
+.cook-body { flex: 1; overflow: auto; padding: 20px; display: flex; flex-direction: column; max-width: 640px; width: 100%; margin: 0 auto; }
+.cook-step { font-size: 26px; line-height: 1.35; font-weight: 600; margin: auto 0; }
+.tstarts { display: grid; gap: 10px; margin-top: 8px; padding-bottom: 12px; }
+.tstart { padding: 14px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 17px; }
+.cook-ing { font-size: 19px; margin: 0 0 auto; }
+.cook-nav { display: flex; gap: 12px; padding: 12px 16px; }
+.cook-nav button { flex: 1; padding: 16px; border-radius: 16px; font-weight: 700; font-size: 17px; background: var(--card); box-shadow: var(--shadow); }
+.cook-nav .next { background: var(--accent); color: var(--on-accent); }
+.cook-nav button:disabled { opacity: 0.35; }
+.timerpill {
+  position: fixed; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 50%; transform: translateX(-50%); z-index: 35;
+  padding: 8px 16px; border-radius: 999px; background: var(--accent); color: var(--on-accent);
+  font-weight: 700; font-size: 14px; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); white-space: nowrap;
+}
+.timerpill.ring { animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: 0.6; } }
+
+/* ---------- Semaine par jour ---------- */
+.daytitle { font-size: 14px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 22px 0 -4px 4px; }
+.dayrow { display: flex; gap: 4px; margin-top: 10px; max-width: 100%; }
+.dayb { flex: 1 1 0; min-width: 0; max-width: 32px; height: 28px; border-radius: 14px; background: var(--accent-soft); color: var(--accent); font-weight: 700; font-size: 12px; }
+.dayb.on { background: var(--accent); color: var(--on-accent); }
+.dayb.today { box-shadow: 0 0 0 2px var(--accent); }
+.prow .info .stepper { margin-top: 0; }
+
+/* ---------- Courses ---------- */
+.addrow { display: flex; gap: 8px; margin-top: 12px; }
+.addrow input { flex: 1; min-width: 0; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); outline: none; }
+.addrow button { flex: none; padding: 0 16px; border-radius: 12px; background: var(--accent); color: var(--on-accent); font-weight: 700; }
+.shopbar { display: flex; gap: 8px; margin: 12px 0 4px; }
+.shopbar button { padding: 8px 14px; border-radius: 999px; background: var(--card); box-shadow: var(--shadow); font-size: 14px; font-weight: 600; }
+.shopbar button.on { background: var(--accent-soft); color: var(--accent); }
+.shop li.withx { display: flex; align-items: center; }
+.shop li.withx .row { flex: 1; }
+.shop li.withx .x { margin-right: 8px; align-self: center; }
+.fridge-panel .addrow, .panel .addrow { margin-top: 0; width: 100%; }
+.fridge-panel, .panel.pantry { flex-direction: column; }
+.fridge-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fridge-panel .muted.small, .panel .muted.small { margin: 0; }
+
+/* ---------- Réglages, notifications ---------- */
+.backlink { color: var(--accent); font-weight: 600; padding: 8px 0; }
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%); z-index: 60;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
+  background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 12px; font-weight: 600; font-size: 14px;
+}

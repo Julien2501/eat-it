@@ -139,7 +139,19 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 
 ## Filtres et ordre d'affichage
 
-- Structure de l'accueil (pensée pour ne pas être fouillis) : recherche → **rangée de catégories de plats** (Tout, Repas, Apéro, Desserts…, avec compteur) → bannière « 🎲 Pas d'idée ? » → barre « N recettes · ⚙️ Filtres · 🔀 Mélanger » → cartes. Les **filtres détaillés sont repliés** derrière le bouton Filtres (avec compteur de filtres actifs) ; une fois ouverts : Protéine, Légume, Saison, Plat, Cuisson, Cuisine + ⚡ Rapide, dépliables au toucher, et « ✕ Réinitialiser ». Catégorie de plat et filtres se cumulent. Le « 🎲 » tire au hasard parmi la sélection courante.
+- Structure de l'accueil : recherche → **rangée de catégories de plats** (Tout, Repas, Apéro, Desserts…, avec compteur) → **rangée de filtres, toujours visible, en petits boutons** (Protéine, Légume, Saison, Plat, Cuisson, Cuisine, ⚡ Rapide, ♥ Favoris, 🧊 Frigo, ✕ Réinitialiser ; un toucher déplie les choix de la catégorie) → bannière « 🎲 Pas d'idée ? » → « N recettes · 🔀 Mélanger » → cartes → lien « 💾 Sauvegarde et réglages ». **L'utilisateur n'aime pas le bouton à roue dentée qui repliait les filtres** (essayé, refusé) : ne pas les recacher derrière un bouton ; réduire plutôt la taille. Catégorie de plat et filtres se cumulent. Le « 🎲 » tire au hasard parmi la sélection courante.
+
+## Fonctions de l'app (toutes côté téléphone, sans serveur)
+
+- **Favoris** ♥ (cartes et fiche) + filtre ♥ Favoris.
+- **Mode cuisine** (« 👨‍🍳 Mode cuisine » sur la fiche) : une étape en grand à la fois, glisser ou boutons Précédent/Suivant, liste d'ingrédients à la demande (🧾), écran maintenu allumé (`navigator.wakeLock`, à redemander au retour au premier plan), **minuteurs détectés dans le texte des étapes** (« 5 à 6 minutes » → bouton, durée la plus courte ; regex `detectTimers`) avec alarme sonore/vibration, pastille ⏱ visible ailleurs dans l'app. Donc **écrire les durées en toutes lettres dans les étapes** (« 20 minutes », « 1 heure ») pour que le minuteur marche.
+- **Semaine par jour** : chaque recette de la semaine peut être placée sur L M M J V S D (`planDay`) ; groupes par jour + « Pas encore placé », jour du jour entouré.
+- **Courses** : ajout d'articles à la main (« Mes ajouts »), **📤 Partager** (feuille de partage iOS, sinon copie dans le presse-papiers), **🏠 J'ai déjà** (masque des ingrédients de la liste ; `sel` et `poivre` masqués par défaut, `DEFAULT_HIDDEN`).
+- **🧊 Frigo** : l'utilisateur saisit ce qu'il a, les recettes sont filtrées/triées par part d'ingrédients déjà possédés (pastille « 🧊 4/9 » ; sel, poivre, huile, eau ignorés). Le match est un `includes` sur le nom normalisé : **des noms d'ingrédients simples et génériques aident** (ex. « blanc de poulet », pas « filet de volaille fermier »).
+- **Mon avis** (fiche) : étoiles 1-5, notes libres, « ✓ Je l'ai cuisiné » (date, compteur). L'étoile s'affiche sur les cartes.
+- **Sauvegarde** (« 💾 Sauvegarde et réglages ») : export JSON (partage/presse-papiers), restauration par collage, gestion des articles masqués, effacement total.
+- Données enregistrées dans `localStorage` (clé `eatit.v1`) : `plan`, `planDay`, `checked`, `favs`, `journal`, `extras`, `hidden`, `fridge`. **Ne jamais renommer ni retirer ces clés sans migration** : ce serait perdre les favoris et notes de l'utilisateur. Les recettes, elles, ne sont jamais dans `localStorage`.
+- **Idées volontairement écartées par l'utilisateur** : macros/calories (les kcal restent seulement dans les `notes` quand la source les donne) et mode hors ligne complet (précache des photos). Ne pas les proposer à nouveau sauf demande.
 - **L'ordre des recettes est aléatoire** : mélangé au chargement, sur demande (« 🔀 Mélanger »), et automatiquement quand l'app revient au premier plan après plus de 10 min sur l'accueil (`RESHUFFLE_AFTER_MS`). Il reste stable pendant qu'on consulte l'accueil, pour que la liste ne saute pas.
 
 ## Design de l'app

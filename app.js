@@ -42,6 +42,11 @@ const ALL_YEAR = "toute l'année"; // compte comme n'importe quelle saison
 const QUICK_MAX_MIN = 25; // « Rapide » : recette de 25 minutes ou moins
 const RESHUFFLE_AFTER_MS = 10 * 60 * 1000; // nouvel ordre si l'app revient au premier plan après 10 min
 
+const DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+const DAY_LETTERS = ["L", "M", "M", "J", "V", "S", "D"];
+const DEFAULT_HIDDEN = ["sel", "poivre"]; // basiques masqués de la liste de courses au départ
+const FRIDGE_IGNORED = ["sel", "poivre", "huile", "eau"]; // jamais comptés « manquants » pour le frigo
+
 const STORE_KEY = "eatit.v1";
 const MAX_SERVINGS = 50;
 // Nombre de personnes affiché par défaut, quelle que soit la portion d'origine de la recette.
@@ -52,27 +57,59 @@ const state = {
   recipes: [],
   loading: true,
   error: null,
-  view: "recipes", // recipes | plan | shop
+  view: "recipes", // recipes | plan | shop | settings
   query: "",
   course: null, // catégorie de plat choisie (null = tout)
-  filtersOpen: false,
   filters: {}, // { catégorie: [valeurs choisies] } : OU dans une catégorie, ET entre catégories
   quick: false,
+  favsOnly: false,
+  fridgeOpen: false,
   openCat: null, // catégorie dont les choix sont dépliés
   rank: {}, // { recipeId: position } : ordre d'affichage aléatoire de la session
   openId: null,
   detailServings: null,
+  cook: null, // { id, step, ing } : mode cuisine
+  lastCook: null,
+  timers: [], // { id, label, end, done } : minuteurs du mode cuisine
+  pantryOpen: false,
+  // --- données de l'utilisateur, enregistrées sur le téléphone ---
   plan: {}, // { recipeId: nombre de personnes }
+  planDay: {}, // { recipeId: 0..6 } (0 = lundi)
   checked: {}, // { clé d'ingrédient: true }
+  favs: {}, // { recipeId: true }
+  journal: {}, // { recipeId: { rating, note, cooked: [dates ISO] } }
+  extras: [], // articles ajoutés à la main dans la liste de courses : { id, text, done }
+  hidden: [...DEFAULT_HIDDEN], // noms normalisés d'ingrédients masqués de la liste de courses
+  fridge: [], // ingrédients que j'ai déjà
 };
 
 /* ---------- Persistance (état de l'utilisateur, jamais les recettes) ---------- */
 
+const persistable = () => ({
+  plan: state.plan,
+  planDay: state.planDay,
+  checked: state.checked,
+  favs: state.favs,
+  journal: state.journal,
+  extras: state.extras,
+  hidden: state.hidden,
+  fridge: state.fridge,
+});
+
+function applySaved(s) {
+  state.plan = s.plan || {};
+  state.planDay = s.planDay || {};
+  state.checked = s.checked || {};
+  state.favs = s.favs || {};
+  state.journal = s.journal || {};
+  state.extras = Array.isArray(s.extras) ? s.extras : [];
+  state.hidden = Array.isArray(s.hidden) ? s.hidden : [...DEFAULT_HIDDEN];
+  state.fridge = Array.isArray(s.fridge) ? s.fridge : [];
+}
+
 function loadState() {
   try {
-    const s = JSON.parse(localStorage.getItem(STORE_KEY) || "{}");
-    state.plan = s.plan || {};
-    state.checked = s.checked || {};
+    applySaved(JSON.parse(localStorage.getItem(STORE_KEY) || "{}"));
   } catch {
     /* localStorage indisponible : l'app marche sans mémoire */
   }
@@ -80,10 +117,16 @@ function loadState() {
 
 function saveState() {
   try {
-    localStorage.setItem(STORE_KEY, JSON.stringify({ plan: state.plan, checked: state.checked }));
+    localStorage.setItem(STORE_KEY, JSON.stringify(persistable()));
   } catch {
     /* idem */
   }
+}
+
+let saveTimer = null;
+function saveSoon() {
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveState, 400);
 }
 
 /* ---------- Utilitaires ---------- */
@@ -95,7 +138,25 @@ const esc = (s) =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 const norm = (s) =>
-  s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
+  s
+    .toLowerCase()
+    .replace(/œ/g, "oe")
+    .replace(/æ/g, "ae")
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .trim();
+
+function toast(msg) {
+  try {
+    const el = document.createElement("div");
+    el.className = "toast";
+    el.textContent = msg;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2200);
+  } catch {
+    /* pas de DOM : rien à afficher */
+  }
+}
 
 function fmtQty(q) {
   if (q == null) return "";
@@ -128,6 +189,9 @@ function ingText(name, qty, unit, plural) {
 function plural(n, one, many) {
   return `${n} ${n > 1 ? many : one}`;
 }
+
+const fmtDate = (iso) => new Date(iso).toLocaleDateString("fr-FR", { day: "numeric", month: "long" });
+const todayIdx = () => (new Date().getDay() + 6) % 7; // 0 = lundi
 
 /* ---------- Images ---------- */
 
@@ -178,7 +242,48 @@ function shoppingList() {
   return [...map.values()];
 }
 
-/* ---------- Vues ---------- */
+const isHidden = (i) => state.hidden.includes(norm(i.name));
+const rowsFor = (items, key) =>
+  items.filter((i) => i.aisle === key || (!AISLES.some(([k]) => k === i.aisle) && key === "other"));
+const itemText = (i) => ingText(i.name, i.hasQty ? i.qty : null, i.unit, i.plural);
+
+function shopText() {
+  const items = shoppingList().filter((i) => !isHidden(i));
+  const lines = ["🛒 Liste de courses"];
+  const extras = state.extras.filter((e) => !e.done);
+  if (extras.length) {
+    lines.push("", "✍️ Mes ajouts");
+    extras.forEach((e) => lines.push(`• ${e.text}`));
+  }
+  for (const [key, label, ico] of AISLES) {
+    const rows = rowsFor(items, key)
+      .filter((i) => !state.checked[i.key])
+      .sort((a, b) => a.name.localeCompare(b.name, "fr"));
+    if (!rows.length) continue;
+    lines.push("", `${ico} ${label}`);
+    rows.forEach((i) => lines.push(`• ${itemText(i)}`));
+  }
+  return lines.join("\n");
+}
+
+/* ---------- Frigo : ce que j'ai déjà ---------- */
+
+const isIgnored = (name) => FRIDGE_IGNORED.some((b) => norm(name).startsWith(b));
+
+function termMatches(term, name) {
+  const t = norm(term);
+  const n = norm(name);
+  if (!t) return false;
+  return n.includes(t) || (t.length > 3 && t.endsWith("s") && n.includes(t.slice(0, -1)));
+}
+
+function fridgeScore(r) {
+  const ings = r.ingredients.filter((i) => !isIgnored(i.name));
+  const have = ings.filter((i) => state.fridge.some((t) => termMatches(t, i.name))).length;
+  return { have, total: ings.length };
+}
+
+/* ---------- Vues : accueil ---------- */
 
 function shuffleOrder() {
   const ids = state.recipes.map((r) => r.id);
@@ -190,7 +295,11 @@ function shuffleOrder() {
 }
 
 const tagValues = (r, key) => (r.tags && r.tags[key]) || [];
-const activeCount = () => Object.values(state.filters).reduce((n, v) => n + v.length, 0) + (state.quick ? 1 : 0);
+const activeCount = () =>
+  Object.values(state.filters).reduce((n, v) => n + v.length, 0) +
+  (state.quick ? 1 : 0) +
+  (state.favsOnly ? 1 : 0) +
+  (state.fridge.length ? 1 : 0);
 
 function recipeMatches(r) {
   if (state.course && !courseOf(r).includes(state.course)) return false;
@@ -202,6 +311,8 @@ function recipeMatches(r) {
     if (!ok) return false;
   }
   if (state.quick && r.time > QUICK_MAX_MIN) return false;
+  if (state.favsOnly && !state.favs[r.id]) return false;
+  if (state.fridge.length && fridgeScore(r).have === 0) return false;
   const q = norm(state.query);
   if (!q) return true;
   const hay = norm([r.title, ...Object.values(r.tags || {}).flat(), ...r.ingredients.map((i) => i.name)].join(" "));
@@ -214,29 +325,47 @@ function pillsHtml(r, max) {
   return `<span class="pill">⏱ ${r.time} min</span>${labels.map((l) => `<span class="pill plain">${esc(l)}</span>`).join("")}`;
 }
 
+const heartBtn = (r, cls = "") =>
+  `<button class="heart ${cls} ${state.favs[r.id] ? "on" : ""}" data-action="fav" data-id="${esc(r.id)}"
+    aria-label="${state.favs[r.id] ? "Retirer des favoris" : "Ajouter aux favoris"}">${state.favs[r.id] ? "♥" : "♡"}</button>`;
+
 function feedHtml() {
-  const items = state.recipes.filter(recipeMatches).sort((a, b) => state.rank[a.id] - state.rank[b.id]);
-  const n = activeCount();
-  const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}</span>
-    <button class="ftoggle ${state.filtersOpen ? "open" : ""}" data-action="filters">⚙️ Filtres${n ? `<b>${n}</b>` : ""}</button>
-    <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>${state.filtersOpen ? filtersHtml() : ""}`;
-  if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
+  const items = state.recipes.filter(recipeMatches);
+  if (state.fridge.length) {
+    const ratio = (r) => {
+      const s = fridgeScore(r);
+      return s.have / Math.max(1, s.total);
+    };
+    items.sort((a, b) => ratio(b) - ratio(a) || fridgeScore(b).have - fridgeScore(a).have || state.rank[a.id] - state.rank[b.id]);
+  } else {
+    items.sort((a, b) => state.rank[a.id] - state.rank[b.id]);
+  }
+  const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}${state.fridge.length ? " · triées selon ton frigo" : ""}</span>
+    <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>`;
+  const footer = `<button class="linkbtn" data-action="settings">💾 Sauvegarde et réglages</button>`;
+  if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>${footer}`;
   return `${bar}<ul class="feed">${items
     .map((r) => {
       const inPlan = r.id in state.plan;
+      const rating = journalOf(r.id).rating;
+      const fr = state.fridge.length ? fridgeScore(r) : null;
+      const extra =
+        (fr ? `<span class="pill fridge">🧊 ${fr.have}/${fr.total}</span>` : "") +
+        (rating ? `<span class="pill star">★ ${rating}</span>` : "");
       return `<li class="rcard">
+        ${heartBtn(r)}
         <button class="fab ${inPlan ? "on" : ""}" data-action="${inPlan ? "remove" : "add"}" data-id="${esc(r.id)}"
           aria-label="${inPlan ? "Retirer de la semaine" : "Ajouter à la semaine"}">${inPlan ? "✓" : "+"}</button>
         <button class="open" data-action="open" data-id="${esc(r.id)}">
           ${imgHtml(r)}
           <div class="body">
             <div class="title">${esc(r.title)}</div>
-            <div class="pills">${pillsHtml(r, 2)}</div>
+            <div class="pills">${pillsHtml(r, 2)}${extra}</div>
           </div>
         </button>
       </li>`;
     })
-    .join("")}</ul>`;
+    .join("")}</ul>${footer}`;
 }
 
 // Valeurs proposées pour une catégorie, d'après les recettes ; les saisons ont un ordre fixe.
@@ -254,7 +383,11 @@ function filtersHtml() {
       return `<button class="cat ${n ? "on" : ""} ${state.openCat === key ? "open" : ""}" data-action="cat" data-cat="${key}">${emoji} ${label}${n ? `<b>${n}</b>` : ""}</button>`;
     })
     .join("");
-  const quick = `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>`;
+  const favCount = Object.keys(state.favs).filter(byId).length;
+  const extras =
+    `<button class="cat ${state.quick ? "on" : ""}" data-action="quick">⚡ Rapide</button>` +
+    `<button class="cat ${state.favsOnly ? "on" : ""}" data-action="favs">♥ Favoris${favCount ? `<b>${favCount}</b>` : ""}</button>` +
+    `<button class="cat ${state.fridge.length ? "on" : ""} ${state.fridgeOpen ? "open" : ""}" data-action="fridge">🧊 Frigo${state.fridge.length ? `<b>${state.fridge.length}</b>` : ""}</button>`;
   const reset = activeCount() ? `<button class="cat reset" data-action="reset">✕ Réinitialiser</button>` : "";
   const open = cats.find((c) => c.key === state.openCat);
   const panel = open
@@ -265,7 +398,15 @@ function filtersHtml() {
         })
         .join("")}</div>`
     : "";
-  return `<div class="cats">${pills}${quick}${reset}</div>${panel}`;
+  const fridge = state.fridgeOpen
+    ? `<div class="panel fridge-panel">
+        <div class="addrow"><input id="fridge-in" type="text" placeholder="Un ingrédient que j'ai (poulet, riz…)" autocomplete="off">
+          <button data-action="fridge-add">Ajouter</button></div>
+        ${state.fridge.length ? `<div class="fridge-chips">${state.fridge.map((t) => `<button class="chip on" data-action="fridge-del" data-term="${esc(t)}">${esc(t)} ✕</button>`).join("")}</div>` : ""}
+        <p class="muted small">Les recettes qui utilisent le plus d’ingrédients que tu as déjà passent en premier. Sel, poivre, huile et eau ne comptent pas.</p>
+      </div>`
+    : "";
+  return `<div class="cats small">${pills}${extras}${reset}</div>${panel}${fridge}`;
 }
 
 function coursesHtml() {
@@ -287,9 +428,12 @@ function recipesView() {
   return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div></div>
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     ${coursesHtml()}
+    ${filtersHtml()}
     <button class="surprise" data-action="random"><span class="dice">🎲</span><div><b>Pas d’idée ?</b><span>Une recette au hasard${narrowed ? " parmi la sélection" : ""}</span></div></button>
     <div id="feed">${feedHtml()}</div>`;
 }
+
+/* ---------- Vues : fiche recette ---------- */
 
 function stepperHtml(id, servings) {
   return `<div class="stepper">
@@ -315,6 +459,25 @@ function servingsControl(r, n) {
   return isFixed(r) ? `<div class="fixed-yield">${esc(servingsLabel(r, n))}</div>` : stepperHtml(r.id, n);
 }
 
+const journalOf = (id) => state.journal[id] || { rating: 0, note: "", cooked: [] };
+const ensureJournal = (id) => (state.journal[id] ||= { rating: 0, note: "", cooked: [] });
+
+function avisHtml(r) {
+  const j = journalOf(r.id);
+  const stars = [1, 2, 3, 4, 5]
+    .map((n) => `<button class="${j.rating >= n ? "on" : ""}" data-action="rate" data-id="${esc(r.id)}" data-n="${n}" aria-label="${n} sur 5">★</button>`)
+    .join("");
+  const last = j.cooked[j.cooked.length - 1];
+  const cooked = j.cooked.length ? `Cuisiné ${j.cooked.length} fois · dernière fois le ${fmtDate(last)}` : "Pas encore cuisiné";
+  return `<h2>Mon avis</h2>
+    <div class="avis">
+      <div class="stars">${stars}</div>
+      <textarea class="note" data-note="${esc(r.id)}" placeholder="Mes notes : ajustements, astuces, ce que j'ai changé…">${esc(j.note)}</textarea>
+      <div class="cooked-row"><button class="btn soft" data-action="cooked" data-id="${esc(r.id)}">✓ Je l’ai cuisiné</button>
+        <span class="muted">${cooked}</span></div>
+    </div>`;
+}
+
 function detailView(r) {
   const servings = currentServings(r);
   const factor = servings / r.servings;
@@ -322,11 +485,12 @@ function detailView(r) {
   const seasonPill = seasons.length
     ? `<span class="pill plain">${seasons.map((s) => (SEASONS.find(([n]) => n === s) || [, ""])[1] + " " + s).join(" · ")}</span>`
     : "";
-  return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button></div>
+  return `<div class="hero">${imgHtml(r)}<button class="back" data-action="close" aria-label="Retour">‹</button>${heartBtn(r, "hero-heart")}</div>
     <div class="sheet">
       <h1>${esc(r.title)}</h1>
       <div class="pills">${pillsHtml(r, 6)}${seasonPill}</div>
       <div class="servings-card"><b>${isFixed(r) ? "Donne" : "Pour"}</b>${servingsControl(r, servings)}</div>
+      <button class="btn cookbtn" data-action="cook" data-id="${esc(r.id)}">👨‍🍳 Mode cuisine</button>
       <h2>Ingrédients</h2>
       <ul class="ingredients">${r.ingredients
         .map((i) => `<li>${esc(ingText(i.name, i.qty == null ? null : i.qty * factor, i.unit, i.plural))}</li>`)
@@ -335,6 +499,7 @@ function detailView(r) {
       <ol class="steps">${r.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol>
       ${r.notes ? `<p class="notes">${esc(r.notes)}</p>` : ""}
       ${r.source ? `<a class="source" href="${esc(r.source)}" target="_blank" rel="noopener">Voir la source ↗</a>` : ""}
+      ${avisHtml(r)}
     </div>`;
 }
 
@@ -347,57 +512,289 @@ function ctaBar(r) {
     </button></div></div>`;
 }
 
+/* ---------- Mode cuisine (étapes en grand, écran allumé, minuteurs) ---------- */
+
+let wakeLock = null;
+async function requestWake() {
+  try {
+    if ("wakeLock" in navigator) wakeLock = await navigator.wakeLock.request("screen");
+  } catch {
+    /* non disponible : l'écran pourra se mettre en veille */
+  }
+}
+function releaseWake() {
+  try {
+    if (wakeLock) wakeLock.release();
+  } catch {
+    /* ignore */
+  }
+  wakeLock = null;
+}
+
+// Durées citées dans une étape : « 5 à 6 minutes », « 1 heure », « 30 secondes »… (la plus courte est retenue).
+function detectTimers(text) {
+  const out = [];
+  const seen = new Set();
+  const re = /(\d+)(?:\s*(?:à|-|–)\s*\d+)?\s*(heures?|h|minutes?|min|secondes?)\b/gi;
+  let m;
+  while ((m = re.exec(text))) {
+    const n = Number(m[1]);
+    const u = m[2].toLowerCase();
+    const seconds = u.startsWith("h") ? n * 3600 : u.startsWith("s") ? n : n * 60;
+    const label = m[0].trim();
+    if (!seconds || seen.has(label)) continue;
+    seen.add(label);
+    out.push({ label, seconds });
+  }
+  return out;
+}
+
+const fmtClock = (s) => {
+  s = Math.max(0, Math.round(s));
+  const h = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
+  return `${h ? h + ":" + String(m).padStart(2, "0") : m}:${String(sec).padStart(2, "0")}`;
+};
+
+function timersInner() {
+  const now = Date.now();
+  return state.timers
+    .map((t) => {
+      const left = (t.end - now) / 1000;
+      return `<div class="tchip ${t.done ? "done" : ""}"><b>${t.done ? "Terminé !" : fmtClock(left)}</b><span>${esc(t.label)}</span>
+        <button data-action="timer-del" data-tid="${t.id}" aria-label="Arrêter">✕</button></div>`;
+    })
+    .join("");
+}
+
+function cookView(r) {
+  const c = state.cook;
+  const n = r.steps.length;
+  const i = clamp(c.step, 0, n - 1);
+  const servings = currentServings(r);
+  const factor = servings / r.servings;
+  const timers = detectTimers(r.steps[i])
+    .map(
+      (t) => `<button class="tstart" data-action="timer-start" data-sec="${t.seconds}" data-label="Étape ${i + 1} · ${esc(t.label)}">⏱ Lancer ${esc(t.label)}</button>`
+    )
+    .join("");
+  const body = c.ing
+    ? `<ul class="ingredients cook-ing">${r.ingredients
+        .map((g) => `<li>${esc(ingText(g.name, g.qty == null ? null : g.qty * factor, g.unit, g.plural))}</li>`)
+        .join("")}</ul>`
+    : `<p class="cook-step">${esc(r.steps[i])}</p><div class="tstarts">${timers}</div>`;
+  const last = i === n - 1;
+  return `<div class="cook">
+    <header class="cook-top">
+      <button class="cook-x" data-action="cook-exit" aria-label="Quitter le mode cuisine">✕</button>
+      <div class="cook-title"><b>${esc(r.title)}</b><small>Étape ${i + 1} sur ${n}</small></div>
+      <button class="cook-ingbtn ${c.ing ? "on" : ""}" data-action="cook-ing" aria-label="Ingrédients">🧾</button>
+    </header>
+    <div class="cook-progress"><i style="width:${((i + 1) / n) * 100}%"></i></div>
+    <div id="timers" class="timers">${timersInner()}</div>
+    <main class="cook-body" id="cookbody">${body}</main>
+    <footer class="cook-nav">
+      <button data-action="cook-prev" ${i === 0 ? "disabled" : ""}>‹ Précédent</button>
+      <button class="next" data-action="${last ? "cook-exit" : "cook-next"}">${last ? "Terminé ✓" : "Suivant ›"}</button>
+    </footer>
+  </div>`;
+}
+
+let tickHandle = null;
+let audioCtx = null;
+
+function ensureAudio() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+  } catch {
+    /* pas de son */
+  }
+}
+
+function alarm() {
+  try {
+    if (navigator.vibrate) navigator.vibrate([300, 150, 300, 150, 300]);
+    if (!audioCtx) return;
+    for (let k = 0; k < 4; k++) {
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.frequency.value = 880;
+      o.connect(g);
+      g.connect(audioCtx.destination);
+      const t = audioCtx.currentTime + k * 0.45;
+      g.gain.setValueAtTime(0.25, t);
+      g.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+      o.start(t);
+      o.stop(t + 0.4);
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+function tick() {
+  const now = Date.now();
+  let rang = false;
+  for (const t of state.timers) {
+    if (!t.done && now >= t.end) {
+      t.done = true;
+      rang = true;
+    }
+  }
+  if (rang) alarm();
+  const el = document.getElementById("timers");
+  if (el) el.innerHTML = timersInner();
+  const pill = document.getElementById("tpill");
+  if (pill) pill.innerHTML = timerPillInner();
+  if (!state.timers.length && tickHandle) {
+    clearInterval(tickHandle);
+    tickHandle = null;
+  }
+}
+
+function timerPillInner() {
+  const active = state.timers.filter((t) => !t.done);
+  const done = state.timers.some((t) => t.done);
+  if (done) return `⏰ Minuteur terminé · voir`;
+  const next = active.sort((a, b) => a.end - b.end)[0];
+  return `⏱ ${fmtClock((next.end - Date.now()) / 1000)} · ${active.length > 1 ? active.length + " minuteurs" : "voir"}`;
+}
+
+const timerPill = () =>
+  state.timers.length && state.lastCook
+    ? `<button id="tpill" class="timerpill ${state.timers.some((t) => t.done) ? "ring" : ""}" data-action="cook-resume">${timerPillInner()}</button>`
+    : "";
+
+/* ---------- Vues : semaine ---------- */
+
+function dayPickerHtml(id) {
+  const cur = state.planDay[id];
+  return `<div class="dayrow">${DAY_LETTERS.map(
+    (l, d) =>
+      `<button class="dayb ${cur === d ? "on" : ""} ${todayIdx() === d ? "today" : ""}" data-action="day" data-id="${esc(id)}" data-day="${d}" aria-label="${DAYS[d]}">${l}</button>`
+  ).join("")}</div>`;
+}
+
+function planCard(r) {
+  return `<li class="prow">
+    ${imgHtml(r)}
+    <div class="info">
+      <button class="title" data-action="open" data-id="${esc(r.id)}">${esc(r.title)}</button>
+      ${servingsControl(r, state.plan[r.id])}
+      ${dayPickerHtml(r.id)}
+    </div>
+    <button class="x" data-action="remove" data-id="${esc(r.id)}" aria-label="Retirer">×</button>
+  </li>`;
+}
+
 function planView() {
   const ids = Object.keys(state.plan).filter(byId);
   if (!ids.length) {
     return `<h1>Ma semaine</h1><p class="empty"><span class="big">📅</span>Aucune recette choisie.<br>Ajoute-en depuis l’onglet Recettes avec le bouton +.</p>`;
   }
   const total = ids.reduce((n, id) => n + (isFixed(byId(id)) ? 0 : state.plan[id]), 0);
+  const placed = DAYS.map((name, d) => ({ d, name, list: ids.filter((id) => state.planDay[id] === d) })).filter((g) => g.list.length);
+  const loose = ids.filter((id) => !(id in state.planDay));
+  const section = (title, list) =>
+    `${title ? `<h3 class="daytitle">${title}</h3>` : ""}<ul class="plan">${list.map((id) => planCard(byId(id))).join("")}</ul>`;
+  const groups =
+    placed.map((g) => section(g.name + (g.d === todayIdx() ? " · aujourd’hui" : ""), g.list)).join("") +
+    (loose.length ? section(placed.length ? "Pas encore placé" : "", loose) : "");
   return `<h1>Ma semaine</h1>
-    <p class="muted">${plural(ids.length, "recette", "recettes")} · ${plural(total, "repas", "repas")} au total</p>
-    <ul class="plan">${ids
-      .map((id) => {
-        const r = byId(id);
-        return `<li class="prow">
-          ${imgHtml(r)}
-          <div class="info">
-            <button class="title" data-action="open" data-id="${esc(id)}">${esc(r.title)}</button>
-            ${servingsControl(r, state.plan[id])}
-          </div>
-          <button class="x" data-action="remove" data-id="${esc(id)}" aria-label="Retirer">×</button>
-        </li>`;
-      })
-      .join("")}</ul>
+    <p class="muted">${plural(ids.length, "recette", "recettes")} · ${plural(total, "repas", "repas")} au total. Touche une lettre pour choisir le jour.</p>
+    ${groups}
     <button class="btn" data-action="tab" data-view="shop">🛒 Voir la liste de courses</button>
     <button class="btn soft" data-action="clear-plan">Vider la semaine</button>`;
 }
 
+/* ---------- Vues : courses ---------- */
+
+function pantryHtml(all) {
+  const names = new Map();
+  for (const i of all) names.set(norm(i.name), i.name);
+  const chips = [...names.entries()]
+    .sort((a, b) => a[1].localeCompare(b[1], "fr"))
+    .map(
+      ([n, label]) =>
+        `<button class="chip ${state.hidden.includes(n) ? "on" : ""}" data-action="pantry-toggle" data-name="${esc(n)}">${esc(label)}</button>`
+    )
+    .join("");
+  return `<div class="panel pantry"><p class="muted small">Touche ce que tu as déjà à la maison : ça disparaît de la liste.</p><div class="fridge-chips">${chips || "<span class='muted'>Rien à afficher.</span>"}</div></div>`;
+}
+
 function shopView() {
-  const items = shoppingList();
-  if (!items.length) {
-    return `<h1>Courses</h1><p class="empty"><span class="big">🛒</span>La liste est vide.<br>Choisis des recettes pour la semaine d’abord.</p>`;
-  }
-  const done = items.filter((i) => state.checked[i.key]).length;
+  const all = shoppingList();
+  const items = all.filter((i) => !isHidden(i));
+  const hiddenN = all.length - items.length;
+  const extras = state.extras;
+  const doneN = items.filter((i) => state.checked[i.key]).length + extras.filter((e) => e.done).length;
+  const totalN = items.length + extras.length;
+
+  const addRow = `<div class="addrow"><input id="extra-in" type="text" placeholder="Ajouter un article (lait, papier toilette…)" autocomplete="off">
+    <button data-action="extra-add">Ajouter</button></div>`;
+  const bar = `<div class="shopbar">
+    <button data-action="share">📤 Partager</button>
+    <button class="${state.pantryOpen ? "on" : ""}" data-action="pantry">🏠 J’ai déjà${hiddenN ? ` (${hiddenN})` : ""}</button></div>${state.pantryOpen ? pantryHtml(all) : ""}`;
+
+  const extrasHtml = extras.length
+    ? `<div class="aisle"><span>✍️</span>Mes ajouts</div><ul class="shop">${extras
+        .map(
+          (e) => `<li class="withx"><button class="row ${e.done ? "done" : ""}" data-action="extra-check" data-id="${e.id}">
+            <span class="box">✓</span><span class="label">${esc(e.text)}</span></button>
+            <button class="x" data-action="extra-del" data-id="${e.id}" aria-label="Supprimer">×</button></li>`
+        )
+        .join("")}</ul>`
+    : "";
+
   const groups = AISLES.map(([key, label, ico]) => {
-    const rows = items
-      .filter((i) => i.aisle === key || (!AISLES.some(([k]) => k === i.aisle) && key === "other"))
-      .sort((a, b) => !!state.checked[a.key] - !!state.checked[b.key] || a.name.localeCompare(b.name, "fr"));
+    const rows = rowsFor(items, key).sort(
+      (a, b) => !!state.checked[a.key] - !!state.checked[b.key] || a.name.localeCompare(b.name, "fr")
+    );
     if (!rows.length) return "";
     return `<div class="aisle"><span>${ico}</span>${label}</div><ul class="shop">${rows
       .map((i) => {
-        const text = ingText(i.name, i.hasQty ? i.qty : null, i.unit, i.plural);
         const isDone = !!state.checked[i.key];
         const from = i.from.size > 1 ? `<span class="from">${esc([...i.from].join(", "))}</span>` : "";
         return `<li><button class="row ${isDone ? "done" : ""}" data-action="check" data-key="${esc(i.key)}">
-          <span class="box">✓</span><span class="label">${esc(text)}${from}</span></button></li>`;
+          <span class="box">✓</span><span class="label">${esc(itemText(i))}${from}</span></button></li>`;
       })
       .join("")}</ul>`;
   }).join("");
-  return `<h1>Courses</h1>
-    <p class="muted">${done} sur ${items.length} dans le panier</p>
-    <div class="progress"><i style="width:${(done / items.length) * 100}%"></i></div>
-    ${groups}
-    ${done ? `<div style="height:20px"></div><button class="btn soft" data-action="uncheck-all">Tout décocher</button>` : ""}`;
+
+  const empty = !totalN
+    ? `<p class="empty"><span class="big">🛒</span>La liste est vide.<br>Choisis des recettes pour la semaine, ou ajoute un article ci-dessus.</p>`
+    : "";
+  const progress = totalN
+    ? `<p class="muted">${doneN} sur ${totalN} dans le panier</p><div class="progress"><i style="width:${(doneN / totalN) * 100}%"></i></div>`
+    : "";
+  const cleanup =
+    (doneN ? `<div style="height:20px"></div><button class="btn soft" data-action="uncheck-all">Tout décocher</button>` : "") +
+    (extras.some((e) => e.done) ? `<button class="btn soft" data-action="extras-clean">Retirer mes ajouts cochés</button>` : "");
+  return `<h1>Courses</h1>${addRow}${bar}${progress}${extrasHtml}${groups}${empty}${cleanup}`;
+}
+
+/* ---------- Vues : réglages et sauvegarde ---------- */
+
+function settingsView() {
+  const hiddenChips = state.hidden.length
+    ? state.hidden.map((n) => `<button class="chip on" data-action="pantry-toggle" data-name="${esc(n)}">${esc(n)} ✕</button>`).join("")
+    : "<span class='muted'>Aucun.</span>";
+  const favN = Object.keys(state.favs).filter(byId).length;
+  const notesN = Object.values(state.journal).filter((j) => j.note || j.rating || j.cooked.length).length;
+  return `<button class="backlink" data-action="tab" data-view="recipes">‹ Retour</button>
+    <h1>Réglages</h1>
+    <p class="muted">${plural(favN, "favori", "favoris")} · ${plural(notesN, "recette avec avis ou notes", "recettes avec avis ou notes")} · ${plural(Object.keys(state.plan).length, "recette", "recettes")} dans la semaine</p>
+    <h2>Sauvegarde</h2>
+    <p class="muted">Tes favoris, ta semaine, tes notes et ta liste de courses sont enregistrés sur ce téléphone. Exporte-les pour les garder en sécurité ou les retrouver sur un autre appareil.</p>
+    <button class="btn" data-action="export">📤 Exporter mes données</button>
+    <textarea id="import-in" class="note" placeholder="Pour restaurer : colle ici les données exportées, puis touche « Restaurer »."></textarea>
+    <button class="btn soft" data-action="import">📥 Restaurer</button>
+    <h2>Articles masqués de la liste de courses</h2>
+    <div class="panel"><div class="fridge-chips">${hiddenChips}</div></div>
+    <h2>Zone sensible</h2>
+    <button class="btn soft" data-action="wipe">Effacer toutes mes données</button>`;
 }
 
 function tabbar() {
@@ -419,6 +816,11 @@ function tabbar() {
 
 function render({ top = false } = {}) {
   const y = window.scrollY;
+  const cookRecipe = state.cook && byId(state.cook.id);
+  if (cookRecipe) {
+    $app.innerHTML = cookView(cookRecipe);
+    return;
+  }
   const r = state.openId && byId(state.openId);
   let body;
   if (state.loading) body = `<p class="empty">Chargement…</p>`;
@@ -426,17 +828,28 @@ function render({ top = false } = {}) {
   else if (r) body = detailView(r);
   else if (state.view === "plan") body = planView();
   else if (state.view === "shop") body = shopView();
+  else if (state.view === "settings") body = settingsView();
   else body = recipesView();
 
-  $app.innerHTML = `<main class="page ${r ? "flush" : ""}">${body}</main>${r ? ctaBar(r) : tabbar()}`;
+  $app.innerHTML = `<main class="page ${r ? "flush" : ""}">${body}</main>${r ? ctaBar(r) : tabbar()}${timerPill()}`;
   window.scrollTo(0, top ? 0 : y);
 }
 
 /* ---------- Actions ---------- */
 
+const focusLater = (id) => {
+  const el = document.getElementById(id);
+  if (el && el.focus) el.focus();
+};
+
 const actions = {
   tab(el) {
     state.view = el.dataset.view;
+    state.openId = null;
+    render({ top: true });
+  },
+  settings() {
+    state.view = "settings";
     state.openId = null;
     render({ top: true });
   },
@@ -458,6 +871,15 @@ const actions = {
   },
   remove(el) {
     delete state.plan[el.dataset.id];
+    delete state.planDay[el.dataset.id];
+    saveState();
+    render();
+  },
+  day(el) {
+    const id = el.dataset.id;
+    const d = Number(el.dataset.day);
+    if (state.planDay[id] === d) delete state.planDay[id];
+    else state.planDay[id] = d;
     saveState();
     render();
   },
@@ -476,11 +898,6 @@ const actions = {
     state.course = el.dataset.course || null;
     render();
   },
-  filters() {
-    state.filtersOpen = !state.filtersOpen;
-    if (!state.filtersOpen) state.openCat = null;
-    render();
-  },
   cat(el) {
     state.openCat = state.openCat === el.dataset.cat ? null : el.dataset.cat;
     render();
@@ -496,10 +913,18 @@ const actions = {
     state.quick = !state.quick;
     render();
   },
+  favs() {
+    state.favsOnly = !state.favsOnly;
+    render();
+  },
   reset() {
     state.filters = {};
     state.quick = false;
+    state.favsOnly = false;
     state.openCat = null;
+    state.fridge = [];
+    state.fridgeOpen = false;
+    saveState();
     render();
   },
   shuffle() {
@@ -513,6 +938,93 @@ const actions = {
     state.detailServings = null;
     render({ top: true });
   },
+  /* favoris */
+  fav(el) {
+    const id = el.dataset.id;
+    if (state.favs[id]) delete state.favs[id];
+    else state.favs[id] = true;
+    saveState();
+    render();
+  },
+  /* frigo */
+  fridge() {
+    state.fridgeOpen = !state.fridgeOpen;
+    render();
+    if (state.fridgeOpen) focusLater("fridge-in");
+  },
+  "fridge-add"() {
+    const input = document.getElementById("fridge-in");
+    const terms = (input ? input.value : "").split(/[,;]/).map((t) => t.trim()).filter(Boolean);
+    for (const t of terms) if (!state.fridge.some((x) => norm(x) === norm(t))) state.fridge.push(t);
+    saveState();
+    render();
+    focusLater("fridge-in");
+  },
+  "fridge-del"(el) {
+    state.fridge = state.fridge.filter((t) => t !== el.dataset.term);
+    saveState();
+    render();
+  },
+  /* avis et notes */
+  rate(el) {
+    const j = ensureJournal(el.dataset.id);
+    const n = Number(el.dataset.n);
+    j.rating = j.rating === n ? 0 : n;
+    saveState();
+    render();
+  },
+  cooked(el) {
+    ensureJournal(el.dataset.id).cooked.push(new Date().toISOString());
+    saveState();
+    render();
+    toast("Noté !");
+  },
+  /* mode cuisine */
+  cook(el) {
+    state.cook = { id: el.dataset.id, step: 0, ing: false };
+    state.lastCook = state.cook;
+    ensureAudio();
+    requestWake();
+    render({ top: true });
+  },
+  "cook-next"() {
+    state.cook.step += 1;
+    state.cook.ing = false;
+    render();
+  },
+  "cook-prev"() {
+    state.cook.step = Math.max(0, state.cook.step - 1);
+    state.cook.ing = false;
+    render();
+  },
+  "cook-ing"() {
+    state.cook.ing = !state.cook.ing;
+    render();
+  },
+  "cook-exit"() {
+    state.lastCook = state.timers.length ? state.cook : null;
+    state.cook = null;
+    releaseWake();
+    render({ top: true });
+  },
+  "cook-resume"() {
+    if (!state.lastCook) return;
+    state.cook = state.lastCook;
+    requestWake();
+    render({ top: true });
+  },
+  "timer-start"(el) {
+    ensureAudio();
+    state.timers.push({ id: Date.now() + Math.floor(Math.random() * 1000), label: el.dataset.label, end: Date.now() + Number(el.dataset.sec) * 1000, done: false });
+    if (!tickHandle) tickHandle = setInterval(tick, 1000);
+    render();
+  },
+  "timer-del"(el) {
+    state.timers = state.timers.filter((t) => String(t.id) !== el.dataset.tid);
+    if (!state.timers.length) state.lastCook = state.cook;
+    render();
+  },
+  /* courses */
   check(el) {
     const key = el.dataset.key;
     if (state.checked[key]) delete state.checked[key];
@@ -522,15 +1034,111 @@ const actions = {
   },
   "uncheck-all"() {
     state.checked = {};
+    state.extras.forEach((e) => (e.done = false));
     saveState();
     render();
+  },
+  "extra-add"() {
+    const input = document.getElementById("extra-in");
+    const text = (input ? input.value : "").trim();
+    if (!text) return;
+    state.extras.push({ id: Date.now() + Math.floor(Math.random() * 1000), text, done: false });
+    saveState();
+    render();
+    focusLater("extra-in");
+  },
+  "extra-check"(el) {
+    const e = state.extras.find((x) => String(x.id) === el.dataset.id);
+    if (e) e.done = !e.done;
+    saveState();
+    render();
+  },
+  "extra-del"(el) {
+    state.extras = state.extras.filter((x) => String(x.id) !== el.dataset.id);
+    saveState();
+    render();
+  },
+  "extras-clean"() {
+    state.extras = state.extras.filter((e) => !e.done);
+    saveState();
+    render();
+  },
+  pantry() {
+    state.pantryOpen = !state.pantryOpen;
+    render();
+  },
+  "pantry-toggle"(el) {
+    const n = el.dataset.name;
+    state.hidden = state.hidden.includes(n) ? state.hidden.filter((x) => x !== n) : [...state.hidden, n];
+    saveState();
+    render();
+  },
+  async share() {
+    const text = shopText();
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Liste de courses", text });
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast("Liste copiée");
+    } catch {
+      window.prompt("Copie la liste :", text);
+    }
   },
   "clear-plan"() {
     if (!confirm("Vider la semaine ?")) return;
     state.plan = {};
+    state.planDay = {};
     state.checked = {};
     saveState();
     render();
+  },
+  /* sauvegarde */
+  async export() {
+    const data = JSON.stringify({ app: "eat-it", version: 1, saved: new Date().toISOString(), ...persistable() });
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Sauvegarde Eat-it", text: data });
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+    try {
+      await navigator.clipboard.writeText(data);
+      toast("Sauvegarde copiée");
+    } catch {
+      window.prompt("Copie cette sauvegarde :", data);
+    }
+  },
+  import() {
+    const input = document.getElementById("import-in");
+    let obj;
+    try {
+      obj = JSON.parse((input ? input.value : "").trim());
+      if (!obj || obj.app !== "eat-it") throw new Error("format");
+    } catch {
+      toast("Données non reconnues");
+      return;
+    }
+    if (!confirm("Remplacer tes données actuelles par cette sauvegarde ?")) return;
+    applySaved(obj);
+    for (const id of Object.keys(state.plan)) if (!byId(id)) delete state.plan[id];
+    saveState();
+    render({ top: true });
+    toast("Sauvegarde restaurée");
+  },
+  wipe() {
+    if (!confirm("Effacer tous tes favoris, notes, semaine et listes ? Cette action est définitive.")) return;
+    applySaved({});
+    saveState();
+    render({ top: true });
+    toast("Données effacées");
   },
 };
 
@@ -539,12 +1147,47 @@ $app.addEventListener("click", (e) => {
   if (el && actions[el.dataset.action]) actions[el.dataset.action](el);
 });
 
-// La recherche ne re-rend que le fil, pour ne pas perdre le focus du champ.
+// La recherche ne re-rend que le fil, pour ne pas perdre le focus du champ ; les notes s'enregistrent en tapant.
 $app.addEventListener("input", (e) => {
-  if (e.target.id !== "q") return;
-  state.query = e.target.value;
-  document.getElementById("feed").innerHTML = feedHtml();
+  const t = e.target;
+  if (t.id === "q") {
+    state.query = t.value;
+    document.getElementById("feed").innerHTML = feedHtml();
+  } else if (t.dataset && t.dataset.note) {
+    ensureJournal(t.dataset.note).note = t.value;
+    saveSoon();
+  }
 });
+
+$app.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  if (e.target.id === "fridge-in") actions["fridge-add"]();
+  else if (e.target.id === "extra-in") actions["extra-add"]();
+});
+
+// Glisser à gauche / à droite pour changer d'étape en mode cuisine.
+let touchStart = null;
+$app.addEventListener(
+  "touchstart",
+  (e) => {
+    touchStart = state.cook && e.target.closest("#cookbody") ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
+  },
+  { passive: true }
+);
+$app.addEventListener(
+  "touchend",
+  (e) => {
+    if (!touchStart || !state.cook) return;
+    const dx = e.changedTouches[0].clientX - touchStart.x;
+    const dy = e.changedTouches[0].clientY - touchStart.y;
+    touchStart = null;
+    if (Math.abs(dx) < 70 || Math.abs(dx) < 2 * Math.abs(dy)) return;
+    const r = byId(state.cook.id);
+    if (dx < 0 && state.cook.step < r.steps.length - 1) actions["cook-next"]();
+    else if (dx > 0 && state.cook.step > 0) actions["cook-prev"]();
+  },
+  { passive: true }
+);
 
 /* ---------- Démarrage ---------- */
 
@@ -557,6 +1200,7 @@ async function init() {
     state.recipes = await res.json();
     // Oublie les recettes supprimées des données.
     for (const id of Object.keys(state.plan)) if (!byId(id)) delete state.plan[id];
+    for (const id of Object.keys(state.planDay)) if (!(id in state.plan)) delete state.planDay[id];
     saveState();
     shuffleOrder();
   } catch {
@@ -573,8 +1217,10 @@ document.addEventListener("visibilitychange", () => {
     hiddenAt = Date.now();
     return;
   }
+  if (state.cook) requestWake(); // le verrou d'écran est perdu quand l'app passe en arrière-plan
+  if (state.timers.length) tick();
   const away = hiddenAt && Date.now() - hiddenAt > RESHUFFLE_AFTER_MS;
-  if (away && !state.loading && !state.openId && state.view === "recipes") {
+  if (away && !state.loading && !state.openId && !state.cook && state.view === "recipes") {
     shuffleOrder();
     render({ top: true });
   }

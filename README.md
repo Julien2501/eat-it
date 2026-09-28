@@ -14,4 +14,4 @@ Le but sera de selectionner les recettes et le nombres de personnes puis de sort
 ## Tes taches
 
 - Definir le support de l'app (python ? htmnl ? autres ?)
-- Créer l'app
+- Créer l'app 

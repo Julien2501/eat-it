@@ -136,6 +136,12 @@ L'utilisateur a rejeté une sélection de 11 recettes TikTok parce que c'étaien
 
 Quand l'utilisateur demande un plat classique par son nom (bolognaises, chili…), écrire la recette soi-même, sans champ `source`, avec les mêmes conventions de normalisation. Réutiliser les noms d'ingrédients déjà présents (ex. `viande hachée 5 %`, `tomates concassées` en `boîte`, `ail` en `gousse`). Pour la photo, chercher une image libre sur Wikimedia Commons (`https://commons.wikimedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=960&format=json&titles=File:...`), regarder le résultat avant de l'utiliser, et **ajouter une ligne dans `images/CREDITS.md`** (auteur + licence, souvent CC BY-SA, l'attribution est obligatoire et le dépôt est public).
 
+**Vidéo dont la légende dit juste « recette complète sur mon site »** (sans détail) : suivre le bioLink jusqu'au site et chercher la page correspondante dans son sitemap (`sitemap_blogs_1.xml` pour swissfitcook.com), comme pour une recette « lien en bio ». Dans ce cas `source` pointe vers la page du site (plus complète), pas vers la vidéo TikTok ; le lien TikTok peut être mentionné dans `notes` si utile.
+
+**Étape manquante dans la légende** (numérotation à trous, ex. 1️⃣2️⃣4️⃣5️⃣ sans 3️⃣) : déduire l'étape manquante de la liste d'ingrédients restants et le signaler dans `notes` (« l'étape des oignons n'est pas détaillée : ordre déduit »).
+
+**Vidéo sans recette exploitable** (légende uniquement composée de macros/kcal, sans ingrédients ni étapes, et aucun site en bio) : ne pas inventer la recette. Le signaler à l'utilisateur et proposer une capture d'écran, plutôt que d'ajouter une recette fabriquée.
+
 Cas non traité : recette collée en texte (même normalisation, sans étape de téléchargement).
 
 ## Images des recettes
@@ -145,7 +151,7 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 - **Droits** : le dépôt est public. Les photos des sites/vidéos d'origine appartiennent à leurs auteurs (on les garde pour un usage personnel, avec renvoi vers `source`) ; les photos Wikimedia sont sous licence libre et à créditer dans `images/CREDITS.md`. Certaines sources servent du PNG/WebP sous un nom `.jpg` : `tools/resize_image.py` re-encode en vrai JPEG (vérifier avec `file`).
 - **Redimensionner avec `python tools/resize_image.py`** (Pillow, installé sur la machine avec `pip install --user pillow`) : sans argument, il réduit toutes les images de `images/` plus larges que 960 px. À lancer après chaque téléchargement (les vignettes TikTok font jusqu'à 2160×3840 et ~1 Mo).
 - **Les vignettes TikTok ont souvent un titre incrusté (souvent en anglais)** : comme l'app est tout en français, recadrer avec Pillow pour ne garder que le plat, hors du texte (regarder l'image entière avant, puis un `crop` d'environ 16/10 sur la zone sans texte). Exemples : ramen (`crop((0,0,960,630))`), pois chiches (`crop((0,950,960,1560))`).
-- Les vignettes TikTok sont en portrait : la carte en montre le centre 16/10. Vérifier le recadrage (aperçu avec Pillow) et, si un visage ou du texte gêne, régler `imageFocus`.
+- Les vignettes TikTok sont en portrait : la carte en montre le centre 16/10. Vérifier le recadrage (aperçu avec Pillow) et, si un visage ou du texte gêne, régler `imageFocus`. **Un texte incrusté sur toute la largeur (titre du plat, kcal) déborde souvent du recadrage `imageFocus` simple** : mieux vaut recadrer l'image elle-même avec Pillow (`Image.crop`) pour ne garder que la zone sans texte, sauvegardée directement dans `images/`, plutôt que de juste décaler le point focal. Toujours regarder l'image entière avant de choisir la zone, puis reregarder le résultat une fois recadré (un premier essai peut encore laisser un bord de texte).
 - Ajout via un lien : récupérer l'image principale de la page (balise `og:image`), la télécharger dans `images/`, puis référencer le chemin. Pour un plat sans photo : chercher une image libre (Wikimedia Commons) ; les recettes classiques utilisent des photos Wikimedia (`-A "Eat-it/1.0 (personal recipe app)"` obligatoire, sinon refusé), créditées dans `images/CREDITS.md`.
 
 ## Filtres et ordre d'affichage
@@ -202,6 +208,7 @@ Cas non traité : recette collée en texte (même normalisation, sans étape de 
 - API Wikimedia : au-delà d'une dizaine de requêtes rapprochées elle répond « You are making too many requests » (texte, pas du JSON) : espacer les appels de quelques secondes et réessayer avec une pause de ~40 s.
 - Ajouter une recette ou modifier l'app = commit + `git push` sur `main` ; Pages se met à jour en ~1 min. C'est le seul moyen pour l'utilisateur de voir le résultat sur son téléphone.
 - Le git de la machine est connecté à un autre compte GitHub (JulienV2501) que celui du dépôt (Julien2501) : en cas d'erreur 403 au push, les identifiants mémorisés sont les mauvais.
+- Quand l'utilisateur envoie une liste de liens TikTok à ajouter directement (« ajoute ces recettes »), la règle de diversité (comparer à la bibliothèque avant de proposer) ne s'applique pas : c'est une demande explicite, on ajoute tout ce qui est faisable. On peut quand même signaler dans le compte rendu si une recette ressemble beaucoup à une déjà présente, sans bloquer l'ajout.
 
 ## Pièges et leçons
 

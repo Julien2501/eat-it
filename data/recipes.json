@@ -1298,5 +1298,66 @@
       "Enfourner 30 minutes, jusqu'à ce que les coquillettes soient tendres et le dessus bien gratiné."
     ],
     "notes": "Recette très simple, tout cuit directement au four sans précuisson des pâtes. Le nombre de portions et l'assaisonnement ne sont pas précisés dans la légende (portions estimées pour 2 ; ajuster le sel et le poivre au goût). Recette de Dans l'assiette de Paulinette, sur TikTok."
+  },
+  {
+    "id": "poulet-coreen-gochujang",
+    "title": "Poulet coréen croustillant, sauce gochujang",
+    "servings": 4,
+    "time": 25,
+    "image": "images/poulet-coreen-gochujang.jpg",
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "season": ["toute l'année"], "dish": ["sauté"], "cuisine": ["coréenne"] },
+    "source": "https://www.tiktok.com/@joladiete/video/7607485780121947425",
+    "ingredients": [
+      { "name": "blanc de poulet", "qty": 800, "unit": "g", "aisle": "meat" },
+      { "name": "fécule de maïs", "qty": 40, "unit": "g", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 60, "unit": "ml", "aisle": "pantry" },
+      { "name": "eau", "qty": 80, "unit": "ml", "aisle": "other" },
+      { "name": "ketchup", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cébette", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Couper le poulet en petits cubes et le mélanger avec la fécule de maïs. Disposer les morceaux sur une plaque et cuire 10 minutes à 180 °C, au four ou à l'airfryer.",
+      "Pendant ce temps, verser tous les ingrédients de la sauce (sauce soja, eau, ketchup, gochujang, vinaigre, miel) dans une poêle et faire chauffer à feu moyen en remuant, jusqu'à ce qu'elle épaississe.",
+      "Une fois le poulet cuit, l'ajouter dans la sauce et mélanger à feu doux pour bien enrober et caraméliser chaque morceau.",
+      "Parsemer de graines de sésame et de cébette ciselée. Accompagner de riz ou de pommes de terre."
+    ],
+    "notes": "Environ 326 kcal et 45 g de protéines par portion (pour 4 portions), selon l'auteur. Recette de Joladiete, sur TikTok."
+  },
+  {
+    "id": "mafe-poulet-butternut",
+    "title": "Mafé au poulet et à la courge butternut",
+    "servings": 3,
+    "time": 45,
+    "image": "images/mafe-poulet-butternut.jpg",
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["courge"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["africaine"] },
+    "source": "https://www.healthyfoodcreation.fr/mafe-au-poulet-et-a-la-courge-butternut/",
+    "ingredients": [
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "courge butternut", "qty": 350, "unit": "g", "aisle": "produce" },
+      { "name": "huile d'arachide", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "beurre de cacahuète", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "bouillon de volaille", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "blanc de poulet", "qty": 250, "unit": "g", "aisle": "meat" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "cacahuètes", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron vert", "qty": null, "unit": "", "aisle": "produce" }
+    ],
+    "steps": [
+      "Émincer l'oignon, éplucher la courge butternut et la couper en petits cubes.",
+      "Faire chauffer l'huile dans une grande poêle ou une sauteuse à feu moyen, puis faire dorer l'oignon et la butternut pendant une dizaine de minutes.",
+      "Ajouter le concentré de tomate, le beurre de cacahuète et le bouillon. Laisser cuire à petite ébullition 25 à 30 minutes, jusqu'à ce que la sauce réduise et devienne onctueuse. Vérifier la cuisson de la butternut et rajouter un peu d'eau si nécessaire.",
+      "Pendant ce temps, cuire le poulet entier dans une poêle légèrement huilée, puis l'effilocher à la fourchette et l'ajouter au mafé en fin de cuisson. Cuire le riz en accompagnement.",
+      "Servir avec la coriandre ciselée, les cacahuètes grossièrement concassées et un filet de citron vert."
+    ],
+    "notes": "Pour une version végétarienne, remplacer le poulet par des émincés de soja. Se garde 3 jours au frais. Le citron vert est cité dans la recette mais absent de la liste d'ingrédients d'origine : ajouté ici. Recette de Lucie, healthyfood_creation (healthyfoodcreation.fr)."
   }
 ]

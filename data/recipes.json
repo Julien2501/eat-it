@@ -1359,5 +1359,77 @@
       "Servir avec la coriandre ciselée, les cacahuètes grossièrement concassées et un filet de citron vert."
     ],
     "notes": "Pour une version végétarienne, remplacer le poulet par des émincés de soja. Se garde 3 jours au frais. Le citron vert est cité dans la recette mais absent de la liste d'ingrédients d'origine : ajouté ici. Recette de Lucie, healthyfood_creation (healthyfoodcreation.fr)."
+  },
+  {
+    "id": "boeuf-chipotle-bowl",
+    "title": "Bowl au bœuf haché façon Chipotle",
+    "servings": 2,
+    "time": 25,
+    "image": "images/boeuf-chipotle-bowl.jpg",
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["avocat", "tomate"], "season": ["toute l'année"], "dish": ["bowl"], "cuisine": ["tex-mex"] },
+    "source": "https://www.tiktok.com/@totocuistot/video/7394516984651664673",
+    "ingredients": [
+      { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "riz", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "tomate", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "oignon rouge", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "maïs", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "haricots rouges", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "fromage blanc", "qty": 60, "unit": "g", "aisle": "dairy" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "flocons de piment", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sauce soja sucrée", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce teriyaki", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce sriracha", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Cuire le riz selon les indications du paquet.",
+      "Assaisonner la viande hachée avec la sauce soja sucrée, la sauce teriyaki, la sauce d'huître, un peu de sriracha, du sel et du poivre. La faire revenir à la poêle à feu vif jusqu'à ce qu'elle soit bien dorée, en l'émiettant.",
+      "Égoutter le maïs et les haricots rouges. Couper la tomate, l'avocat et l'oignon rouge.",
+      "Mélanger le fromage blanc avec l'ail en poudre, les flocons de piment et la coriandre ciselée pour préparer la sauce.",
+      "Dresser le riz dans un bol, ajouter la viande, puis disposer le maïs, les haricots rouges, la tomate, l'avocat et l'oignon rouge en petits tas. Napper de sauce et servir."
+    ],
+    "notes": "Équivalent trouvé pour remplacer une recette « Bœuf Chipotle » dont la légende TikTok ne donnait ni quantités ni étapes. Ici aussi, la légende d'origine ne donnait qu'une liste d'ingrédients sans quantités ni ordre des étapes : proportions (pour 2) et déroulé déduits, à ajuster selon le goût. La sauce du visuel paraît plus verte que fromage blanc + ail + piment seuls : de la coriandre fraîche a été ajoutée en déduction, absente de la légende. Recette inspirée de totocuistot sur TikTok."
+  },
+  {
+    "id": "poulet-curry-coco-legumes",
+    "title": "Poulet au curry coco et tagliatelles de légumes",
+    "servings": 4,
+    "time": 35,
+    "image": "images/poulet-curry-coco-legumes.jpg",
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["carotte", "courgette"], "season": ["toute l'année"], "dish": ["mijoté"] },
+    "source": "https://www.tiktok.com/@janette594/video/7275048624474705185",
+    "ingredients": [
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "blanc de poulet", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "oignon rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "curry en poudre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "piment doux", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "gingembre en poudre", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "carotte", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "courgette", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
+    ],
+    "steps": [
+      "Éplucher les carottes et la courgette, puis les tailler en tagliatelles à l'aide d'un économe. Les faire revenir dans une poêle avec du sel et du poivre, à feu doux, pendant 10 minutes.",
+      "Pendant ce temps, découper les blancs de poulet en dés.",
+      "Verser l'huile d'olive dans une sauteuse chaude, faire revenir l'oignon rouge, l'ail et les épices (curry, cumin, piment doux, gingembre), puis ajouter le poulet et laisser cuire 10 à 15 minutes à feu doux.",
+      "Incorporer le lait de coco, vérifier l'assaisonnement et laisser mijoter 5 à 8 minutes.",
+      "Ajouter les tagliatelles de légumes dans le poulet et laisser cuire encore 2 minutes.",
+      "Déguster avec du riz."
+    ],
+    "notes": "Équivalent trouvé pour remplacer une recette « Curry coco » dont la légende TikTok ne donnait aucune information. Recette de Janette Saïd, sur TikTok."
   }
 ]

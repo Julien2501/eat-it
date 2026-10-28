@@ -643,7 +643,7 @@
       { "name": "carotte", "qty": 2, "unit": "", "aisle": "produce" },
       { "name": "petits pois surgelés", "qty": 40, "unit": "g", "aisle": "frozen" },
       { "name": "germes de soja", "qty": null, "unit": "", "aisle": "produce" },
-      { "name": "riz cuit", "qty": 50000, "unit": "g", "aisle": "pantry" },
+      { "name": "riz cuit", "qty": 500, "unit": "g", "aisle": "pantry" },
       { "name": "sauce soja foncée", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
       { "name": "sauce d'huître", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
       { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },

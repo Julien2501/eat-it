@@ -63,7 +63,7 @@ const state = {
   recipes: [],
   loading: true,
   error: null,
-  view: "recipes", // recipes | plan | shop | suggest
+  view: "recipes", // recipes | plan | shop | suggest | about
   menuOpen: false, // menu ☰ de l'accueil
   suggest: null, // { mode: "new" | "edit", id, sending, sent, f: { champs du formulaire } }
   query: "",
@@ -511,7 +511,7 @@ function recipesView() {
   const narrowed = activeCount() || state.course;
   return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div>
     <button class="menubtn" data-action="menu" aria-label="Menu" aria-expanded="${state.menuOpen}">${state.menuOpen ? "✕" : "☰"}</button></div>
-    ${state.menuOpen ? `<div class="menu"><button data-action="suggest-new">✍️ Proposer une recette</button></div>` : ""}
+    ${state.menuOpen ? `<div class="menu"><button data-action="suggest-new">✍️ Proposer une recette</button><button data-action="about">ℹ️ À propos</button></div>` : ""}
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     ${coursesHtml()}
     ${filtersHtml()}
@@ -893,6 +893,18 @@ function shopView() {
   return `<h1>Courses</h1>${addRow}${bar}${seg}${progress}${extrasHtml}${groups}${empty}${cleanup}`;
 }
 
+/* ---------- Vue : à propos ---------- */
+
+function aboutView() {
+  return `<button class="backlink" data-action="tab" data-view="recipes">‹ Retour</button>
+    <h1>À propos</h1>
+    <p>Eat-it est un carnet de recettes pour les jours où on ne sait pas quoi cuisiner. On parcourt les recettes, on filtre (protéine, saison, rapidité, ce qu'il y a dans le frigo…), on choisit celles de la semaine, et l'app prépare la liste de courses, regroupée par rayon et adaptée au nombre de personnes.</p>
+    <p>Tout fonctionne sur le téléphone, même sans réseau : les favoris, les notes et les listes y restent. Une recette manque ? Elle peut être proposée depuis le menu ☰ ; elle est relue avant d'être ajoutée.</p>
+    <h2>Crédits</h2>
+    <p>Imaginée et créée par <b>Julien</b>, développée avec l'aide de Claude (Anthropic).</p>
+    <p class="muted">Les recettes viennent de blogs, de vidéos et de créateurs de contenu, réécrites pour l'app : le lien « Voir la source » d'une recette renvoie vers l'original. Les photos appartiennent à leurs auteurs ; celles issues de Wikimedia Commons sont sous licence libre, <a class="source" href="https://github.com/Julien2501/eat-it/blob/main/images/CREDITS.md" target="_blank" rel="noopener">crédits ↗</a>.</p>`;
+}
+
 /* ---------- Vues : proposer une recette ou une modification ---------- */
 
 function loadDraft() {
@@ -1074,6 +1086,7 @@ function render({ top = false } = {}) {
   else if (state.view === "plan") body = planView();
   else if (state.view === "shop") body = shopView();
   else if (state.view === "suggest") body = suggestView();
+  else if (state.view === "about") body = aboutView();
   else body = recipesView();
 
   $app.innerHTML = `<main class="page ${r ? "flush" : ""}">${body}</main>${r ? ctaBar(r) : tabbar()}${timerPill()}`;
@@ -1409,6 +1422,13 @@ const actions = {
     render();
   },
   /* propositions */
+  about() {
+    state.menuOpen = false;
+    state.view = "about";
+    state.openId = null;
+    setHash(null);
+    render({ top: true });
+  },
   "suggest-new"() {
     state.menuOpen = false;
     const d = loadDraft();

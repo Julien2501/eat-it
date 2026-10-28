@@ -987,7 +987,7 @@ function rowsHtml(key, label, placeholder, addLabel) {
 
 // Photo : réduite sur le téléphone (960 px, JPEG) avant l'envoi.
 function photoHtml(sg) {
-  return `<div class="field"><span>Photo du plat (facultatif)</span>${
+  return `<div class="field"><span>${sg.mode === "edit" ? "Nouvelle photo du plat (facultatif)" : "Photo du plat (facultatif)"}</span>${
     sg.photo
       ? `<div class="photo-prev"><img src="${sg.photo.url}" alt="Aperçu de la photo"><button class="rowdel" data-action="photo-del" aria-label="Retirer la photo">✕</button></div>`
       : `<label class="btn soft rowadd">📷 Ajouter une photo<input type="file" accept="image/*" data-photo hidden></label>`
@@ -1039,11 +1039,12 @@ function suggestView() {
   const area = (k, label, ph, max, rows) =>
     `<label class="field"><span>${label}</span><textarea class="note" data-field="${k}" rows="${rows}" maxlength="${max}" placeholder="${esc(ph)}">${val(k)}</textarea></label>`;
   const courses = [["", "Je ne sais pas"], ...COURSES.map((c) => [c.key, c.label])];
-  const body =
-    sg.mode === "edit"
-      ? `<p class="muted">Une erreur, une quantité à corriger, une astuce à ajouter ? Dis ce qui change pour <b>${esc(r ? r.title : "")}</b>.</p>
-        ${area("message", "Ta suggestion", "Ex. : 200 g de farine au lieu de 300 g, cuire plutôt 15 minutes…", SUGGEST_LIMITS.text, 6)}`
-      : `<p class="muted">Propose une recette : elle sera relue, adaptée à l'app et, si elle est validée, elle apparaîtra pour tout le monde. Tu peux n'écrire que l'essentiel.</p>
+  const edit = sg.mode === "edit";
+  const body = `<p class="muted">${
+      edit
+        ? `Voici la recette <b>${esc(r ? r.title : "")}</b> : corrige ce qui doit l'être. Seuls tes changements seront transmis, et ils seront relus avant d'être appliqués.`
+        : "Propose une recette : elle sera relue, adaptée à l'app et, si elle est validée, elle apparaîtra pour tout le monde. Tu peux n'écrire que l'essentiel."
+    }</p>
         ${field("title", "Nom de la recette *", `maxlength="${SUGGEST_LIMITS.title}" autocomplete="off"`)}
         <div class="field-row">${numField("servings", "Personnes", f.servings)}${numField("time", "Durée", f.time)}</div>
         <label class="field"><span>Type de plat</span><select data-field="category">${courses
@@ -1052,7 +1053,7 @@ function suggestView() {
         ${rowsHtml("ingredients", "Ingrédients *", "Ex. : 200 g de spaghetti", "Ajouter un ingrédient")}
         ${rowsHtml("steps", "Étapes *", "Ex. : Cuire les pâtes 10 minutes.", "Ajouter une étape")}
         ${field("source", "Lien d'origine (facultatif)", 'type="url" inputmode="url" maxlength="300" autocomplete="off"')}
-        ${area("message", "Un mot, une astuce ? (facultatif)", "", SUGGEST_LIMITS.text, 3)}`;
+        ${area("message", edit ? "Pourquoi cette modification ? (facultatif)" : "Un mot, une astuce ? (facultatif)", "", SUGGEST_LIMITS.text, 3)}`;
   return `<button class="backlink" data-action="suggest-cancel">‹ Annuler</button>
     <h1>${sg.mode === "edit" ? "Suggérer une modification" : "Proposer une recette"}</h1>
     ${body}
@@ -1486,7 +1487,25 @@ const actions = {
     render();
   },
   "suggest-edit"(el) {
-    state.suggest = { mode: "edit", id: el.dataset.id, sending: false, sent: false, f: { website: "" } };
+    // Formulaire prérempli avec la recette ; `before` garde l'original pour n'envoyer que les différences.
+    const r = byId(el.dataset.id);
+    const before = {
+      title: r.title,
+      servings: String(r.servings),
+      time: String(r.time),
+      category: courseOf(r)[0] || "",
+      ingredients: r.ingredients.map((i) => ingText(i.name, i.qty, i.unit, i.plural)),
+      steps: [...r.steps],
+      source: r.source || "",
+    };
+    state.suggest = {
+      mode: "edit",
+      id: r.id,
+      sending: false,
+      sent: false,
+      before,
+      f: { ...before, ingredients: [...before.ingredients], steps: [...before.steps], message: "", from: "", website: "" },
+    };
     state.view = "suggest";
     state.openId = null;
     setHash(null);
@@ -1510,19 +1529,45 @@ const actions = {
     const lines = (a) => (Array.isArray(a) ? a : []).map((x) => String(x).replace(/\s*\n\s*/g, " ").trim()).filter(Boolean).join("\n");
     f.ingredients = Array.isArray(f.ingredients) ? f.ingredients : [""];
     f.steps = Array.isArray(f.steps) ? f.steps : [""];
-    if (sg.mode === "new" && !(clean(f.title, 1) && lines(f.ingredients) && lines(f.steps))) {
+    if (!(clean(f.title, 1) && lines(f.ingredients) && lines(f.steps))) {
       toast("Nom, ingrédients et étapes sont nécessaires");
       return;
     }
-    if (sg.mode === "edit" && !clean(f.message, 1)) {
-      toast("Écris ta suggestion");
-      return;
-    }
     const r = sg.mode === "edit" ? byId(sg.id) : null;
-    const payload = {
+    const norm = (x) => ({
+      title: clean(x.title, SUGGEST_LIMITS.title),
+      servings: String(x.servings || "").replace(/[^0-9]/g, ""),
+      time: String(x.time || "").replace(/[^0-9]/g, ""),
+      category: clean(x.category, SUGGEST_LIMITS.short),
+      ingredients: clean(lines(x.ingredients), SUGGEST_LIMITS.list),
+      steps: clean(lines(x.steps), SUGGEST_LIMITS.list),
+      source: clean(x.source, 300),
+    });
+    let editPayload = null;
+    if (r) {
+      // Modification : on n'envoie que les champs qui ont changé, avec leur ancienne et leur nouvelle valeur.
+      const a = norm(sg.before);
+      const b = norm(f);
+      const changes = {};
+      for (const k of Object.keys(a)) if (a[k] !== b[k]) changes[k] = { before: a[k], after: b[k] };
+      if (!Object.keys(changes).length && !clean(f.message, 1) && !sg.photo) {
+        toast("Aucune modification");
+        return;
+      }
+      editPayload = {
+        type: "edit",
+        recipeId: r.id,
+        recipeTitle: r.title,
+        changes,
+        message: clean(f.message, SUGGEST_LIMITS.text),
+        from: clean(f.from, SUGGEST_LIMITS.short),
+        website: clean(f.website, 100),
+      };
+    }
+    const payload = editPayload || {
       type: sg.mode,
-      recipeId: r ? r.id : "",
-      recipeTitle: r ? r.title : "",
+      recipeId: "",
+      recipeTitle: "",
       title: clean(f.title, SUGGEST_LIMITS.title),
       servings: clean(String(f.servings || "").replace(/[^0-9]/g, ""), 3),
       time: clean(String(f.time || "").replace(/[^0-9]/g, ""), 4),
@@ -1627,7 +1672,9 @@ const actions = {
 // Texte lisible de la proposition, utilisé quand il n'y a pas de relais.
 function suggestText(p) {
   const lines = [p.type === "edit" ? `Modification pour « ${p.recipeTitle} » (${p.recipeId})` : `Nouvelle recette : ${p.title}`];
-  if (p.type === "new") {
+  if (p.type === "edit") {
+    for (const [k, c] of Object.entries(p.changes || {})) lines.push("", `${k} :`, `AVANT : ${c.before}`, `APRÈS : ${c.after}`);
+  } else {
     lines.push(`Personnes : ${p.servings || "?"} · Durée : ${fmtMinutes(p.time) || "?"} · Type : ${p.category || "?"}`);
     lines.push("", "Ingrédients :", p.ingredients, "", "Étapes :", p.steps);
     if (p.source) lines.push("", `Source : ${p.source}`);

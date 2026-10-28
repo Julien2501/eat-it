@@ -46,6 +46,61 @@ async function storeImage(p, env, origin) {
   return `${origin}/img/${id}.jpg`;
 }
 
+const FIELD_LABELS = {
+  title: "Titre",
+  servings: "Personnes",
+  time: "Durée (min)",
+  category: "Type de plat",
+  ingredients: "Ingrédients",
+  steps: "Étapes",
+  source: "Lien d'origine",
+};
+const LIST_FIELDS = new Set(["ingredients", "steps"]);
+
+// Diff ligne à ligne (plus longue sous-suite commune) : « - » supprimé, « + » ajouté, deux espaces = inchangé.
+function diffLines(before, after) {
+  const a = before ? before.split("\n") : [];
+  const b = after ? after.split("\n") : [];
+  const t = Array.from({ length: a.length + 1 }, () => new Array(b.length + 1).fill(0));
+  for (let i = a.length - 1; i >= 0; i--)
+    for (let j = b.length - 1; j >= 0; j--) t[i][j] = a[i] === b[j] ? t[i + 1][j + 1] + 1 : Math.max(t[i + 1][j], t[i][j + 1]);
+  const out = [];
+  let i = 0;
+  let j = 0;
+  while (i < a.length && j < b.length) {
+    if (a[i] === b[j]) {
+      out.push(`  ${a[i++]}`);
+      j++;
+    } else if (t[i + 1][j] >= t[i][j + 1]) out.push(`- ${a[i++]}`);
+    else out.push(`+ ${b[j++]}`);
+  }
+  while (i < a.length) out.push(`- ${a[i++]}`);
+  while (j < b.length) out.push(`+ ${b[j++]}`);
+  return out.join("\n");
+}
+
+// Dans un bloc de code le texte n'est pas interprété : on empêche seulement de refermer le bloc.
+const fenced = (s) => s.replace(/```/g, "'''");
+const FENCE = "```";
+
+function changesMd(changes) {
+  const parts = [];
+  for (const key of Object.keys(FIELD_LABELS)) {
+    const c = changes && typeof changes === "object" ? changes[key] : null;
+    if (!c || typeof c !== "object") continue;
+    const max = LIST_FIELDS.has(key) ? LIMITS.list : LIMITS.title * 3;
+    const before = str(c.before, max);
+    const after = str(c.after, max);
+    if (before === after) continue;
+    if (LIST_FIELDS.has(key)) {
+      parts.push(`**${FIELD_LABELS[key]}**\n${FENCE}diff\n${fenced(diffLines(before, after))}\n${FENCE}`);
+    } else {
+      parts.push(`**${FIELD_LABELS[key]}** : ~~${safe(before) || "(vide)"}~~ → **${safe(after) || "(vide)"}**`);
+    }
+  }
+  return parts.join("\n\n");
+}
+
 function buildIssue(p, photo) {
   const photoMd = photo ? `\n**Photo** : ${photo}\n\n![photo](${photo})\n` : "";
   const from = safe(str(p.from, LIMITS.short)) || "anonyme";
@@ -53,11 +108,12 @@ function buildIssue(p, photo) {
   if (p.type === "edit") {
     const id = str(p.recipeId, LIMITS.short).replace(/[^a-z0-9-]/gi, "");
     const name = safe(str(p.recipeTitle, LIMITS.title));
-    if (!id || !message) return null;
-    return {
-      title: `[Modification] ${name}`.slice(0, 200),
-      body: `**Recette** : ${name} (\`${id}\`)\n**De** : ${from}\n\n${message}\n${photoMd}`,
-    };
+    const changes = changesMd(p.changes);
+    if (!id || !(changes || message || photo)) return null;
+    const lines = [`**Recette** : ${name} (\`${id}\`)`, `**De** : ${from}`];
+    if (changes) lines.push("", "### Modifications proposées", "", changes);
+    if (message) lines.push("", "### Pourquoi", message);
+    return { title: `[Modification] ${name}`.slice(0, 200), body: lines.join("\n") + "\n" + photoMd };
   }
   const title = safe(str(p.title, LIMITS.title));
   const ingredients = safe(str(p.ingredients, LIMITS.list));
@@ -115,7 +171,7 @@ export default {
     // Champ piège rempli = robot : on répond « ok » sans rien créer.
     if (str(p.website, 100)) return json(200, { ok: true }, allowed);
 
-    if (!buildIssue(p, "")) return json(400, { error: "fields" }, allowed);
+    if (!buildIssue(p, typeof p.image === "string" && p.image ? "pending" : "")) return json(400, { error: "fields" }, allowed);
     const photo = await storeImage(p, env, url.origin);
     const issue = buildIssue(p, photo);
 

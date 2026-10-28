@@ -63,7 +63,7 @@ const state = {
   recipes: [],
   loading: true,
   error: null,
-  view: "recipes", // recipes | plan | shop | settings | suggest
+  view: "recipes", // recipes | plan | shop | suggest
   menuOpen: false, // menu ☰ de l'accueil
   suggest: null, // { mode: "new" | "edit", id, sending, sent, f: { champs du formulaire } }
   query: "",
@@ -511,7 +511,7 @@ function recipesView() {
   const narrowed = activeCount() || state.course;
   return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div>
     <button class="menubtn" data-action="menu" aria-label="Menu" aria-expanded="${state.menuOpen}">${state.menuOpen ? "✕" : "☰"}</button></div>
-    ${state.menuOpen ? `<div class="menu"><button data-action="suggest-new">✍️ Proposer une recette</button><button data-action="settings">💾 Sauvegarde et réglages</button></div>` : ""}
+    ${state.menuOpen ? `<div class="menu"><button data-action="suggest-new">✍️ Proposer une recette</button></div>` : ""}
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     ${coursesHtml()}
     ${filtersHtml()}
@@ -893,28 +893,6 @@ function shopView() {
   return `<h1>Courses</h1>${addRow}${bar}${seg}${progress}${extrasHtml}${groups}${empty}${cleanup}`;
 }
 
-/* ---------- Vues : réglages et sauvegarde ---------- */
-
-function settingsView() {
-  const hiddenChips = state.hidden.length
-    ? state.hidden.map((n) => `<button class="chip on" data-action="pantry-toggle" data-name="${esc(n)}">${esc(n)} ✕</button>`).join("")
-    : "<span class='muted'>Aucun.</span>";
-  const favN = Object.keys(state.favs).filter(byId).length;
-  const notesN = Object.values(state.journal).filter((j) => j.note || j.rating || j.cooked.length).length;
-  return `<button class="backlink" data-action="tab" data-view="recipes">‹ Retour</button>
-    <h1>Réglages</h1>
-    <p class="muted">${plural(favN, "favori", "favoris")} · ${plural(notesN, "recette avec avis ou notes", "recettes avec avis ou notes")} · ${plural(Object.keys(state.plan).length, "recette", "recettes")} dans la semaine</p>
-    <h2>Sauvegarde</h2>
-    <p class="muted">Tes favoris, ta semaine, tes notes et ta liste de courses sont enregistrés sur ce téléphone. Exporte-les pour les garder en sécurité ou les retrouver sur un autre appareil.</p>
-    <button class="btn" data-action="export">📤 Exporter mes données</button>
-    <textarea id="import-in" class="note" placeholder="Pour restaurer : colle ici les données exportées, puis touche « Restaurer »."></textarea>
-    <button class="btn soft" data-action="import">📥 Restaurer</button>
-    <h2>Articles masqués de la liste de courses</h2>
-    <div class="panel"><div class="fridge-chips">${hiddenChips}</div></div>
-    <h2>Zone sensible</h2>
-    <button class="btn soft" data-action="wipe">Effacer toutes mes données</button>`;
-}
-
 /* ---------- Vues : proposer une recette ou une modification ---------- */
 
 function loadDraft() {
@@ -1095,7 +1073,6 @@ function render({ top = false } = {}) {
   else if (r) body = detailView(r);
   else if (state.view === "plan") body = planView();
   else if (state.view === "shop") body = shopView();
-  else if (state.view === "settings") body = settingsView();
   else if (state.view === "suggest") body = suggestView();
   else body = recipesView();
 
@@ -1153,12 +1130,6 @@ const actions = {
   menu() {
     state.menuOpen = !state.menuOpen;
     render();
-  },
-  settings() {
-    state.menuOpen = false;
-    state.view = "settings";
-    state.openId = null;
-    render({ top: true });
   },
   open(el) {
     state.openId = el.dataset.id;
@@ -1624,48 +1595,6 @@ const actions = {
     } catch {
       window.prompt("Copie cette proposition :", text);
     }
-  },
-  /* sauvegarde */
-  async export() {
-    const data = JSON.stringify({ app: "eat-it", version: 1, saved: new Date().toISOString(), ...persistable() });
-    try {
-      if (navigator.share) {
-        await navigator.share({ title: "Sauvegarde Eat-it", text: data });
-        return;
-      }
-    } catch (e) {
-      if (e && e.name === "AbortError") return;
-    }
-    try {
-      await navigator.clipboard.writeText(data);
-      toast("Sauvegarde copiée");
-    } catch {
-      window.prompt("Copie cette sauvegarde :", data);
-    }
-  },
-  import() {
-    const input = document.getElementById("import-in");
-    let obj;
-    try {
-      obj = JSON.parse((input ? input.value : "").trim());
-      if (!obj || obj.app !== "eat-it") throw new Error("format");
-    } catch {
-      toast("Données non reconnues");
-      return;
-    }
-    if (!confirm("Remplacer tes données actuelles par cette sauvegarde ?")) return;
-    applySaved(obj);
-    for (const id of Object.keys(state.plan)) if (!byId(id)) delete state.plan[id];
-    saveState();
-    render({ top: true });
-    toast("Sauvegarde restaurée");
-  },
-  wipe() {
-    if (!confirm("Effacer tous tes favoris, notes, semaine et listes ? Cette action est définitive.")) return;
-    applySaved({});
-    saveState();
-    render({ top: true });
-    toast("Données effacées");
   },
 };
 

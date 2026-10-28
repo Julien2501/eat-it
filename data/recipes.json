@@ -1431,23 +1431,5 @@
       "Déguster avec du riz."
     ],
     "notes": "Équivalent trouvé pour remplacer une recette « Curry coco » dont la légende TikTok ne donnait aucune information. Recette de Janette Saïd, sur TikTok."
-  },
-  {
-    "id": "test111111",
-    "title": "Test111111",
-    "servings": 2,
-    "time": 45,
-    "categories": ["encas"],
-    "tags": { "protein": ["végétarien"], "season": ["toute l'année"], "dish": ["pâtes"] },
-    "ingredients": [
-      { "name": "pâtes", "qty": null, "unit": "", "aisle": "pantry" },
-      { "name": "riz", "qty": 200, "unit": "g", "aisle": "pantry" },
-      { "name": "test", "qty": null, "unit": "", "aisle": "other" }
-    ],
-    "steps": [
-      "Regarderfdjejes.",
-      "Shshdhejs epned cossuufbe Dushanbe Fuchs s. Jcushabd"
-    ],
-    "notes": "Recette de test proposée depuis l'app (à supprimer). Quantité de pâtes non précisée (« 3 pates ») : laissée « au goût »."
   }
 ]

@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE = "eatit-v21";
+const CACHE = "eatit-v22";
 const SHELL = [
   "./",
   "index.html",

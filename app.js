@@ -324,7 +324,45 @@ function termMatches(term, name) {
   const t = norm(term);
   const n = norm(name);
   if (!t) return false;
-  return n.includes(t) || (t.length > 3 && t.endsWith("s") && n.includes(t.slice(0, -1)));
+  if (n.includes(t)) return true;
+  // Pluriel saisi (« carottes ») contre un nom au singulier (« carotte râpée ») : mot entier seulement.
+  if (t.length > 3 && t.endsWith("s")) {
+    const one = t.slice(0, -1).replace(/[^a-z0-9 ]/g, "");
+    return one.length > 2 && new RegExp(`(^|[^a-z])${one}s?($|[^a-z])`).test(n);
+  }
+  return false;
+}
+
+// Ingrédients qui existent dans les recettes (hors sel, poivre, huile, eau) : { name, n } triés du plus utilisé au moins utilisé.
+function fridgeCatalog() {
+  const seen = new Map();
+  for (const r of state.recipes)
+    for (const i of r.ingredients) {
+      if (isIgnored(i.name)) continue;
+      const k = norm(i.name);
+      const e = seen.get(k) || { name: i.name, n: 0 };
+      e.n++;
+      seen.set(k, e);
+    }
+  return [...seen.values()].sort((a, b) => b.n - a.n || a.name.localeCompare(b.name, "fr"));
+}
+
+// Ce qui est proposé quand on tape dans le champ du frigo : uniquement des ingrédients présents dans les recettes.
+function fridgeMatches(q) {
+  const t = norm(q);
+  if (!t) return [];
+  const have = state.fridge.map(norm);
+  return fridgeCatalog().filter((e) => termMatches(q, e.name) && !have.includes(norm(e.name)));
+}
+
+function fridgeSuggestHtml(q) {
+  if (!norm(q)) return "";
+  const m = fridgeMatches(q);
+  if (!m.length) return `<p class="muted small">Aucun ingrédient des recettes ne correspond à « ${esc(q.trim())} ».</p>`;
+  return `<div class="fridge-chips">${m
+    .slice(0, 8)
+    .map((e) => `<button class="chip" data-action="fridge-pick" data-term="${esc(e.name)}">${esc(e.name)} <small>${e.n}</small></button>`)
+    .join("")}</div>`;
 }
 
 function fridgeScore(r) {
@@ -488,6 +526,7 @@ function fridgePanelHtml() {
   return `<div class="panel fridge-panel">
     <div class="addrow"><input id="fridge-in" type="text" placeholder="Un ingrédient que j'ai (poulet, riz…)" autocomplete="off">
       <button data-action="fridge-add">Ajouter</button></div>
+    <div id="fridge-sugg"></div>
     ${state.fridge.length ? `<div class="fridge-chips">${state.fridge.map((t) => `<button class="chip on" data-action="fridge-del" data-term="${esc(t)}">${esc(t)} ✕</button>`).join("")}</div>` : ""}
     <p class="muted small">Les recettes qui utilisent le plus d’ingrédients que tu as déjà passent en premier. Sel, poivre, huile et eau ne comptent pas.</p>
   </div>`;
@@ -1277,7 +1316,23 @@ const actions = {
   "fridge-add"() {
     const input = document.getElementById("fridge-in");
     const terms = (input ? input.value : "").split(/[,;]/).map((t) => t.trim()).filter(Boolean);
-    for (const t of terms) if (!state.fridge.some((x) => norm(x) === norm(t))) state.fridge.push(t);
+    const unknown = [];
+    // Seuls les ingrédients qui existent dans les recettes sont acceptés.
+    for (const t of terms) {
+      if (!fridgeCatalog().some((e) => termMatches(t, e.name))) unknown.push(t);
+      else if (!state.fridge.some((x) => norm(x) === norm(t))) state.fridge.push(t);
+    }
+    if (unknown.length) toast(`Pas dans les recettes : ${unknown.join(", ")}`);
+    saveState();
+    render();
+    const again = document.getElementById("fridge-in");
+    if (again && unknown.length) again.value = unknown.join(", ");
+    focusLater("fridge-in");
+    if (again) document.getElementById("fridge-sugg").innerHTML = fridgeSuggestHtml(again.value);
+  },
+  "fridge-pick"(el) {
+    const t = el.dataset.term;
+    if (!state.fridge.some((x) => norm(x) === norm(t))) state.fridge.push(t);
     saveState();
     render();
     focusLater("fridge-in");
@@ -1643,6 +1698,8 @@ $app.addEventListener("input", (e) => {
   if (t.id === "q") {
     state.query = t.value;
     document.getElementById("feed").innerHTML = feedHtml();
+  } else if (t.id === "fridge-in") {
+    document.getElementById("fridge-sugg").innerHTML = fridgeSuggestHtml(t.value.split(/[,;]/).pop());
   } else if (t.dataset && t.dataset.list && state.suggest) {
     state.suggest.f[t.dataset.list][Number(t.dataset.i)] = t.value;
     saveDraft();

@@ -51,7 +51,7 @@ const FRIDGE_IGNORED = ["sel", "poivre", "huile", "eau"]; // jamais comptés « 
 const STORE_KEY = "eatit.v1";
 const DRAFT_KEY = "eatit.draft"; // brouillon de proposition, à part de STORE_KEY pour ne pas toucher aux données existantes
 // Adresse du relais qui reçoit les propositions (voir worker/README.md). Vide : l'envoi passe par la feuille de partage.
-const SUGGEST_URL = "";
+const SUGGEST_URL = "https://eat-it-relay.eatit-julien.workers.dev";
 const PHOTO_MAX_BYTES = 400 * 1024;
 const SUGGEST_LIMITS = { title: 120, list: 4000, text: 1500, short: 80 };
 const MAX_SERVINGS = 50;

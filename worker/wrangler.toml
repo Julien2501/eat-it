@@ -9,6 +9,6 @@ ALLOWED_ORIGIN = "https://julien2501.github.io"
 # Le secret GITHUB_TOKEN n'est jamais écrit ici : `npx wrangler secret put GITHUB_TOKEN`.
 
 # Stockage des photos reçues : `npx wrangler kv namespace create IMAGES`, puis décommenter et coller l'id.
-# [[kv_namespaces]]
-# binding = "IMAGES"
-# id = "COLLER_L_ID_ICI"
+[[kv_namespaces]]
+binding = "IMAGES"
+id = "f4213dc79f63419badf0191a69e924b4"

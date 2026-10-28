@@ -5,67 +5,16 @@
     "servings": 2,
     "time": 20,
     "image": "images/carbonara.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "porc"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "pâtes"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
-      {
-        "name": "spaghetti",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "lardons",
-        "qty": 120,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "œuf",
-        "qty": 1,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "jaune d'œuf",
-        "plural": "jaunes d'œufs",
-        "qty": 2,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "lardons", "qty": 120, "unit": "g", "aisle": "meat" },
+      { "name": "œuf", "qty": 1, "unit": "", "aisle": "dairy" },
+      { "name": "jaune d'œuf", "plural": "jaunes d'œufs", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 40, "unit": "g", "aisle": "dairy" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Porter à ébullition une grande casserole d'eau, la saler légèrement (les lardons et le parmesan sont déjà salés), puis y cuire les spaghetti al dente.",
@@ -83,104 +32,22 @@
     "servings": 2,
     "time": 45,
     "image": "images/choux-bruxelles-patate-douce.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "tofu",
-        "fromage",
-        "végétarien"
-      ],
-      "vegetable": [
-        "chou",
-        "patate douce"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "légumes rôtis"
-      ],
-      "method": [
-        "four"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["tofu", "fromage", "végétarien"], "vegetable": ["chou", "patate douce"], "season": ["automne", "hiver"], "dish": ["légumes rôtis"], "method": ["four"] },
     "source": "https://freethepickle.fr/2024/11/29/choux-de-bruxelles-et-patate-douce-rotis-%F0%9F%8D%82/",
     "ingredients": [
-      {
-        "name": "choux de Bruxelles",
-        "qty": 400,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "patate douce",
-        "qty": 500,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "tofu fumé",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "flocons de piment",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pâte de miso blanc",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'érable",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "feta",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "vinaigre balsamique",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "choux de Bruxelles", "qty": 400, "unit": "g", "aisle": "produce" },
+      { "name": "patate douce", "qty": 500, "unit": "g", "aisle": "produce" },
+      { "name": "tofu fumé", "qty": 200, "unit": "g", "aisle": "dairy" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "flocons de piment", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "graines de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "pâte de miso blanc", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "feta", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "vinaigre balsamique", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer le four à 200 °C.",
@@ -199,103 +66,23 @@
     "servings": 2,
     "time": 18,
     "image": "images/udon-cacahuete-gochujang.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "viande hachée"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "nouilles"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée"], "season": ["toute l'année"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7631227747515370774",
     "ingredients": [
-      {
-        "name": "udon précuits",
-        "qty": 350,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "viande hachée 5 %",
-        "qty": 350,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre râpé",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 25,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "gochujang",
-        "qty": 25,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre de cacahuète en poudre",
-        "qty": 25,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'érable",
-        "qty": 0.5,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile de sésame",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "herbes fraîches",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "udon précuits", "qty": 350, "unit": "g", "aisle": "pantry" },
+      { "name": "viande hachée 5 %", "qty": 350, "unit": "g", "aisle": "meat" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre râpé", "qty": 1, "unit": "c. à café", "aisle": "produce" },
+      { "name": "sauce soja", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre de cacahuète en poudre", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 0.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "herbes fraîches", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Plonger les udon précuits 1 à 2 minutes dans l'eau bouillante, puis les égoutter en gardant l'eau de cuisson : elle servira pour la sauce.",
@@ -313,100 +100,21 @@
     "servings": 2,
     "time": 45,
     "image": "images/pates-bolognaises.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "viande hachée"
-      ],
-      "vegetable": [
-        "carotte",
-        "tomate"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "pâtes"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["carotte", "tomate"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
-      {
-        "name": "spaghetti",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "viande hachée 5 %",
-        "qty": 250,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "carotte",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "tomates concassées",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "origan séché",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 30,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "spaghetti", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "viande hachée 5 %", "qty": 250, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "carotte", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "origan séché", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 30, "unit": "g", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Éplucher l'oignon, la carotte et l'ail, puis les hacher finement.",
@@ -425,82 +133,18 @@
     "servings": 2,
     "time": 25,
     "image": "images/pates-pesto-cottage-courgettes.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "fromage",
-        "végétarien"
-      ],
-      "vegetable": [
-        "courgette"
-      ],
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "pâtes"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["courgette"], "season": ["été"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "ingredients": [
-      {
-        "name": "pâtes",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "courgette",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "cottage cheese",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "pesto vert",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 20,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pâtes", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "courgette", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "cottage cheese", "qty": 200, "unit": "g", "aisle": "dairy" },
+      { "name": "pesto vert", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 20, "unit": "g", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Cuire les pâtes dans une grande casserole d'eau bouillante salée. Avant de les égoutter, garder un verre d'eau de cuisson.",
@@ -517,107 +161,22 @@
     "servings": 2,
     "time": 45,
     "image": "images/chili-con-carne.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "viande hachée"
-      ],
-      "vegetable": [
-        "poivron",
-        "tomate"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "mijoté"
-      ],
-      "cuisine": [
-        "tex-mex"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["poivron", "tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["tex-mex"] },
     "ingredients": [
-      {
-        "name": "viande hachée 5 %",
-        "qty": 300,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "poivron rouge",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "haricots rouges",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "tomates concassées",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cumin moulu",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika fumé",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "piment en poudre",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "riz",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "poivron rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "haricots rouges", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "paprika fumé", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "piment en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "riz", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Hacher l'oignon et l'ail, et couper le poivron en petits dés.",
@@ -635,83 +194,19 @@
     "servings": 2,
     "time": 30,
     "image": "images/sushi-bowl-truite-avocat.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poisson & fruits de mer"
-      ],
-      "vegetable": [
-        "avocat"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "bowl"
-      ],
-      "cuisine": [
-        "japonaise"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["avocat"], "season": ["toute l'année"], "dish": ["bowl"], "cuisine": ["japonaise"] },
     "source": "https://www.tiktok.com/@eatwithflower/video/7488376597314112790",
     "ingredients": [
-      {
-        "name": "riz à sushi",
-        "qty": 120,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'agave",
-        "qty": 2,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pavé de truite",
-        "plural": "pavés de truite",
-        "qty": 2,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "avocat",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "fromage frais",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "citron",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce soja sucrée",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "riz à sushi", "qty": 120, "unit": "g", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'agave", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "pavé de truite", "plural": "pavés de truite", "qty": 2, "unit": "", "aisle": "meat" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "fromage frais", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sauce soja sucrée", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Facultatif : faire tremper le riz 30 minutes, puis le rincer soigneusement.",
@@ -729,103 +224,22 @@
     "servings": 1,
     "time": 25,
     "image": "images/taglyoza.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "porc",
-        "poisson & fruits de mer"
-      ],
-      "vegetable": [
-        "chou"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "nouilles"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["porc", "poisson & fruits de mer"], "vegetable": ["chou"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://swissfitcook.com/blogs/recettes/taglyoza",
     "ingredients": [
-      {
-        "name": "pâte à gyoza",
-        "qty": 120,
-        "unit": "g",
-        "aisle": "other"
-      },
-      {
-        "name": "porc haché 5 %",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "crevettes crues",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "chou chinois",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre frais",
-        "qty": 5,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce soja légère",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile de sésame",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bouillon de volaille ou de légumes",
-        "qty": 500,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pâte à gyoza", "qty": 120, "unit": "g", "aisle": "other" },
+      { "name": "porc haché 5 %", "qty": 100, "unit": "g", "aisle": "meat" },
+      { "name": "crevettes crues", "qty": 100, "unit": "g", "aisle": "meat" },
+      { "name": "chou chinois", "qty": 100, "unit": "g", "aisle": "produce" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 5, "unit": "g", "aisle": "produce" },
+      { "name": "sauce soja légère", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "bouillon de volaille ou de légumes", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Découper la pâte à gyoza en fines lamelles, façon tagliatelles. Les cuire 1 à 2 minutes dans une grande eau bouillante salée, puis les égoutter en gardant un peu d'eau de cuisson.",
@@ -843,123 +257,25 @@
     "servings": 1,
     "time": 40,
     "image": "images/salade-riz-croustillant.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "tofu",
-        "végétarien"
-      ],
-      "vegetable": [
-        "carotte",
-        "avocat"
-      ],
-      "season": [
-        "printemps",
-        "été"
-      ],
-      "dish": [
-        "salade",
-        "bowl"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["tofu", "végétarien"], "vegetable": ["carotte", "avocat"], "season": ["printemps", "été"], "dish": ["salade", "bowl"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@unzestepourdeux/video/7613475586463370518",
     "ingredients": [
-      {
-        "name": "riz cuit",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile de sésame",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "tofu ferme",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "avocat",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "carotte",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "coriandre",
-        "qty": 0.25,
-        "unit": "bouquet",
-        "aisle": "produce"
-      },
-      {
-        "name": "menthe",
-        "qty": 0.25,
-        "unit": "bouquet",
-        "aisle": "produce"
-      },
-      {
-        "name": "cébette",
-        "plural": "cébettes",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "edamame ou haricots plats",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "beurre de cacahuète",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "gingembre",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "flocons de piment",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "riz cuit", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "tofu ferme", "qty": 150, "unit": "g", "aisle": "dairy" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "carotte", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "coriandre", "qty": 0.25, "unit": "bouquet", "aisle": "produce" },
+      { "name": "menthe", "qty": 0.25, "unit": "bouquet", "aisle": "produce" },
+      { "name": "cébette", "plural": "cébettes", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "edamame ou haricots plats", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "beurre de cacahuète", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "gingembre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "flocons de piment", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Riz croustillant : mélanger le riz cuit avec 1 c. à soupe de sauce soja et 1 c. à soupe d'huile de sésame. L'étaler en fine couche sur du papier cuisson et cuire 25 minutes à 190 °C, en remuant à mi-cuisson.",
@@ -977,110 +293,24 @@
     "time": 20,
     "image": "images/porc-hoisin-saute.jpg",
     "imageFocus": "50% 72%",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "porc"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "sauté"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["porc"], "season": ["toute l'année"], "dish": ["sauté"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@mariongrasby_/video/7608759256522788104",
     "ingredients": [
-      {
-        "name": "poitrine de porc sans couenne",
-        "qty": 600,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "huile végétale",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": 4,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "riz",
-        "qty": 300,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vin de riz Shaoxing",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bicarbonate de soude",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "fécule de maïs",
-        "qty": 3,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce hoisin",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce d'huître",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja foncée",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 3,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "cinq-épices chinois",
-        "qty": 2,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      }
+      { "name": "poitrine de porc sans couenne", "qty": 600, "unit": "g", "aisle": "meat" },
+      { "name": "huile végétale", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": 300, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vin de riz Shaoxing", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "bicarbonate de soude", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "fécule de maïs", "qty": 3, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sauce hoisin", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 3, "unit": "gousse", "aisle": "produce" },
+      { "name": "cinq-épices chinois", "qty": 2, "unit": "c. à café", "aisle": "pantry" }
     ],
     "steps": [
       "Couper la poitrine de porc en bâtonnets d'environ 3 cm. Les mélanger dans un saladier avec la sauce soja, le vin Shaoxing, le bicarbonate et la fécule de maïs. Laisser mariner 10 minutes.",
@@ -1097,104 +327,23 @@
     "servings": 4,
     "time": 35,
     "image": "images/gnocchis-champignons-lardons.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "porc"
-      ],
-      "vegetable": [
-        "champignon"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "gnocchis"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["porc"], "vegetable": ["champignon"], "season": ["automne", "hiver"], "dish": ["gnocchis"] },
     "source": "https://www.tiktok.com/@casalitaaa/video/7616023848445562134",
     "ingredients": [
-      {
-        "name": "gnocchis",
-        "qty": 700,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "lardons",
-        "qty": 350,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "champignons bruns",
-        "qty": 400,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "bouillon de volaille",
-        "qty": 300,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "Boursin ail et fines herbes",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "crème fraîche",
-        "qty": 380,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "paprika fumé",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "origan séché",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": null,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "gnocchis", "qty": 700, "unit": "g", "aisle": "pantry" },
+      { "name": "lardons", "qty": 350, "unit": "g", "aisle": "meat" },
+      { "name": "champignons bruns", "qty": 400, "unit": "g", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "oignon", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "bouillon de volaille", "qty": 300, "unit": "ml", "aisle": "pantry" },
+      { "name": "Boursin ail et fines herbes", "qty": 0.5, "unit": "", "aisle": "dairy" },
+      { "name": "crème fraîche", "qty": 380, "unit": "ml", "aisle": "dairy" },
+      { "name": "paprika fumé", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "origan séché", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Dans une grande poêle à feu moyen, faire cuire les lardons jusqu'à ce qu'ils soient dorés et croustillants. Les retirer et les réserver.",
@@ -1213,81 +362,19 @@
     "servings": 1,
     "time": 21,
     "image": "images/poulet-moutarde-brocoli-riz.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "brocoli"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "riz"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["riz"] },
     "source": "https://jow.fr/recipes/poulet-sauce-moutarde-brocoli-et-riz-8uyw6kg6elo3jgw609ye",
     "ingredients": [
-      {
-        "name": "escalope de poulet",
-        "plural": "escalopes de poulet",
-        "qty": 1,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "riz",
-        "qty": 70,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "brocoli",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "crème liquide",
-        "qty": 50,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "moutarde à l'ancienne",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "escalope de poulet", "plural": "escalopes de poulet", "qty": 1, "unit": "", "aisle": "meat" },
+      { "name": "riz", "qty": 70, "unit": "g", "aisle": "pantry" },
+      { "name": "brocoli", "qty": 200, "unit": "g", "aisle": "produce" },
+      { "name": "oignon", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "crème liquide", "qty": 50, "unit": "ml", "aisle": "dairy" },
+      { "name": "moutarde à l'ancienne", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Laver le brocoli et le couper en petits bouquets. Éplucher et émincer l'oignon.",
@@ -1307,59 +394,16 @@
     "yieldLabel": "moelleux",
     "time": 20,
     "image": "images/moelleux-chocolat.jpg",
-    "categories": [
-      "dessert"
-    ],
-    "tags": {
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "dessert",
-        "gâteau"
-      ],
-      "method": [
-        "four"
-      ]
-    },
+    "categories": ["dessert"],
+    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
     "source": "https://www.750g.com/moelleux-au-chocolat-r43027.htm",
     "ingredients": [
-      {
-        "name": "chocolat noir",
-        "qty": 110,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre",
-        "qty": 30,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sucre",
-        "qty": 50,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "farine",
-        "qty": 50,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "œuf",
-        "qty": 2,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "chocolat noir", "qty": 110, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre", "qty": 30, "unit": "g", "aisle": "dairy" },
+      { "name": "sucre", "qty": 50, "unit": "g", "aisle": "pantry" },
+      { "name": "farine", "qty": 50, "unit": "g", "aisle": "pantry" },
+      { "name": "œuf", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer le four à 200 °C. Beurrer 4 ramequins ou préparer 4 moules en papier.",
@@ -1375,96 +419,21 @@
     "servings": 4,
     "time": 30,
     "image": "images/dahl-lentilles-corail.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "légumineuses",
-        "végétarien"
-      ],
-      "vegetable": [
-        "tomate"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "mijoté"
-      ],
-      "cuisine": [
-        "indienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["légumineuses", "végétarien"], "vegetable": ["tomate"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["indienne"] },
     "source": "https://edithetsacuisine.fr/dahl-lentilles-corail-coco-facile/",
     "ingredients": [
-      {
-        "name": "lentilles corail",
-        "qty": 250,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "lait de coco",
-        "qty": 400,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "tomates concassées",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bouillon de légumes",
-        "qty": 500,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre frais",
-        "qty": 2,
-        "unit": "cm",
-        "aisle": "produce"
-      },
-      {
-        "name": "curry de Madras",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cumin moulu",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "curcuma",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "lentilles corail", "qty": 250, "unit": "g", "aisle": "pantry" },
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "bouillon de légumes", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 2, "unit": "cm", "aisle": "produce" },
+      { "name": "curry de Madras", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "curcuma", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Rincer les lentilles sous l'eau froide jusqu'à ce que l'eau ne soit plus trouble (environ 30 secondes) : cela évite l'écume et rend le dahl plus digeste.",
@@ -1484,121 +453,25 @@
     "time": 35,
     "image": "images/shakshuka.jpg",
     "imageFocus": "50% 35%",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "œufs",
-        "végétarien"
-      ],
-      "vegetable": [
-        "poivron",
-        "tomate"
-      ],
-      "season": [
-        "été",
-        "automne"
-      ],
-      "dish": [
-        "poêlée"
-      ],
-      "cuisine": [
-        "orientale"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["œufs", "végétarien"], "vegetable": ["poivron", "tomate"], "season": ["été", "automne"], "dish": ["poêlée"], "cuisine": ["orientale"] },
     "source": "https://www.mamiesimone.com/recettes/comment-reussir-la-fameuse-shakshuka-a-lisraelienne",
     "ingredients": [
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "poivron rouge",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "tomate",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "tomates concassées",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "œuf",
-        "qty": 4,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cumin moulu",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "piment d'Espelette",
-        "qty": 1,
-        "unit": "pincée",
-        "aisle": "pantry"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "feta",
-        "qty": null,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "poivron rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "tomate", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "tomates concassées", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "paprika", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "piment d'Espelette", "qty": 1, "unit": "pincée", "aisle": "pantry" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "feta", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Émincer l'oignon et couper le poivron en petits dés. Les faire revenir quelques minutes dans une poêle avec l'huile d'olive, puis ajouter l'ail émincé.",
@@ -1616,78 +489,18 @@
     "servings": 1,
     "time": 26,
     "image": "images/nouilles-saumon-brocoli.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poisson & fruits de mer"
-      ],
-      "vegetable": [
-        "brocoli"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "nouilles"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["brocoli"], "season": ["automne", "hiver"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://jow.fr/recipes/nouilles-au-saumon-brocoli-et-sesame-96ulj1u933bwelyx0nz7",
     "ingredients": [
-      {
-        "name": "nouilles précuites",
-        "qty": 120,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pavé de saumon",
-        "plural": "pavés de saumon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "brocoli",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 0.25,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "nouilles précuites", "qty": 120, "unit": "g", "aisle": "pantry" },
+      { "name": "pavé de saumon", "plural": "pavés de saumon", "qty": 1, "unit": "", "aisle": "meat" },
+      { "name": "brocoli", "qty": 100, "unit": "g", "aisle": "produce" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 0.25, "unit": "gousse", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préparer la marinade en mélangeant la sauce soja et l'ail râpé. La verser sur le saumon et laisser mariner au frais 10 minutes.",
@@ -1706,62 +519,16 @@
     "servings": 4,
     "time": 15,
     "image": "images/airfryer-saumon.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poisson & fruits de mer"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "poisson"
-      ],
-      "method": [
-        "airfryer"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poisson & fruits de mer"], "season": ["toute l'année"], "dish": ["poisson"], "method": ["airfryer"] },
     "source": "https://airfryer-recette.fr/saumon-dans-lairfryer/",
     "ingredients": [
-      {
-        "name": "pavé de saumon",
-        "plural": "pavés de saumon",
-        "qty": 4,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pavé de saumon", "plural": "pavés de saumon", "qty": 4, "unit": "", "aisle": "meat" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "paprika", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Essuyer les pavés de saumon (environ 150 g chacun) avec du papier absorbant et retirer les arêtes si besoin.",
@@ -1777,78 +544,18 @@
     "servings": 6,
     "time": 20,
     "image": "images/airfryer-gnocchis-croustillants.jpg",
-    "categories": [
-      "apéro",
-      "encas"
-    ],
-    "tags": {
-      "protein": [
-        "fromage",
-        "végétarien"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "gnocchis"
-      ],
-      "method": [
-        "airfryer"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["apéro", "encas"],
+    "tags": { "protein": ["fromage", "végétarien"], "season": ["toute l'année"], "dish": ["gnocchis"], "method": ["airfryer"], "cuisine": ["italienne"] },
     "source": "https://marcwiner.com/gnocchis-air-fryer/",
     "ingredients": [
-      {
-        "name": "gnocchis",
-        "qty": 450,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 15,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce marinara",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "gnocchis", "qty": 450, "unit": "g", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 15, "unit": "g", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sauce marinara", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer l'airfryer à 200 °C et huiler légèrement le panier.",
@@ -1865,62 +572,16 @@
     "servings": 4,
     "time": 25,
     "image": "images/airfryer-pilons-poulet.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "grillade"
-      ],
-      "method": [
-        "airfryer"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "season": ["toute l'année"], "dish": ["grillade"], "method": ["airfryer"] },
     "source": "https://www.cuisineetcreation.fr/pilons-de-poulet-au-airfryer/",
     "ingredients": [
-      {
-        "name": "pilon de poulet",
-        "plural": "pilons de poulet",
-        "qty": 8,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 4,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "épices cajun",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "thym",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pilon de poulet", "plural": "pilons de poulet", "qty": 8, "unit": "", "aisle": "meat" },
+      { "name": "huile d'olive", "qty": 4, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "épices cajun", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "thym", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Mettre les pilons crus dans un grand saladier avec l'huile d'olive, les épices cajun, le thym, du sel et du poivre.",
@@ -1936,83 +597,19 @@
     "servings": 4,
     "time": 75,
     "image": "images/smashed-potatoes.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "fromage",
-        "végétarien"
-      ],
-      "vegetable": [
-        "pomme de terre"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "accompagnement"
-      ],
-      "method": [
-        "four"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["fromage", "végétarien"], "vegetable": ["pomme de terre"], "season": ["toute l'année"], "dish": ["accompagnement"], "method": ["four"] },
     "source": "https://mariefoodtips.com/smashed-potatoes/",
     "ingredients": [
-      {
-        "name": "pommes de terre",
-        "qty": 1000,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "beurre",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "ail",
-        "qty": 4,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "herbes de Provence",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "zaatar",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "persil",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      }
+      { "name": "pommes de terre", "qty": 1000, "unit": "g", "aisle": "produce" },
+      { "name": "beurre", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 100, "unit": "g", "aisle": "dairy" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "herbes de Provence", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "zaatar", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "persil", "qty": 1, "unit": "c. à soupe", "aisle": "produce" },
+      { "name": "sel", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "poivre", "qty": 1, "unit": "c. à café", "aisle": "pantry" }
     ],
     "steps": [
       "Cuire les pommes de terre 20 minutes dans une casserole d'eau bouillante.",
@@ -2029,137 +626,28 @@
     "servings": 4,
     "time": 45,
     "image": "images/riz-poulet-teriyaki-frit.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "carotte"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "riz"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["riz"], "cuisine": ["asiatique"] },
     "source": "https://www.instagram.com/reel/C1NffBOoJ1n/",
     "ingredients": [
-      {
-        "name": "blanc de poulet",
-        "qty": 800,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "sauce soja légère",
-        "qty": 55,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "assaisonnement polyvalent (sel, poivre, paprika, ail, persil)",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 4,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 1.5,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 2.5,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "fécule de maïs",
-        "qty": 15,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "œuf",
-        "qty": 4,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre frais",
-        "qty": 20,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "carotte",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "petits pois surgelés",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "frozen"
-      },
-      {
-        "name": "germes de soja",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "riz cuit",
-        "qty": 500,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja foncée",
-        "qty": 1.5,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce d'huître",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "blanc de poulet", "qty": 800, "unit": "g", "aisle": "meat" },
+      { "name": "sauce soja légère", "qty": 55, "unit": "ml", "aisle": "pantry" },
+      { "name": "assaisonnement polyvalent (sel, poivre, paprika, ail, persil)", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 4, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "miel", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 2.5, "unit": "gousse", "aisle": "produce" },
+      { "name": "fécule de maïs", "qty": 15, "unit": "g", "aisle": "pantry" },
+      { "name": "œuf", "qty": 4, "unit": "", "aisle": "dairy" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 20, "unit": "g", "aisle": "produce" },
+      { "name": "carotte", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "petits pois surgelés", "qty": 40, "unit": "g", "aisle": "frozen" },
+      { "name": "germes de soja", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "riz cuit", "qty": 500, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Couper le poulet en cubes et le faire mariner au moins 30 minutes avec 25 ml de sauce soja légère, l'assaisonnement et 2 c. à café d'huile d'olive.",
@@ -2178,101 +666,22 @@
     "servings": 4,
     "time": 20,
     "image": "images/poulet-miel-ail-piment-riz.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "poivron"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "riz",
-        "poêlée"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["poivron"], "season": ["toute l'année"], "dish": ["riz", "poêlée"], "cuisine": ["asiatique"] },
     "source": "https://www.instagram.com/reel/C40xDczobgf/",
     "ingredients": [
-      {
-        "name": "blanc de poulet",
-        "qty": 500,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "assaisonnement pour poulet",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 4,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "purée de gingembre",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile pimentée ou pâte de piment",
-        "qty": 1.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja légère",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignons verts",
-        "qty": 1,
-        "unit": "botte",
-        "aisle": "produce"
-      },
-      {
-        "name": "poivron",
-        "qty": 1.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "riz cuit",
-        "qty": 500,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja foncée",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "blanc de poulet", "qty": 500, "unit": "g", "aisle": "meat" },
+      { "name": "assaisonnement pour poulet", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "purée de gingembre", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile pimentée ou pâte de piment", "qty": 1.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "sauce soja légère", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "oignons verts", "qty": 1, "unit": "botte", "aisle": "produce" },
+      { "name": "poivron", "qty": 1.5, "unit": "", "aisle": "produce" },
+      { "name": "riz cuit", "qty": 500, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce soja foncée", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Mélanger dans un bol tous les ingrédients de la sauce : le miel, l'ail, la purée de gingembre, l'huile pimentée et la sauce soja légère.",
@@ -2292,72 +701,18 @@
     "time": 55,
     "image": "images/banana-bread.jpg",
     "imageFocus": "50% 35%",
-    "categories": [
-      "dessert",
-      "encas"
-    ],
-    "tags": {
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "dessert",
-        "gâteau"
-      ],
-      "method": [
-        "four"
-      ]
-    },
+    "categories": ["dessert", "encas"],
+    "tags": { "season": ["toute l'année"], "dish": ["dessert", "gâteau"], "method": ["four"] },
     "source": "https://www.instagram.com/reel/CvUCyDwASug/",
     "ingredients": [
-      {
-        "name": "banane",
-        "qty": 4,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "œuf",
-        "qty": 2,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "compote",
-        "qty": 80,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'érable",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "lait végétal",
-        "qty": 40,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "farine",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "levure chimique",
-        "qty": 11,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pépites de chocolat",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "banane", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "œuf", "qty": 2, "unit": "", "aisle": "dairy" },
+      { "name": "compote", "qty": 80, "unit": "g", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "lait végétal", "qty": 40, "unit": "ml", "aisle": "pantry" },
+      { "name": "farine", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "levure chimique", "qty": 11, "unit": "g", "aisle": "pantry" },
+      { "name": "pépites de chocolat", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer le four à 180 °C.",
@@ -2375,167 +730,33 @@
     "servings": 4,
     "time": 35,
     "image": "images/ramen-miso-cremeux.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "tofu",
-        "végétarien"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "soupe",
-        "nouilles"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["tofu", "végétarien"], "season": ["automne", "hiver"], "dish": ["soupe", "nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@bosh.tv/video/7481605936876932374",
     "ingredients": [
-      {
-        "name": "nouilles ramen",
-        "qty": 400,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bouillon de légumes",
-        "qty": 1500,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "lait de coco",
-        "qty": 400,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile végétale",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile pimentée croustillante (chili crisp)",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 4,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre frais",
-        "qty": 5,
-        "unit": "cm",
-        "aisle": "produce"
-      },
-      {
-        "name": "curcuma frais",
-        "qty": 2.5,
-        "unit": "cm",
-        "aisle": "produce"
-      },
-      {
-        "name": "citron vert",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": 6,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "pâte de miso",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre de cacahuète",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "purée de sésame (tahini)",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "mirin",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "tofu fumé",
-        "qty": 225,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "fumée liquide",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile pimentée",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "graines de sésame grillées",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "coriandre",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sucre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "nouilles ramen", "qty": 400, "unit": "g", "aisle": "pantry" },
+      { "name": "bouillon de légumes", "qty": 1500, "unit": "ml", "aisle": "pantry" },
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "huile végétale", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile pimentée croustillante (chili crisp)", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 4, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": 5, "unit": "cm", "aisle": "produce" },
+      { "name": "curcuma frais", "qty": 2.5, "unit": "cm", "aisle": "produce" },
+      { "name": "citron vert", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": 6, "unit": "", "aisle": "produce" },
+      { "name": "pâte de miso", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "beurre de cacahuète", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "purée de sésame (tahini)", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "mirin", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "tofu fumé", "qty": 225, "unit": "g", "aisle": "dairy" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "fumée liquide", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile pimentée", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "graines de sésame grillées", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sucre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préparer le bouillon : chauffer 1 c. à soupe d'huile végétale et l'huile pimentée croustillante dans une grande casserole. Y faire revenir 5 minutes l'ail, le gingembre et le curcuma râpés, le zeste d'un citron vert et le blanc des oignons verts.",
@@ -2553,114 +774,24 @@
     "servings": 2,
     "time": 45,
     "image": "images/pois-chiches-croustillants-gochujang.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "légumineuses",
-        "végétarien"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "riz"
-      ],
-      "method": [
-        "four"
-      ],
-      "cuisine": [
-        "coréenne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["légumineuses", "végétarien"], "season": ["toute l'année"], "dish": ["riz"], "method": ["four"], "cuisine": ["coréenne"] },
     "source": "https://www.tiktok.com/@benrebuck/video/7254956197831314715",
     "ingredients": [
-      {
-        "name": "pois chiches",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "gochujang",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile de sésame",
-        "qty": 0.5,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'érable",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "gingembre frais",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "riz",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "citron vert",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pois chiches", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre de riz", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 0.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sirop d'érable", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "gingembre frais", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron vert", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Égoutter les pois chiches et les sécher soigneusement avec du papier absorbant.",
@@ -2678,58 +809,15 @@
     "time": 5,
     "image": "images/mojito.jpg",
     "imageFocus": "50% 10%",
-    "categories": [
-      "cocktail",
-      "apéro"
-    ],
-    "tags": {
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "cocktail"
-      ],
-      "cuisine": [
-        "cubaine"
-      ]
-    },
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["été"], "dish": ["cocktail"], "cuisine": ["cubaine"] },
     "ingredients": [
-      {
-        "name": "rhum blanc",
-        "qty": 5,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "citron vert",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "menthe",
-        "qty": 8,
-        "unit": "feuille",
-        "aisle": "produce"
-      },
-      {
-        "name": "sucre",
-        "qty": 2,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "eau gazeuse",
-        "qty": 10,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      }
+      { "name": "rhum blanc", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "menthe", "qty": 8, "unit": "feuille", "aisle": "produce" },
+      { "name": "sucre", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "eau gazeuse", "qty": 10, "unit": "cl", "aisle": "drinks" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
     ],
     "steps": [
       "Couper le demi-citron vert en petits morceaux et les mettre dans un grand verre avec le sucre et les feuilles de menthe.",
@@ -2746,52 +834,14 @@
     "time": 3,
     "image": "images/aperol-spritz.jpg",
     "imageFocus": "50% 20%",
-    "categories": [
-      "cocktail",
-      "apéro"
-    ],
-    "tags": {
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "cocktail"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["été"], "dish": ["cocktail"], "cuisine": ["italienne"] },
     "ingredients": [
-      {
-        "name": "prosecco",
-        "qty": 9,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "Aperol",
-        "qty": 6,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "eau gazeuse",
-        "qty": 3,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "orange",
-        "qty": 1,
-        "unit": "tranche",
-        "aisle": "produce"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      }
+      { "name": "prosecco", "qty": 9, "unit": "cl", "aisle": "drinks" },
+      { "name": "Aperol", "qty": 6, "unit": "cl", "aisle": "drinks" },
+      { "name": "eau gazeuse", "qty": 3, "unit": "cl", "aisle": "drinks" },
+      { "name": "orange", "qty": 1, "unit": "tranche", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
     ],
     "steps": [
       "Remplir un grand verre à pied de glaçons.",
@@ -2808,52 +858,14 @@
     "time": 5,
     "image": "images/margarita.jpg",
     "imageFocus": "50% 20%",
-    "categories": [
-      "cocktail",
-      "apéro"
-    ],
-    "tags": {
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "cocktail"
-      ],
-      "cuisine": [
-        "mexicaine"
-      ]
-    },
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["toute l'année"], "dish": ["cocktail"], "cuisine": ["mexicaine"] },
     "ingredients": [
-      {
-        "name": "tequila",
-        "qty": 5,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "triple sec",
-        "qty": 2,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "citron vert",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel fin",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      }
+      { "name": "tequila", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "triple sec", "qty": 2, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "sel fin", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
     ],
     "steps": [
       "Frotter le bord d'un verre avec un quartier de citron vert, puis le tremper dans du sel fin pour former un givre.",
@@ -2870,49 +882,14 @@
     "time": 3,
     "image": "images/moscow-mule.jpg",
     "imageFocus": "50% 50%",
-    "categories": [
-      "cocktail",
-      "apéro"
-    ],
-    "tags": {
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "cocktail"
-      ]
-    },
+    "categories": ["cocktail", "apéro"],
+    "tags": { "season": ["toute l'année"], "dish": ["cocktail"] },
     "ingredients": [
-      {
-        "name": "vodka",
-        "qty": 5,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "bière de gingembre",
-        "qty": 12,
-        "unit": "cl",
-        "aisle": "drinks"
-      },
-      {
-        "name": "citron vert",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      },
-      {
-        "name": "menthe",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "vodka", "qty": 5, "unit": "cl", "aisle": "drinks" },
+      { "name": "bière de gingembre", "qty": 12, "unit": "cl", "aisle": "drinks" },
+      { "name": "citron vert", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" },
+      { "name": "menthe", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Remplir un mug (en cuivre, si possible) de glaçons.",
@@ -2929,48 +906,14 @@
     "time": 15,
     "image": "images/limonade-maison.jpg",
     "imageFocus": "50% 25%",
-    "categories": [
-      "boisson"
-    ],
-    "tags": {
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "boisson"
-      ]
-    },
+    "categories": ["boisson"],
+    "tags": { "season": ["été"], "dish": ["boisson"] },
     "ingredients": [
-      {
-        "name": "citron",
-        "qty": 4,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sucre",
-        "qty": 100,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "eau",
-        "qty": 1000,
-        "unit": "ml",
-        "aisle": "other"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      },
-      {
-        "name": "menthe",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "citron", "qty": 4, "unit": "", "aisle": "produce" },
+      { "name": "sucre", "qty": 100, "unit": "g", "aisle": "pantry" },
+      { "name": "eau", "qty": 1000, "unit": "ml", "aisle": "other" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" },
+      { "name": "menthe", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Préparer un sirop : chauffer un cinquième de l'eau avec le sucre, en remuant jusqu'à ce qu'il soit entièrement dissous, puis laisser refroidir.",
@@ -2987,54 +930,15 @@
     "time": 15,
     "image": "images/the-glace-peche.jpg",
     "imageFocus": "50% 50%",
-    "categories": [
-      "boisson"
-    ],
-    "tags": {
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "boisson"
-      ]
-    },
+    "categories": ["boisson"],
+    "tags": { "season": ["été"], "dish": ["boisson"] },
     "ingredients": [
-      {
-        "name": "thé noir",
-        "qty": 4,
-        "unit": "sachet",
-        "aisle": "pantry"
-      },
-      {
-        "name": "eau",
-        "qty": 1000,
-        "unit": "ml",
-        "aisle": "other"
-      },
-      {
-        "name": "miel",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pêche",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "citron",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      }
+      { "name": "thé noir", "qty": 4, "unit": "sachet", "aisle": "pantry" },
+      { "name": "eau", "qty": 1000, "unit": "ml", "aisle": "other" },
+      { "name": "miel", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "pêche", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "citron", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
     ],
     "steps": [
       "Faire infuser les sachets de thé 5 minutes dans l'eau bouillante, puis les retirer.",
@@ -3051,49 +955,14 @@
     "time": 5,
     "image": "images/smoothie-banane-cacahuete.jpg",
     "imageFocus": "50% 35%",
-    "categories": [
-      "boisson",
-      "encas"
-    ],
-    "tags": {
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "smoothie"
-      ]
-    },
+    "categories": ["boisson", "encas"],
+    "tags": { "season": ["toute l'année"], "dish": ["smoothie"] },
     "ingredients": [
-      {
-        "name": "banane",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "yaourt grec",
-        "qty": 125,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "lait",
-        "qty": 200,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "beurre de cacahuète",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "glaçons",
-        "qty": null,
-        "unit": "",
-        "aisle": "frozen"
-      }
+      { "name": "banane", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "yaourt grec", "qty": 125, "unit": "g", "aisle": "dairy" },
+      { "name": "lait", "qty": 200, "unit": "ml", "aisle": "dairy" },
+      { "name": "beurre de cacahuète", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "glaçons", "qty": null, "unit": "", "aisle": "frozen" }
     ],
     "steps": [
       "Éplucher la banane et la couper en morceaux.",
@@ -3110,37 +979,12 @@
     "time": 10,
     "image": "images/chocolat-chaud.jpg",
     "imageFocus": "50% 50%",
-    "categories": [
-      "boisson"
-    ],
-    "tags": {
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "boisson chaude"
-      ]
-    },
+    "categories": ["boisson"],
+    "tags": { "season": ["automne", "hiver"], "dish": ["boisson chaude"] },
     "ingredients": [
-      {
-        "name": "lait",
-        "qty": 500,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "chocolat noir",
-        "qty": 60,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sucre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "lait", "qty": 500, "unit": "ml", "aisle": "dairy" },
+      { "name": "chocolat noir", "qty": 60, "unit": "g", "aisle": "pantry" },
+      { "name": "sucre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Chauffer le lait dans une casserole, sans le laisser bouillir.",
@@ -3156,124 +1000,26 @@
     "servings": 3,
     "time": 60,
     "image": "images/lentilles-burrata.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "légumineuses",
-        "fromage",
-        "végétarien"
-      ],
-      "vegetable": [
-        "oignon"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "mijoté"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["légumineuses", "fromage", "végétarien"], "vegetable": ["oignon"], "season": ["automne", "hiver"], "dish": ["mijoté"] },
     "source": "https://www.tiktok.com/@_lindoush_/video/7685797855298096417",
     "ingredients": [
-      {
-        "name": "lentilles vertes",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cumin moulu",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika fumé",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "herbes de Provence",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bouillon de légumes",
-        "qty": 500,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre balsamique",
-        "qty": 0.75,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "citron",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "burrata",
-        "qty": 125,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "lentilles vertes", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "paprika fumé", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "herbes de Provence", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "bouillon de légumes", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "vinaigre balsamique", "qty": 0.75, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "citron", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "burrata", "qty": 125, "unit": "g", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Émincer finement les oignons. Faire chauffer l'huile d'olive dans une grande sauteuse, ajouter les oignons avec une pincée de sel et laisser caraméliser à feu doux-moyen, en remuant régulièrement, jusqu'à ce qu'ils soient bien dorés et fondants.",
@@ -3291,104 +1037,23 @@
     "servings": 2,
     "time": 15,
     "image": "images/nouilles-cacahuete-epicees.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "végétarien"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "nouilles"
-      ],
-      "cuisine": [
-        "asiatique"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["végétarien"], "season": ["toute l'année"], "dish": ["nouilles"], "cuisine": ["asiatique"] },
     "source": "https://www.tiktok.com/@_lindoush_/video/7670578461638954272",
     "ingredients": [
-      {
-        "name": "nouilles de blé",
-        "qty": 250,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre de cacahuète",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile pimentée croustillante (chili crisp)",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "flocons de piment",
-        "qty": 0.75,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile de sésame",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "vinaigre de riz",
-        "qty": 2,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "noix de cajou",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon vert",
-        "plural": "oignons verts",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "citron vert",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "nouilles de blé", "qty": 250, "unit": "g", "aisle": "pantry" },
+      { "name": "beurre de cacahuète", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile pimentée croustillante (chili crisp)", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "flocons de piment", "qty": 0.75, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile de sésame", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "vinaigre de riz", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "miel", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "noix de cajou", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "oignon vert", "plural": "oignons verts", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron vert", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Cuire les nouilles selon les indications du paquet. Avant de les égoutter, prélever 60 ml d'eau de cuisson.",
@@ -3405,152 +1070,30 @@
     "servings": 1,
     "time": 40,
     "image": "images/tocino-patate-douce.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "porc"
-      ],
-      "vegetable": [
-        "patate douce"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "frites"
-      ],
-      "method": [
-        "airfryer",
-        "four"
-      ],
-      "cuisine": [
-        "philippine"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["porc"], "vegetable": ["patate douce"], "season": ["toute l'année"], "dish": ["frites"], "method": ["airfryer", "four"], "cuisine": ["philippine"] },
     "source": "https://swissfitcook.com/blogs/recettes/tocino-loaded-sweet-potato-fries",
     "ingredients": [
-      {
-        "name": "patate douce",
-        "qty": 250,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "fécule de maïs",
-        "qty": 3,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika fumé",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "porc haché 5 %",
-        "qty": 175,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "oignon",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "sauce soja légère",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sirop d'agave",
-        "qty": 7,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre de cidre",
-        "qty": 5,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "jus de betterave",
-        "qty": 15,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "yaourt grec",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "coriandre",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "citron",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "patate douce", "qty": 250, "unit": "g", "aisle": "produce" },
+      { "name": "fécule de maïs", "qty": 3, "unit": "g", "aisle": "pantry" },
+      { "name": "paprika fumé", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "porc haché 5 %", "qty": 175, "unit": "g", "aisle": "meat" },
+      { "name": "oignon", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "sauce soja légère", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "paprika", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sirop d'agave", "qty": 7, "unit": "g", "aisle": "pantry" },
+      { "name": "vinaigre de cidre", "qty": 5, "unit": "ml", "aisle": "pantry" },
+      { "name": "jus de betterave", "qty": 15, "unit": "ml", "aisle": "pantry" },
+      { "name": "yaourt grec", "qty": 150, "unit": "g", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "citron", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Couper les patates douces en frites épaisses et bien les sécher. Les enrober de fécule de maïs, de paprika fumé, d'ail en poudre, de sel et d'un léger voile d'huile d'olive.",
@@ -3568,108 +1111,23 @@
     "servings": 2,
     "time": 25,
     "image": "images/pasta-verde.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet",
-        "fromage"
-      ],
-      "vegetable": [
-        "chou",
-        "épinard"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "pâtes"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet", "fromage"], "vegetable": ["chou", "épinard"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7569279796526451990",
     "ingredients": [
-      {
-        "name": "pâtes",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "chou kale",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "épinards frais",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 3,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "cottage cheese",
-        "qty": 160,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "Philadelphia light",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "poulet cuit effiloché",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "citron",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "flocons de piment",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "pâtes", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "chou kale", "qty": 150, "unit": "g", "aisle": "produce" },
+      { "name": "épinards frais", "qty": 150, "unit": "g", "aisle": "produce" },
+      { "name": "ail", "qty": 3, "unit": "gousse", "aisle": "produce" },
+      { "name": "cottage cheese", "qty": 160, "unit": "g", "aisle": "dairy" },
+      { "name": "Philadelphia light", "qty": 40, "unit": "g", "aisle": "dairy" },
+      { "name": "parmesan râpé", "qty": 40, "unit": "g", "aisle": "dairy" },
+      { "name": "poulet cuit effiloché", "qty": 150, "unit": "g", "aisle": "meat" },
+      { "name": "citron", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "flocons de piment", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Retirer les tiges du chou kale. Le blanchir avec les gousses d'ail 2 à 3 minutes dans une eau frémissante, puis ajouter les épinards pour 30 secondes supplémentaires.",
@@ -3687,93 +1145,20 @@
     "servings": 2,
     "time": 30,
     "image": "images/animal-fries-cajun.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "viande hachée",
-        "fromage"
-      ],
-      "vegetable": [
-        "pomme de terre",
-        "oignon"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "frites"
-      ],
-      "method": [
-        "airfryer"
-      ],
-      "cuisine": [
-        "américaine"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée", "fromage"], "vegetable": ["pomme de terre", "oignon"], "season": ["toute l'année"], "dish": ["frites"], "method": ["airfryer"], "cuisine": ["américaine"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7553299625113963798",
     "ingredients": [
-      {
-        "name": "pommes de terre",
-        "qty": 400,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "épices cajun",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "viande hachée 5 %",
-        "qty": 420,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "cheddar",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "oignon",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sirop d'érable",
-        "qty": 1.5,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "mayonnaise allégée",
-        "qty": 60,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce piquante",
-        "qty": 25,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ciboulette",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "pommes de terre", "qty": 400, "unit": "g", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "épices cajun", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "viande hachée 5 %", "qty": 420, "unit": "g", "aisle": "meat" },
+      { "name": "cheddar", "qty": 40, "unit": "g", "aisle": "dairy" },
+      { "name": "oignon", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "sirop d'érable", "qty": 1.5, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "mayonnaise allégée", "qty": 60, "unit": "g", "aisle": "pantry" },
+      { "name": "sauce piquante", "qty": 25, "unit": "g", "aisle": "pantry" },
+      { "name": "ciboulette", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Couper les pommes de terre en frites et les assaisonner avec l'huile d'olive et les épices cajun. Cuire à l'airfryer 25 minutes à 180-190 °C, en secouant le panier toutes les 5 minutes.",
@@ -3791,122 +1176,26 @@
     "servings": 2,
     "time": 25,
     "image": "images/pates-saumon-fit.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poisson & fruits de mer"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "pâtes"
-      ],
-      "cuisine": [
-        "italienne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poisson & fruits de mer"], "season": ["toute l'année"], "dish": ["pâtes"], "cuisine": ["italienne"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7545483885942017302",
     "ingredients": [
-      {
-        "name": "pâtes",
-        "qty": 160,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "pavé de saumon",
-        "plural": "pavés de saumon",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "saumon fumé",
-        "qty": 60,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "Philadelphia light",
-        "qty": 50,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "crème allégée",
-        "qty": 50,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ketchup allégé",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "moutarde",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "paprika fumé",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "oignon en poudre",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "câpres",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "ciboulette",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "pâtes", "qty": 160, "unit": "g", "aisle": "pantry" },
+      { "name": "pavé de saumon", "plural": "pavés de saumon", "qty": 200, "unit": "g", "aisle": "meat" },
+      { "name": "saumon fumé", "qty": 60, "unit": "g", "aisle": "meat" },
+      { "name": "Philadelphia light", "qty": 50, "unit": "g", "aisle": "dairy" },
+      { "name": "crème allégée", "qty": 50, "unit": "ml", "aisle": "dairy" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "ketchup allégé", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "moutarde", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "paprika fumé", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "ail en poudre", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "oignon en poudre", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "câpres", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "ciboulette", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Couper le saumon frais en cubes et le saisir rapidement à la poêle avec un peu d'huile d'olive. Réserver.",
@@ -3924,119 +1213,24 @@
     "servings": 2,
     "time": 30,
     "image": "images/escalopes-poulet-champignons.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "champignon",
-        "pomme de terre"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "poêlée"
-      ],
-      "method": [
-        "four",
-        "airfryer"
-      ],
-      "cuisine": [
-        "française"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["champignon", "pomme de terre"], "season": ["automne", "hiver"], "dish": ["poêlée"], "method": ["four", "airfryer"], "cuisine": ["française"] },
     "source": "https://www.tiktok.com/@swiss_fit.cook/video/7463358865338273046",
     "ingredients": [
-      {
-        "name": "escalope de poulet",
-        "plural": "escalopes de poulet",
-        "qty": 2,
-        "unit": "",
-        "aisle": "meat"
-      },
-      {
-        "name": "pommes de terre",
-        "qty": 500,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "champignons de Paris",
-        "qty": 300,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "moutarde de Dijon",
-        "qty": 2,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre blanc",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "crème allégée",
-        "qty": 250,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "persil",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ciboulette",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "escalope de poulet", "plural": "escalopes de poulet", "qty": 2, "unit": "", "aisle": "meat" },
+      { "name": "pommes de terre", "qty": 500, "unit": "g", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "champignons de Paris", "qty": 300, "unit": "g", "aisle": "produce" },
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "moutarde de Dijon", "qty": 2, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "vinaigre blanc", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "crème allégée", "qty": 250, "unit": "ml", "aisle": "dairy" },
+      { "name": "persil", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "ciboulette", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer le four à 200 °C. Couper les pommes de terre grossièrement, les assaisonner de sel et de poivre et les disposer sur une plaque avec un filet d'huile d'olive. Ajouter les escalopes de poulet sur la même plaque et enfourner 25 à 30 minutes, en retournant à mi-cuisson. (Ou à l'airfryer : pommes de terre 23 à 25 minutes et poulet 13 à 15 minutes, à 200 °C.)",
@@ -4053,106 +1247,23 @@
     "servings": 2,
     "time": 20,
     "image": "images/orzo-courgette-crevettes.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poisson & fruits de mer"
-      ],
-      "vegetable": [
-        "courgette"
-      ],
-      "season": [
-        "été"
-      ],
-      "dish": [
-        "orzo"
-      ],
-      "cuisine": [
-        "méditerranéenne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poisson & fruits de mer"], "vegetable": ["courgette"], "season": ["été"], "dish": ["orzo"], "cuisine": ["méditerranéenne"] },
     "source": "https://www.tiktok.com/@thedailysaby/video/7506565918109994262",
     "ingredients": [
-      {
-        "name": "orzo",
-        "qty": 125,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "crevettes cuites décortiquées",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "courgette",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 1,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "bouillon de légumes",
-        "qty": 350,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "fromage frais",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "dairy"
-      },
-      {
-        "name": "curry en poudre",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "parmesan râpé",
-        "qty": 25,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "citron",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre",
-        "qty": null,
-        "unit": "",
-        "aisle": "dairy"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "orzo", "qty": 125, "unit": "g", "aisle": "pantry" },
+      { "name": "crevettes cuites décortiquées", "qty": 200, "unit": "g", "aisle": "meat" },
+      { "name": "courgette", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 1, "unit": "gousse", "aisle": "produce" },
+      { "name": "bouillon de légumes", "qty": 350, "unit": "ml", "aisle": "pantry" },
+      { "name": "fromage frais", "qty": 2, "unit": "c. à soupe", "aisle": "dairy" },
+      { "name": "curry en poudre", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "parmesan râpé", "qty": 25, "unit": "g", "aisle": "dairy" },
+      { "name": "citron", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "beurre", "qty": null, "unit": "", "aisle": "dairy" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Dans un faitout ou une grande poêle, faire revenir la courgette coupée en rondelles dans un filet d'huile d'olive et une noix de beurre, jusqu'à ce qu'elle commence à dorer.",
@@ -4169,72 +1280,17 @@
     "servings": 2,
     "time": 35,
     "image": "images/coquillettes-jambon-comte-petits-pois.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "jambon",
-        "fromage"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "gratin",
-        "pâtes"
-      ],
-      "method": [
-        "four"
-      ],
-      "cuisine": [
-        "française"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["jambon", "fromage"], "season": ["toute l'année"], "dish": ["gratin", "pâtes"], "method": ["four"], "cuisine": ["française"] },
     "source": "https://www.tiktok.com/@chez.paulinette/video/7547377003318529302",
     "ingredients": [
-      {
-        "name": "coquillettes",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "petits pois surgelés",
-        "qty": 50,
-        "unit": "g",
-        "aisle": "frozen"
-      },
-      {
-        "name": "champignons de Paris",
-        "qty": 50,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "jambon blanc",
-        "qty": 75,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "comté râpé",
-        "qty": 60,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "crème liquide",
-        "qty": 250,
-        "unit": "ml",
-        "aisle": "dairy"
-      },
-      {
-        "name": "bouillon de légumes",
-        "qty": 200,
-        "unit": "ml",
-        "aisle": "pantry"
-      }
+      { "name": "coquillettes", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "petits pois surgelés", "qty": 50, "unit": "g", "aisle": "frozen" },
+      { "name": "champignons de Paris", "qty": 50, "unit": "g", "aisle": "produce" },
+      { "name": "jambon blanc", "qty": 75, "unit": "g", "aisle": "meat" },
+      { "name": "comté râpé", "qty": 60, "unit": "g", "aisle": "dairy" },
+      { "name": "crème liquide", "qty": 250, "unit": "ml", "aisle": "dairy" },
+      { "name": "bouillon de légumes", "qty": 200, "unit": "ml", "aisle": "pantry" }
     ],
     "steps": [
       "Préchauffer le four à 200 °C.",
@@ -4249,91 +1305,21 @@
     "servings": 4,
     "time": 25,
     "image": "images/poulet-coreen-gochujang.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "sauté"
-      ],
-      "cuisine": [
-        "coréenne"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "season": ["toute l'année"], "dish": ["sauté"], "cuisine": ["coréenne"] },
     "source": "https://www.tiktok.com/@joladiete/video/7607485780121947425",
     "ingredients": [
-      {
-        "name": "blanc de poulet",
-        "qty": 800,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "fécule de maïs",
-        "qty": 40,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja",
-        "qty": 60,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "eau",
-        "qty": 80,
-        "unit": "ml",
-        "aisle": "other"
-      },
-      {
-        "name": "ketchup",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "gochujang",
-        "qty": 3,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "vinaigre",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "miel",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cébette",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "graines de sésame",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "blanc de poulet", "qty": 800, "unit": "g", "aisle": "meat" },
+      { "name": "fécule de maïs", "qty": 40, "unit": "g", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sauce soja", "qty": 60, "unit": "ml", "aisle": "pantry" },
+      { "name": "eau", "qty": 80, "unit": "ml", "aisle": "other" },
+      { "name": "ketchup", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "gochujang", "qty": 3, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "vinaigre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "miel", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cébette", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "graines de sésame", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Couper le poulet en petits cubes et le mélanger avec la fécule de maïs. Disposer les morceaux sur une plaque et cuire 10 minutes à 180 °C, au four ou à l'airfryer.",
@@ -4349,95 +1335,21 @@
     "servings": 3,
     "time": 45,
     "image": "images/mafe-poulet-butternut.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "courge"
-      ],
-      "season": [
-        "automne",
-        "hiver"
-      ],
-      "dish": [
-        "mijoté"
-      ],
-      "cuisine": [
-        "africaine"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["courge"], "season": ["automne", "hiver"], "dish": ["mijoté"], "cuisine": ["africaine"] },
     "source": "https://www.healthyfoodcreation.fr/mafe-au-poulet-et-a-la-courge-butternut/",
     "ingredients": [
-      {
-        "name": "oignon",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "courge butternut",
-        "qty": 350,
-        "unit": "g",
-        "aisle": "produce"
-      },
-      {
-        "name": "huile d'arachide",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "concentré de tomate",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "beurre de cacahuète",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "bouillon de volaille",
-        "qty": 500,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "blanc de poulet",
-        "qty": 250,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "riz",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "coriandre",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "cacahuètes",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "citron vert",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      }
+      { "name": "oignon", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "courge butternut", "qty": 350, "unit": "g", "aisle": "produce" },
+      { "name": "huile d'arachide", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "concentré de tomate", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "beurre de cacahuète", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "bouillon de volaille", "qty": 500, "unit": "ml", "aisle": "pantry" },
+      { "name": "blanc de poulet", "qty": 250, "unit": "g", "aisle": "meat" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "cacahuètes", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "citron vert", "qty": null, "unit": "", "aisle": "produce" }
     ],
     "steps": [
       "Émincer l'oignon, éplucher la courge butternut et la couper en petits cubes.",
@@ -4454,131 +1366,27 @@
     "servings": 2,
     "time": 25,
     "image": "images/boeuf-chipotle-bowl.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "viande hachée"
-      ],
-      "vegetable": [
-        "avocat",
-        "tomate"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "bowl"
-      ],
-      "cuisine": [
-        "tex-mex"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["viande hachée"], "vegetable": ["avocat", "tomate"], "season": ["toute l'année"], "dish": ["bowl"], "cuisine": ["tex-mex"] },
     "source": "https://www.tiktok.com/@totocuistot/video/7394516984651664673",
     "ingredients": [
-      {
-        "name": "viande hachée 5 %",
-        "qty": 300,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "riz",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "tomate",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "avocat",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "oignon rouge",
-        "qty": 0.5,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "maïs",
-        "qty": 150,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "haricots rouges",
-        "qty": 1,
-        "unit": "boîte",
-        "aisle": "pantry"
-      },
-      {
-        "name": "fromage blanc",
-        "qty": 60,
-        "unit": "g",
-        "aisle": "dairy"
-      },
-      {
-        "name": "coriandre",
-        "qty": null,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail en poudre",
-        "qty": 0.5,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "flocons de piment",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce soja sucrée",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce teriyaki",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce d'huître",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sauce sriracha",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "viande hachée 5 %", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "riz", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "tomate", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "avocat", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "oignon rouge", "qty": 0.5, "unit": "", "aisle": "produce" },
+      { "name": "maïs", "qty": 150, "unit": "g", "aisle": "pantry" },
+      { "name": "haricots rouges", "qty": 1, "unit": "boîte", "aisle": "pantry" },
+      { "name": "fromage blanc", "qty": 60, "unit": "g", "aisle": "dairy" },
+      { "name": "coriandre", "qty": null, "unit": "", "aisle": "produce" },
+      { "name": "ail en poudre", "qty": 0.5, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "flocons de piment", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sauce soja sucrée", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce teriyaki", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce d'huître", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "sauce sriracha", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Cuire le riz selon les indications du paquet.",
@@ -4595,110 +1403,24 @@
     "servings": 4,
     "time": 35,
     "image": "images/poulet-curry-coco-legumes.jpg",
-    "categories": [
-      "repas"
-    ],
-    "tags": {
-      "protein": [
-        "poulet"
-      ],
-      "vegetable": [
-        "carotte",
-        "courgette"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "mijoté"
-      ]
-    },
+    "categories": ["repas"],
+    "tags": { "protein": ["poulet"], "vegetable": ["carotte", "courgette"], "season": ["toute l'année"], "dish": ["mijoté"] },
     "source": "https://www.tiktok.com/@janette594/video/7275048624474705185",
     "ingredients": [
-      {
-        "name": "lait de coco",
-        "qty": 400,
-        "unit": "ml",
-        "aisle": "pantry"
-      },
-      {
-        "name": "blanc de poulet",
-        "qty": 300,
-        "unit": "g",
-        "aisle": "meat"
-      },
-      {
-        "name": "oignon rouge",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "ail",
-        "qty": 2,
-        "unit": "gousse",
-        "aisle": "produce"
-      },
-      {
-        "name": "curry en poudre",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "cumin moulu",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "piment doux",
-        "qty": 1,
-        "unit": "c. à café",
-        "aisle": "pantry"
-      },
-      {
-        "name": "gingembre en poudre",
-        "qty": 1,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "huile d'olive",
-        "qty": 2,
-        "unit": "c. à soupe",
-        "aisle": "pantry"
-      },
-      {
-        "name": "carotte",
-        "qty": 2,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "courgette",
-        "qty": 1,
-        "unit": "",
-        "aisle": "produce"
-      },
-      {
-        "name": "riz",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "sel",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "poivre",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      }
+      { "name": "lait de coco", "qty": 400, "unit": "ml", "aisle": "pantry" },
+      { "name": "blanc de poulet", "qty": 300, "unit": "g", "aisle": "meat" },
+      { "name": "oignon rouge", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "ail", "qty": 2, "unit": "gousse", "aisle": "produce" },
+      { "name": "curry en poudre", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "cumin moulu", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "piment doux", "qty": 1, "unit": "c. à café", "aisle": "pantry" },
+      { "name": "gingembre en poudre", "qty": 1, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "huile d'olive", "qty": 2, "unit": "c. à soupe", "aisle": "pantry" },
+      { "name": "carotte", "qty": 2, "unit": "", "aisle": "produce" },
+      { "name": "courgette", "qty": 1, "unit": "", "aisle": "produce" },
+      { "name": "riz", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "sel", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "poivre", "qty": null, "unit": "", "aisle": "pantry" }
     ],
     "steps": [
       "Éplucher les carottes et la courgette, puis les tailler en tagliatelles à l'aide d'un économe. Les faire revenir dans une poêle avec du sel et du poivre, à feu doux, pendant 10 minutes.",
@@ -4715,39 +1437,12 @@
     "title": "Test111111",
     "servings": 2,
     "time": 45,
-    "categories": [
-      "encas"
-    ],
-    "tags": {
-      "protein": [
-        "végétarien"
-      ],
-      "season": [
-        "toute l'année"
-      ],
-      "dish": [
-        "pâtes"
-      ]
-    },
+    "categories": ["encas"],
+    "tags": { "protein": ["végétarien"], "season": ["toute l'année"], "dish": ["pâtes"] },
     "ingredients": [
-      {
-        "name": "pâtes",
-        "qty": null,
-        "unit": "",
-        "aisle": "pantry"
-      },
-      {
-        "name": "riz",
-        "qty": 200,
-        "unit": "g",
-        "aisle": "pantry"
-      },
-      {
-        "name": "test",
-        "qty": null,
-        "unit": "",
-        "aisle": "other"
-      }
+      { "name": "pâtes", "qty": null, "unit": "", "aisle": "pantry" },
+      { "name": "riz", "qty": 200, "unit": "g", "aisle": "pantry" },
+      { "name": "test", "qty": null, "unit": "", "aisle": "other" }
     ],
     "steps": [
       "Regarderfdjejes.",

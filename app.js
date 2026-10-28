@@ -941,6 +941,20 @@ function clearDraft() {
   }
 }
 
+// Champs numériques à boutons − / + : personnes (pas de 1) et durée (pas de 5 minutes).
+const NUM_FIELDS = {
+  servings: { step: 1, min: 1, max: MAX_SERVINGS, start: DEFAULT_SERVINGS },
+  time: { step: 5, min: 5, max: 600, start: 30 },
+};
+
+function numField(key, label, value) {
+  const c = NUM_FIELDS[key];
+  return `<div class="field"><span>${label}</span><div class="stepper numstep">
+    <button type="button" data-action="num-step" data-field="${key}" data-dir="-1" aria-label="Moins">−</button>
+    <input data-field="${key}" inputmode="numeric" maxlength="3" value="${esc(value || "")}" placeholder="${c.start}" aria-label="${esc(label)}">
+    <button type="button" data-action="num-step" data-field="${key}" data-dir="1" aria-label="Plus">+</button></div></div>`;
+}
+
 // Liste de cases (ingrédients ou étapes) avec ajout et suppression.
 function rowsHtml(key, label, placeholder, addLabel) {
   const rows = state.suggest.f[key];
@@ -1017,7 +1031,7 @@ function suggestView() {
         ${area("message", "Ta suggestion", "Ex. : 200 g de farine au lieu de 300 g, cuire plutôt 15 minutes…", SUGGEST_LIMITS.text, 6)}`
       : `<p class="muted">Propose une recette : elle sera relue, adaptée à l'app et, si elle est validée, elle apparaîtra pour tout le monde. Tu peux n'écrire que l'essentiel.</p>
         ${field("title", "Nom de la recette *", `maxlength="${SUGGEST_LIMITS.title}" autocomplete="off"`)}
-        <div class="field-row">${field("servings", "Personnes", 'inputmode="numeric" maxlength="3"')}${field("time", "Durée (min)", 'inputmode="numeric" maxlength="4"')}</div>
+        <div class="field-row">${numField("servings", "Personnes", f.servings)}${numField("time", "Durée (min)", f.time)}</div>
         <label class="field"><span>Type de plat</span><select data-field="category">${courses
           .map(([k, l]) => `<option value="${esc(k)}" ${f.category === k ? "selected" : ""}>${esc(l)}</option>`)
           .join("")}</select></label>
@@ -1424,6 +1438,19 @@ const actions = {
     setHash(null);
     render({ top: true });
   },
+  "num-step"(el) {
+    const key = el.dataset.field;
+    const c = NUM_FIELDS[key];
+    const dir = Number(el.dataset.dir);
+    const cur = parseInt(state.suggest.f[key], 10);
+    let n;
+    if (!cur) n = dir > 0 ? c.start : c.min;
+    else if (c.step === 1) n = cur + dir;
+    else n = dir > 0 ? (Math.floor(cur / c.step) + 1) * c.step : (Math.ceil(cur / c.step) - 1) * c.step; // cale sur les multiples de 5
+    state.suggest.f[key] = String(Math.min(c.max, Math.max(c.min, n)));
+    saveDraft();
+    render();
+  },
   "list-add"(el) {
     const rows = state.suggest.f[el.dataset.list];
     rows.push("");
@@ -1483,8 +1510,8 @@ const actions = {
       recipeId: r ? r.id : "",
       recipeTitle: r ? r.title : "",
       title: clean(f.title, SUGGEST_LIMITS.title),
-      servings: clean(f.servings, 3),
-      time: clean(f.time, 4),
+      servings: clean(String(f.servings || "").replace(/D/g, ""), 3),
+      time: clean(String(f.time || "").replace(/D/g, ""), 4),
       category: clean(f.category, SUGGEST_LIMITS.short),
       ingredients: clean(lines(f.ingredients), SUGGEST_LIMITS.list),
       steps: clean(lines(f.steps), SUGGEST_LIMITS.list),

@@ -403,3 +403,6 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
 .photo-prev { position: relative; }
 .photo-prev img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; }
 .photo-prev .rowdel { position: absolute; top: 8px; right: 8px; margin: 0; background: var(--overlay); border-radius: 18px; color: var(--text); }
+.numstep { display: flex; gap: 8px; }
+.numstep input { flex: 1; min-width: 0; text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
+.numstep button { flex: none; }

@@ -947,8 +947,22 @@ const NUM_FIELDS = {
   time: { step: 5, min: 5, max: 600, start: 30 },
 };
 
+// 45 → « 45 min », 60 → « 1h », 125 → « 2h05 ».
+function fmtMinutes(v) {
+  const m = parseInt(v, 10);
+  if (!m) return "";
+  if (m < 60) return `${m} min`;
+  return `${Math.floor(m / 60)}h${m % 60 ? String(m % 60).padStart(2, "0") : ""}`;
+}
+
 function numField(key, label, value) {
   const c = NUM_FIELDS[key];
+  if (key === "time") {
+    return `<div class="field"><span>${label}</span><div class="stepper numstep">
+    <button type="button" data-action="num-step" data-field="time" data-dir="-1" aria-label="Moins">−</button>
+    <input readonly inputmode="none" value="${esc(fmtMinutes(value))}" placeholder="${fmtMinutes(c.start)}" aria-label="${esc(label)}">
+    <button type="button" data-action="num-step" data-field="time" data-dir="1" aria-label="Plus">+</button></div></div>`;
+  }
   return `<div class="field"><span>${label}</span><div class="stepper numstep">
     <button type="button" data-action="num-step" data-field="${key}" data-dir="-1" aria-label="Moins">−</button>
     <input data-field="${key}" inputmode="numeric" maxlength="3" value="${esc(value || "")}" placeholder="${c.start}" aria-label="${esc(label)}">
@@ -1031,7 +1045,7 @@ function suggestView() {
         ${area("message", "Ta suggestion", "Ex. : 200 g de farine au lieu de 300 g, cuire plutôt 15 minutes…", SUGGEST_LIMITS.text, 6)}`
       : `<p class="muted">Propose une recette : elle sera relue, adaptée à l'app et, si elle est validée, elle apparaîtra pour tout le monde. Tu peux n'écrire que l'essentiel.</p>
         ${field("title", "Nom de la recette *", `maxlength="${SUGGEST_LIMITS.title}" autocomplete="off"`)}
-        <div class="field-row">${numField("servings", "Personnes", f.servings)}${numField("time", "Durée (min)", f.time)}</div>
+        <div class="field-row">${numField("servings", "Personnes", f.servings)}${numField("time", "Durée", f.time)}</div>
         <label class="field"><span>Type de plat</span><select data-field="category">${courses
           .map(([k, l]) => `<option value="${esc(k)}" ${f.category === k ? "selected" : ""}>${esc(l)}</option>`)
           .join("")}</select></label>

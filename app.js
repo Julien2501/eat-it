@@ -63,6 +63,7 @@ const state = {
   loading: true,
   error: null,
   view: "recipes", // recipes | plan | shop | settings | suggest
+  menuOpen: false, // menu ☰ de l'accueil
   suggest: null, // { mode: "new" | "edit", id, sending, sent, f: { champs du formulaire } }
   query: "",
   course: null, // catégorie de plat choisie (null = tout)
@@ -395,8 +396,7 @@ function feedHtml() {
   }
   const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}${state.fridge.length ? " · triées selon ton frigo" : ""}</span>
     <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>`;
-  const footer = `<button class="linkbtn" data-action="suggest-new">✍️ Proposer une recette</button><button class="linkbtn" data-action="settings">💾 Sauvegarde et réglages</button>`;
-  if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>${footer}`;
+  if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>`;
   return `${bar}<ul class="feed">${items
     .map((r) => {
       const inPlan = r.id in state.plan;
@@ -418,7 +418,7 @@ function feedHtml() {
         </button>
       </li>`;
     })
-    .join("")}</ul>${footer}`;
+    .join("")}</ul>`;
 }
 
 // Choix d'une catégorie de filtre avec, pour chacun, le nombre de recettes qu'il donnerait
@@ -508,7 +508,9 @@ function coursesHtml() {
 
 function recipesView() {
   const narrowed = activeCount() || state.course;
-  return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div></div>
+  return `<div class="brand"><div class="logo">🍽️</div><div class="name">Eat-it</div>
+    <button class="menubtn" data-action="menu" aria-label="Menu" aria-expanded="${state.menuOpen}">${state.menuOpen ? "✕" : "☰"}</button></div>
+    ${state.menuOpen ? `<div class="menu"><button data-action="suggest-new">✍️ Proposer une recette</button><button data-action="settings">💾 Sauvegarde et réglages</button></div>` : ""}
     <input id="q" class="search" type="search" placeholder="Rechercher une recette, un ingrédient…" value="${esc(state.query)}">
     ${coursesHtml()}
     ${filtersHtml()}
@@ -938,6 +940,22 @@ function clearDraft() {
   }
 }
 
+// Liste de cases (ingrédients ou étapes) avec ajout et suppression.
+function rowsHtml(key, label, placeholder, addLabel) {
+  const rows = state.suggest.f[key];
+  const isStep = key === "steps";
+  const max = isStep ? SUGGEST_LIMITS.text : SUGGEST_LIMITS.short * 2;
+  return `<div class="field"><span>${label}</span>${rows
+    .map(
+      (v, i) => `<div class="rowbox">${isStep ? `<b class="rownum">${i + 1}</b>` : ""}
+        ${isStep
+          ? `<textarea class="note" rows="2" maxlength="${max}" data-list="${key}" data-i="${i}" placeholder="${esc(placeholder)}">${esc(v)}</textarea>`
+          : `<input maxlength="${max}" data-list="${key}" data-i="${i}" value="${esc(v)}" placeholder="${esc(placeholder)}" autocomplete="off">`}
+        <button class="rowdel" data-action="list-del" data-list="${key}" data-i="${i}" aria-label="Supprimer">✕</button></div>`
+    )
+    .join("")}<button class="btn soft rowadd" data-action="list-add" data-list="${key}">＋ ${addLabel}</button></div>`;
+}
+
 function suggestView() {
   const sg = state.suggest;
   if (!sg) return "";
@@ -966,8 +984,8 @@ function suggestView() {
         <label class="field"><span>Type de plat</span><select data-field="category">${courses
           .map(([k, l]) => `<option value="${esc(k)}" ${f.category === k ? "selected" : ""}>${esc(l)}</option>`)
           .join("")}</select></label>
-        ${area("ingredients", "Ingrédients * (un par ligne)", "200 g de spaghetti\n2 œufs\n1 oignon", SUGGEST_LIMITS.list, 6)}
-        ${area("steps", "Étapes * (une par ligne)", "Cuire les pâtes 10 minutes.\nMélanger avec la sauce.", SUGGEST_LIMITS.list, 6)}
+        ${rowsHtml("ingredients", "Ingrédients *", "Ex. : 200 g de spaghetti", "Ajouter un ingrédient")}
+        ${rowsHtml("steps", "Étapes *", "Ex. : Cuire les pâtes 10 minutes.", "Ajouter une étape")}
         ${field("source", "Lien d'origine (facultatif)", 'type="url" inputmode="url" maxlength="300" autocomplete="off"')}
         ${area("message", "Un mot, une astuce ? (facultatif)", "", SUGGEST_LIMITS.text, 3)}`;
   return `<button class="backlink" data-action="suggest-cancel">‹ Annuler</button>
@@ -1059,12 +1077,18 @@ const focusLater = (id) => {
 
 const actions = {
   tab(el) {
+    state.menuOpen = false;
     state.view = el.dataset.view;
     state.openId = null;
     setHash(null);
     render({ top: true });
   },
+  menu() {
+    state.menuOpen = !state.menuOpen;
+    render();
+  },
   settings() {
+    state.menuOpen = false;
     state.view = "settings";
     state.openId = null;
     render({ top: true });
@@ -1348,11 +1372,35 @@ const actions = {
   },
   /* propositions */
   "suggest-new"() {
-    state.suggest = { mode: "new", id: null, sending: false, sent: false, f: { ...loadDraft(), website: "" } };
+    state.menuOpen = false;
+    const d = loadDraft();
+    const list = (v, min) => {
+      const a = Array.isArray(v) ? v : String(v || "").split("\n");
+      const out = a.map(String);
+      while (out.length < min) out.push("");
+      return out;
+    };
+    state.suggest = { mode: "new", id: null, sending: false, sent: false, f: { ...d, ingredients: list(d.ingredients, 3), steps: list(d.steps, 2), website: "" } };
     state.view = "suggest";
     state.openId = null;
     setHash(null);
     render({ top: true });
+  },
+  "list-add"(el) {
+    const rows = state.suggest.f[el.dataset.list];
+    rows.push("");
+    saveDraft();
+    render();
+    const box = document.querySelectorAll(`[data-list="${el.dataset.list}"][data-i]`);
+    const last = box[box.length - 1];
+    if (last && last.focus) last.focus();
+  },
+  "list-del"(el) {
+    const rows = state.suggest.f[el.dataset.list];
+    rows.splice(Number(el.dataset.i), 1);
+    if (!rows.length) rows.push("");
+    saveDraft();
+    render();
   },
   "suggest-edit"(el) {
     state.suggest = { mode: "edit", id: el.dataset.id, sending: false, sent: false, f: { website: "" } };
@@ -1376,7 +1424,10 @@ const actions = {
     if (!sg || sg.sending) return;
     const f = sg.f;
     const clean = (v, n) => String(v || "").trim().slice(0, n);
-    if (sg.mode === "new" && !(clean(f.title, 1) && clean(f.ingredients, 1) && clean(f.steps, 1))) {
+    const lines = (a) => (Array.isArray(a) ? a : []).map((x) => String(x).replace(/\s*\n\s*/g, " ").trim()).filter(Boolean).join("\n");
+    f.ingredients = Array.isArray(f.ingredients) ? f.ingredients : [""];
+    f.steps = Array.isArray(f.steps) ? f.steps : [""];
+    if (sg.mode === "new" && !(clean(f.title, 1) && lines(f.ingredients) && lines(f.steps))) {
       toast("Nom, ingrédients et étapes sont nécessaires");
       return;
     }
@@ -1393,8 +1444,8 @@ const actions = {
       servings: clean(f.servings, 3),
       time: clean(f.time, 4),
       category: clean(f.category, SUGGEST_LIMITS.short),
-      ingredients: clean(f.ingredients, SUGGEST_LIMITS.list),
-      steps: clean(f.steps, SUGGEST_LIMITS.list),
+      ingredients: clean(lines(f.ingredients), SUGGEST_LIMITS.list),
+      steps: clean(lines(f.steps), SUGGEST_LIMITS.list),
       source: clean(f.source, 300),
       message: clean(f.message, SUGGEST_LIMITS.text),
       from: clean(f.from, SUGGEST_LIMITS.short),
@@ -1511,6 +1562,9 @@ $app.addEventListener("input", (e) => {
   if (t.id === "q") {
     state.query = t.value;
     document.getElementById("feed").innerHTML = feedHtml();
+  } else if (t.dataset && t.dataset.list && state.suggest) {
+    state.suggest.f[t.dataset.list][Number(t.dataset.i)] = t.value;
+    saveDraft();
   } else if (t.dataset && t.dataset.field && state.suggest) {
     state.suggest.f[t.dataset.field] = t.value;
     saveDraft();

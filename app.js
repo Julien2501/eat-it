@@ -49,6 +49,10 @@ const DEFAULT_HIDDEN = ["sel", "poivre"]; // basiques masqués de la liste de co
 const FRIDGE_IGNORED = ["sel", "poivre", "huile", "eau"]; // jamais comptés « manquants » pour le frigo
 
 const STORE_KEY = "eatit.v1";
+const DRAFT_KEY = "eatit.draft"; // brouillon de proposition, à part de STORE_KEY pour ne pas toucher aux données existantes
+// Adresse du relais qui reçoit les propositions (voir worker/README.md). Vide : l'envoi passe par la feuille de partage.
+const SUGGEST_URL = "";
+const SUGGEST_LIMITS = { title: 120, list: 4000, text: 1500, short: 80 };
 const MAX_SERVINGS = 50;
 // Nombre de personnes affiché par défaut, quelle que soit la portion d'origine de la recette.
 const DEFAULT_SERVINGS = 2;
@@ -58,7 +62,8 @@ const state = {
   recipes: [],
   loading: true,
   error: null,
-  view: "recipes", // recipes | plan | shop | settings
+  view: "recipes", // recipes | plan | shop | settings | suggest
+  suggest: null, // { mode: "new" | "edit", id, sending, sent, f: { champs du formulaire } }
   query: "",
   course: null, // catégorie de plat choisie (null = tout)
   filters: {}, // { catégorie: [valeurs choisies] } : OU dans une catégorie, ET entre catégories
@@ -390,7 +395,7 @@ function feedHtml() {
   }
   const bar = `<div class="listbar"><span>${plural(items.length, "recette", "recettes")}${state.fridge.length ? " · triées selon ton frigo" : ""}</span>
     <button class="shuffle" data-action="shuffle">🔀 Mélanger</button></div>`;
-  const footer = `<button class="linkbtn" data-action="settings">💾 Sauvegarde et réglages</button>`;
+  const footer = `<button class="linkbtn" data-action="suggest-new">✍️ Proposer une recette</button><button class="linkbtn" data-action="settings">💾 Sauvegarde et réglages</button>`;
   if (!items.length) return `${bar}<p class="empty"><span class="big">🔍</span>Aucune recette ne correspond.</p>${footer}`;
   return `${bar}<ul class="feed">${items
     .map((r) => {
@@ -582,6 +587,7 @@ function detailView(r) {
       ${r.notes ? `<p class="notes">${esc(r.notes)}</p>` : ""}
       ${r.source ? `<a class="source" href="${esc(r.source)}" target="_blank" rel="noopener">Voir la source ↗</a>` : ""}
       ${avisHtml(r)}
+      <button class="linkbtn" data-action="suggest-edit" data-id="${esc(r.id)}">✏️ Suggérer une modification</button>
     </div>`;
 }
 
@@ -906,6 +912,73 @@ function settingsView() {
     <button class="btn soft" data-action="wipe">Effacer toutes mes données</button>`;
 }
 
+/* ---------- Vues : proposer une recette ou une modification ---------- */
+
+function loadDraft() {
+  try {
+    return JSON.parse(localStorage.getItem(DRAFT_KEY) || "{}") || {};
+  } catch {
+    return {};
+  }
+}
+
+function saveDraft() {
+  try {
+    if (state.suggest && state.suggest.mode === "new") localStorage.setItem(DRAFT_KEY, JSON.stringify(state.suggest.f));
+  } catch {
+    /* brouillon non enregistré : sans conséquence */
+  }
+}
+
+function clearDraft() {
+  try {
+    localStorage.removeItem(DRAFT_KEY);
+  } catch {
+    /* idem */
+  }
+}
+
+function suggestView() {
+  const sg = state.suggest;
+  if (!sg) return "";
+  if (sg.sent) {
+    const msg =
+      sg.sent === "relay"
+        ? "Ta proposition est bien partie. Elle sera lue et, si elle est validée, elle apparaîtra dans l'app."
+        : "Ton message est prêt à être envoyé. Une fois reçu, il sera lu et, s'il est validé, il apparaîtra dans l'app.";
+    return `<h1>Merci !</h1><p class="muted">${msg}</p><button class="btn" data-action="suggest-done">Retour aux recettes</button>`;
+  }
+  const f = sg.f;
+  const r = sg.mode === "edit" ? byId(sg.id) : null;
+  const val = (k) => esc(f[k] || "");
+  const field = (k, label, extra = "") =>
+    `<label class="field"><span>${label}</span><input data-field="${k}" value="${val(k)}" ${extra}></label>`;
+  const area = (k, label, ph, max, rows) =>
+    `<label class="field"><span>${label}</span><textarea class="note" data-field="${k}" rows="${rows}" maxlength="${max}" placeholder="${esc(ph)}">${val(k)}</textarea></label>`;
+  const courses = [["", "Je ne sais pas"], ...COURSES.map((c) => [c.key, c.label])];
+  const body =
+    sg.mode === "edit"
+      ? `<p class="muted">Une erreur, une quantité à corriger, une astuce à ajouter ? Dis ce qui change pour <b>${esc(r ? r.title : "")}</b>.</p>
+        ${area("message", "Ta suggestion", "Ex. : 200 g de farine au lieu de 300 g, cuire plutôt 15 minutes…", SUGGEST_LIMITS.text, 6)}`
+      : `<p class="muted">Propose une recette : elle sera relue, adaptée à l'app et, si elle est validée, elle apparaîtra pour tout le monde. Tu peux n'écrire que l'essentiel.</p>
+        ${field("title", "Nom de la recette *", `maxlength="${SUGGEST_LIMITS.title}" autocomplete="off"`)}
+        <div class="field-row">${field("servings", "Personnes", 'inputmode="numeric" maxlength="3"')}${field("time", "Durée (min)", 'inputmode="numeric" maxlength="4"')}</div>
+        <label class="field"><span>Type de plat</span><select data-field="category">${courses
+          .map(([k, l]) => `<option value="${esc(k)}" ${f.category === k ? "selected" : ""}>${esc(l)}</option>`)
+          .join("")}</select></label>
+        ${area("ingredients", "Ingrédients * (un par ligne)", "200 g de spaghetti\n2 œufs\n1 oignon", SUGGEST_LIMITS.list, 6)}
+        ${area("steps", "Étapes * (une par ligne)", "Cuire les pâtes 10 minutes.\nMélanger avec la sauce.", SUGGEST_LIMITS.list, 6)}
+        ${field("source", "Lien d'origine (facultatif)", 'type="url" inputmode="url" maxlength="300" autocomplete="off"')}
+        ${area("message", "Un mot, une astuce ? (facultatif)", "", SUGGEST_LIMITS.text, 3)}`;
+  return `<button class="backlink" data-action="suggest-cancel">‹ Annuler</button>
+    <h1>${sg.mode === "edit" ? "Suggérer une modification" : "Proposer une recette"}</h1>
+    ${body}
+    ${field("from", "Ton prénom (facultatif)", `maxlength="${SUGGEST_LIMITS.short}" autocomplete="off"`)}
+    <input class="hp" data-field="website" tabindex="-1" autocomplete="off" aria-hidden="true" value="${val("website")}">
+    <p class="muted small">Ta proposition sera lue par le créateur de l'app et peut être consultée publiquement : n'y mets pas d'information personnelle.</p>
+    <button class="btn" data-action="suggest-send" ${sg.sending ? "disabled" : ""}>${sg.sending ? "Envoi…" : "Envoyer"}</button>`;
+}
+
 function tabbar() {
   const planCount = Object.keys(state.plan).filter(byId).length;
   const tabs = [
@@ -938,6 +1011,7 @@ function render({ top = false } = {}) {
   else if (state.view === "plan") body = planView();
   else if (state.view === "shop") body = shopView();
   else if (state.view === "settings") body = settingsView();
+  else if (state.view === "suggest") body = suggestView();
   else body = recipesView();
 
   $app.innerHTML = `<main class="page ${r ? "flush" : ""}">${body}</main>${r ? ctaBar(r) : tabbar()}${timerPill()}`;
@@ -1272,6 +1346,103 @@ const actions = {
     saveState();
     render();
   },
+  /* propositions */
+  "suggest-new"() {
+    state.suggest = { mode: "new", id: null, sending: false, sent: false, f: { ...loadDraft(), website: "" } };
+    state.view = "suggest";
+    state.openId = null;
+    setHash(null);
+    render({ top: true });
+  },
+  "suggest-edit"(el) {
+    state.suggest = { mode: "edit", id: el.dataset.id, sending: false, sent: false, f: { website: "" } };
+    state.view = "suggest";
+    state.openId = null;
+    setHash(null);
+    render({ top: true });
+  },
+  "suggest-cancel"() {
+    state.suggest = null;
+    state.view = "recipes";
+    render({ top: true });
+  },
+  "suggest-done"() {
+    state.suggest = null;
+    state.view = "recipes";
+    render({ top: true });
+  },
+  async "suggest-send"() {
+    const sg = state.suggest;
+    if (!sg || sg.sending) return;
+    const f = sg.f;
+    const clean = (v, n) => String(v || "").trim().slice(0, n);
+    if (sg.mode === "new" && !(clean(f.title, 1) && clean(f.ingredients, 1) && clean(f.steps, 1))) {
+      toast("Nom, ingrédients et étapes sont nécessaires");
+      return;
+    }
+    if (sg.mode === "edit" && !clean(f.message, 1)) {
+      toast("Écris ta suggestion");
+      return;
+    }
+    const r = sg.mode === "edit" ? byId(sg.id) : null;
+    const payload = {
+      type: sg.mode,
+      recipeId: r ? r.id : "",
+      recipeTitle: r ? r.title : "",
+      title: clean(f.title, SUGGEST_LIMITS.title),
+      servings: clean(f.servings, 3),
+      time: clean(f.time, 4),
+      category: clean(f.category, SUGGEST_LIMITS.short),
+      ingredients: clean(f.ingredients, SUGGEST_LIMITS.list),
+      steps: clean(f.steps, SUGGEST_LIMITS.list),
+      source: clean(f.source, 300),
+      message: clean(f.message, SUGGEST_LIMITS.text),
+      from: clean(f.from, SUGGEST_LIMITS.short),
+      website: clean(f.website, 100), // champ piège : un humain ne le remplit pas
+    };
+    const done = (how) => {
+      if (sg.mode === "new") clearDraft();
+      sg.sent = how;
+      sg.sending = false;
+      render({ top: true });
+    };
+    if (SUGGEST_URL) {
+      sg.sending = true;
+      render();
+      try {
+        const res = await fetch(SUGGEST_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!res.ok) throw new Error(res.status);
+        done("relay");
+      } catch {
+        sg.sending = false;
+        render();
+        toast("Envoi impossible, réessaie plus tard");
+      }
+      return;
+    }
+    // Pas de relais configuré : feuille de partage, sinon presse-papiers.
+    const text = suggestText(payload);
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Proposition Eat-it", text });
+        done("share");
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+    try {
+      await navigator.clipboard.writeText(text);
+      toast("Proposition copiée : envoie-la au créateur");
+      done("share");
+    } catch {
+      window.prompt("Copie cette proposition :", text);
+    }
+  },
   /* sauvegarde */
   async export() {
     const data = JSON.stringify({ app: "eat-it", version: 1, saved: new Date().toISOString(), ...persistable() });
@@ -1316,6 +1487,19 @@ const actions = {
   },
 };
 
+// Texte lisible de la proposition, utilisé quand il n'y a pas de relais.
+function suggestText(p) {
+  const lines = [p.type === "edit" ? `Modification pour « ${p.recipeTitle} » (${p.recipeId})` : `Nouvelle recette : ${p.title}`];
+  if (p.type === "new") {
+    lines.push(`Personnes : ${p.servings || "?"} · Durée : ${p.time || "?"} min · Type : ${p.category || "?"}`);
+    lines.push("", "Ingrédients :", p.ingredients, "", "Étapes :", p.steps);
+    if (p.source) lines.push("", `Source : ${p.source}`);
+  }
+  if (p.message) lines.push("", p.message);
+  if (p.from) lines.push("", `— ${p.from}`);
+  return lines.join("\n");
+}
+
 $app.addEventListener("click", (e) => {
   const el = e.target.closest("[data-action]");
   if (el && actions[el.dataset.action]) actions[el.dataset.action](el);
@@ -1327,9 +1511,20 @@ $app.addEventListener("input", (e) => {
   if (t.id === "q") {
     state.query = t.value;
     document.getElementById("feed").innerHTML = feedHtml();
+  } else if (t.dataset && t.dataset.field && state.suggest) {
+    state.suggest.f[t.dataset.field] = t.value;
+    saveDraft();
   } else if (t.dataset && t.dataset.note) {
     ensureJournal(t.dataset.note).note = t.value;
     saveSoon();
+  }
+});
+
+$app.addEventListener("change", (e) => {
+  const t = e.target;
+  if (t.tagName === "SELECT" && t.dataset.field && state.suggest) {
+    state.suggest.f[t.dataset.field] = t.value;
+    saveDraft();
   }
 });
 

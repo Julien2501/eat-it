@@ -1,0 +1,9 @@
+name = "eat-it-relay"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+GITHUB_REPO = "Julien2501/eat-it"
+ALLOWED_ORIGIN = "https://julien2501.github.io"
+
+# Le secret GITHUB_TOKEN n'est jamais écrit ici : `npx wrangler secret put GITHUB_TOKEN`.

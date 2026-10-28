@@ -377,3 +377,17 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
 .seg button { flex: 1; padding: 8px; border-radius: 10px; font-size: 14px; font-weight: 600; color: var(--muted); }
 .seg button.on { background: var(--accent); color: var(--on-accent); }
 .hero .hero-share { right: 66px; font-size: 22px; }
+
+/* ---------- Proposer une recette ---------- */
+.field { display: block; margin: 14px 0; }
+.field > span { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.field input, .field select {
+  width: 100%; padding: 12px; border-radius: 14px; border: 1px solid var(--line);
+  background: var(--card); color: inherit; font: inherit; outline: none;
+}
+.field .note { margin-bottom: 0; }
+.field-row { display: flex; gap: 12px; }
+.field-row .field { flex: 1; min-width: 0; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.small { font-size: 13px; margin: 16px 0; }
+.btn[disabled] { opacity: 0.6; }

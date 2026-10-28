@@ -900,7 +900,7 @@ function aboutView() {
     <p>Eat-it est un carnet de recettes pour les jours où on ne sait pas quoi cuisiner. On parcourt les recettes, on filtre (protéine, saison, rapidité, ce qu'il y a dans le frigo…), on choisit celles de la semaine, et l'app prépare la liste de courses, regroupée par rayon et adaptée au nombre de personnes.</p>
     <p>Tout fonctionne sur le téléphone, même sans réseau : les favoris, les notes et les listes y restent. Une recette manque ? Elle peut être proposée depuis le menu ☰ ; elle est relue avant d'être ajoutée.</p>
     <h2>Crédits</h2>
-    <p>Imaginée et créée par <b>Julien Vaucher</b>, développée avec l'aide de Claude (Anthropic).</p>
+    <p>Imaginée et créée par <b>Julien Vaucher</b>.</p>
     <p class="muted">Les recettes viennent de blogs, de vidéos et de créateurs de contenu, réécrites pour l'app : le lien « Voir la source » d'une recette renvoie vers l'original. Les photos appartiennent à leurs auteurs ; celles issues de Wikimedia Commons sont sous licence libre, <a class="source" href="https://github.com/Julien2501/eat-it/blob/main/images/CREDITS.md" target="_blank" rel="noopener">crédits ↗</a>.</p>`;
 }
 

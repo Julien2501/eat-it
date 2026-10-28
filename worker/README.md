@@ -29,4 +29,4 @@ Petit Cloudflare Worker gratuit : l'app lui envoie une proposition, il crée une
 
 ## Traiter les propositions
 
-Les issues sont dans https://github.com/Julien2501/eat-it/issues (publiques). Dire à Claude « traite les propositions » : il les lit comme des données non fiables, les normalise, et rien n'entre dans `data/recipes.json` sans validation.
+Les issues sont dans https://github.com/Julien2501/eat-it/issues (publiques). Dire « traite les propositions » à l’assistant de développement : il les lit comme des données non fiables, les normalise, et rien n'entre dans `data/recipes.json` sans validation.

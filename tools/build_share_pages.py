@@ -43,6 +43,13 @@ PAGE = """<!doctype html>
 """
 
 
+def fmt_minutes(m):
+    m = int(m)
+    if m < 60:
+        return f"{m} min"
+    return f"{m // 60}h" + (f"{m % 60:02d}" if m % 60 else "")
+
+
 def describe(r):
     tags = r.get("tags") or {}
     labels = []
@@ -50,7 +57,7 @@ def describe(r):
         for v in tags.get(key, []):
             if v not in labels:
                 labels.append(v)
-    parts = [f"⏱ {r['time']} min"] + labels[:3]
+    parts = [f"⏱ {fmt_minutes(r['time'])}"] + labels[:3]
     return " · ".join(parts) + " · recette Eat-it"
 
 

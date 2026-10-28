@@ -377,7 +377,7 @@ const recipeMatches = (r) => matchesExcept(r, null);
 // Étiquettes affichées sur une recette : plat, cuisine puis protéine.
 function pillsHtml(r, max) {
   const labels = [...new Set([...tagValues(r, "dish"), ...tagValues(r, "cuisine"), ...tagValues(r, "protein")])].slice(0, max);
-  return `<span class="pill">⏱ ${r.time} min</span>${labels.map((l) => `<span class="pill plain">${esc(l)}</span>`).join("")}`;
+  return `<span class="pill">⏱ ${fmtMinutes(r.time)}</span>${labels.map((l) => `<span class="pill plain">${esc(l)}</span>`).join("")}`;
 }
 
 const heartBtn = (r, cls = "") =>
@@ -1173,7 +1173,7 @@ const actions = {
   async "share-recipe"(el) {
     const r = byId(el.dataset.id);
     const url = recipeUrl(r.id);
-    const text = `${r.title} (${r.time} min). Regarde la recette dans Eat-it :`;
+    const text = `${r.title} (${fmtMinutes(r.time)}). Regarde la recette dans Eat-it :`;
     try {
       if (navigator.share) {
         await navigator.share({ title: r.title, text, url });
@@ -1628,7 +1628,7 @@ const actions = {
 function suggestText(p) {
   const lines = [p.type === "edit" ? `Modification pour « ${p.recipeTitle} » (${p.recipeId})` : `Nouvelle recette : ${p.title}`];
   if (p.type === "new") {
-    lines.push(`Personnes : ${p.servings || "?"} · Durée : ${p.time || "?"} min · Type : ${p.category || "?"}`);
+    lines.push(`Personnes : ${p.servings || "?"} · Durée : ${fmtMinutes(p.time) || "?"} · Type : ${p.category || "?"}`);
     lines.push("", "Ingrédients :", p.ingredients, "", "Étapes :", p.steps);
     if (p.source) lines.push("", `Source : ${p.source}`);
   }

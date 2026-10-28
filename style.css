@@ -400,3 +400,6 @@ h2 { font-size: 20px; margin: 28px 0 12px; letter-spacing: -0.01em; }
 .rownum { flex: none; width: 24px; height: 24px; margin-top: 10px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); font-size: 13px; display: grid; place-items: center; }
 .rowdel { flex: none; width: 36px; height: 36px; margin-top: 4px; color: var(--muted); font-size: 16px; }
 .rowadd { margin-top: 4px; padding: 11px; }
+.photo-prev { position: relative; }
+.photo-prev img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 16px; }
+.photo-prev .rowdel { position: absolute; top: 8px; right: 8px; margin: 0; background: var(--overlay); border-radius: 18px; color: var(--text); }

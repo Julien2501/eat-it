@@ -15,6 +15,7 @@ Petit Cloudflare Worker gratuit : l'app lui envoie une proposition, il crée une
    npx wrangler secret put GITHUB_TOKEN     # coller le jeton
    npx wrangler deploy
    ```
+   **Photos** : avant `deploy`, lancer `npx wrangler kv namespace create IMAGES`, puis décommenter le bloc `[[kv_namespaces]]` de `wrangler.toml` et y coller l'id affiché. Les photos (réduites à 960 px par l'app) sont gardées 90 jours, et l'issue contient un lien vers chacune. Sans ce bloc, les propositions marchent mais la photo est ignorée.
    `deploy` affiche l'adresse du Worker : `https://eat-it-relay.<compte>.workers.dev`.
 4. Mettre cette adresse dans `SUGGEST_URL` (début de `app.js`), incrémenter `CACHE` dans `sw.js`, commit + push.
 

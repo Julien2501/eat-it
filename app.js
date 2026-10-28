@@ -52,6 +52,7 @@ const STORE_KEY = "eatit.v1";
 const DRAFT_KEY = "eatit.draft"; // brouillon de proposition, à part de STORE_KEY pour ne pas toucher aux données existantes
 // Adresse du relais qui reçoit les propositions (voir worker/README.md). Vide : l'envoi passe par la feuille de partage.
 const SUGGEST_URL = "";
+const PHOTO_MAX_BYTES = 400 * 1024;
 const SUGGEST_LIMITS = { title: 120, list: 4000, text: 1500, short: 80 };
 const MAX_SERVINGS = 50;
 // Nombre de personnes affiché par défaut, quelle que soit la portion d'origine de la recette.
@@ -956,6 +957,42 @@ function rowsHtml(key, label, placeholder, addLabel) {
     .join("")}<button class="btn soft rowadd" data-action="list-add" data-list="${key}">＋ ${addLabel}</button></div>`;
 }
 
+// Photo : réduite sur le téléphone (960 px, JPEG) avant l'envoi.
+function photoHtml(sg) {
+  return `<div class="field"><span>Photo du plat (facultatif)</span>${
+    sg.photo
+      ? `<div class="photo-prev"><img src="${sg.photo.url}" alt="Aperçu de la photo"><button class="rowdel" data-action="photo-del" aria-label="Retirer la photo">✕</button></div>`
+      : `<label class="btn soft rowadd">📷 Ajouter une photo<input type="file" accept="image/*" data-photo hidden></label>`
+  }</div>`;
+}
+
+// Réduit une image choisie : retourne { url (aperçu), blob } ou null.
+async function shrinkImage(file, max = 960) {
+  try {
+    const bmp = await createImageBitmap(file);
+    const k = Math.min(1, max / Math.max(bmp.width, bmp.height));
+    const c = document.createElement("canvas");
+    c.width = Math.round(bmp.width * k);
+    c.height = Math.round(bmp.height * k);
+    c.getContext("2d").drawImage(bmp, 0, 0, c.width, c.height);
+    for (const q of [0.82, 0.7, 0.55, 0.4]) {
+      const blob = await new Promise((ok) => c.toBlob(ok, "image/jpeg", q));
+      if (blob && blob.size <= PHOTO_MAX_BYTES) return { blob, url: URL.createObjectURL(blob) };
+    }
+  } catch {
+    /* format non lisible */
+  }
+  return null;
+}
+
+const blobToDataUrl = (blob) =>
+  new Promise((ok, ko) => {
+    const fr = new FileReader();
+    fr.onload = () => ok(fr.result);
+    fr.onerror = ko;
+    fr.readAsDataURL(blob);
+  });
+
 function suggestView() {
   const sg = state.suggest;
   if (!sg) return "";
@@ -991,6 +1028,7 @@ function suggestView() {
   return `<button class="backlink" data-action="suggest-cancel">‹ Annuler</button>
     <h1>${sg.mode === "edit" ? "Suggérer une modification" : "Proposer une recette"}</h1>
     ${body}
+    ${photoHtml(sg)}
     ${field("from", "Ton prénom (facultatif)", `maxlength="${SUGGEST_LIMITS.short}" autocomplete="off"`)}
     <input class="hp" data-field="website" tabindex="-1" autocomplete="off" aria-hidden="true" value="${val("website")}">
     <p class="muted small">Ta proposition sera lue par le créateur de l'app et peut être consultée publiquement : n'y mets pas d'information personnelle.</p>
@@ -1402,6 +1440,10 @@ const actions = {
     saveDraft();
     render();
   },
+  "photo-del"() {
+    if (state.suggest) state.suggest.photo = null;
+    render();
+  },
   "suggest-edit"(el) {
     state.suggest = { mode: "edit", id: el.dataset.id, sending: false, sent: false, f: { website: "" } };
     state.view = "suggest";
@@ -1461,6 +1503,7 @@ const actions = {
       sg.sending = true;
       render();
       try {
+        if (sg.photo) payload.image = await blobToDataUrl(sg.photo.blob);
         const res = await fetch(SUGGEST_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -1479,7 +1522,9 @@ const actions = {
     const text = suggestText(payload);
     try {
       if (navigator.share) {
-        await navigator.share({ title: "Proposition Eat-it", text });
+        const files = sg.photo ? [new File([sg.photo.blob], "photo.jpg", { type: "image/jpeg" })] : [];
+        const withFiles = files.length && navigator.canShare && navigator.canShare({ files });
+        await navigator.share(withFiles ? { title: "Proposition Eat-it", text, files } : { title: "Proposition Eat-it", text });
         done("share");
         return;
       }
@@ -1574,8 +1619,15 @@ $app.addEventListener("input", (e) => {
   }
 });
 
-$app.addEventListener("change", (e) => {
+$app.addEventListener("change", async (e) => {
   const t = e.target;
+  if (t.dataset && t.dataset.photo !== undefined && state.suggest && t.files && t.files[0]) {
+    const img = await shrinkImage(t.files[0]);
+    if (!img) return toast("Photo non lisible ou trop lourde");
+    state.suggest.photo = img;
+    render();
+    return;
+  }
   if (t.tagName === "SELECT" && t.dataset.field && state.suggest) {
     state.suggest.f[t.dataset.field] = t.value;
     saveDraft();

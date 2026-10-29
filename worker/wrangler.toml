@@ -3,12 +3,15 @@ main = "index.js"
 compatibility_date = "2025-01-01"
 
 [vars]
-GITHUB_REPO = "Julien2501/eat-it"
+# Boîte de réception PRIVÉE : une issue par proposition (GitHub prévient par mail).
+INBOX_REPO = "Julien2501/eat-it-propositions"
+# Dépôt public de l'app : le relais y publie après validation.
+PUBLISH_REPO = "Julien2501/eat-it"
 ALLOWED_ORIGIN = "https://julien2501.github.io"
 
-# Le secret GITHUB_TOKEN n'est jamais écrit ici : `npx wrangler secret put GITHUB_TOKEN`.
+# Secrets (jamais écrits ici) : `npx wrangler secret put INBOX_TOKEN` et `npx wrangler secret put PUBLISH_TOKEN`.
 
-# Stockage des photos reçues : `npx wrangler kv namespace create IMAGES`, puis décommenter et coller l'id.
+# Stockage des photos et des propositions en attente.
 [[kv_namespaces]]
 binding = "IMAGES"
 id = "f4213dc79f63419badf0191a69e924b4"

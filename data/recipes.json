@@ -624,7 +624,7 @@
     "id": "riz-frit-poulet-teriyaki",
     "title": "Riz frit au poulet teriyaki",
     "servings": 4,
-    "time": 45,
+    "time": 40,
     "image": "images/riz-poulet-teriyaki-frit.jpg",
     "categories": ["repas"],
     "tags": { "protein": ["poulet"], "vegetable": ["carotte"], "season": ["toute l'année"], "dish": ["riz"], "cuisine": ["asiatique"] },
